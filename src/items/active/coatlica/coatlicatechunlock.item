@@ -1,0 +1,11 @@
+{
+  "itemName" : "coatlicatechunlock",
+  "price" : 200,
+  "category" : "quest",
+  "rarity" : "Rare",
+  "inventoryIcon" : "coatlicatechunlock.png",
+  "description" : "Plaque from a limbless statue. Stealing these things usually gets you cursed.",
+  "shortdescription" : "Statue Plaque",
+  
+  "pickupQuestTemplates" : [ "coatlicatechunlock" ]
+}

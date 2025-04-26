@@ -1,0 +1,10 @@
+{
+  "name" : "coatlicahead_flyer",
+  "category" : "coatlicahead_flyer",
+  "type" : "head",
+
+  "frames" : {
+    "head" : "head.png",
+    "jaw" : "jaw.png"
+  }
+}

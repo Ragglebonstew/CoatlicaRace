@@ -1,0 +1,10 @@
+{
+  "name" : "coatlicahead_base",
+  "category" : "coatlicahead",
+  "type" : "head",
+
+  "frames" : {
+    "head" : "head.png",
+    "jaw" : "jaw.png"
+  }
+}

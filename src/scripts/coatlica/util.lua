@@ -1,0 +1,32 @@
+require "/scripts/vec2.lua"
+
+function distanceToGround(maxSearch)
+	local startPoint = mcontroller.position()
+	local endPoint = vec2.add(startPoint, {0, -maxSearch})
+
+	local intPoint = world.lineCollision(startPoint, endPoint, {"Block", "Platform", "Dynamic", "Slippery", "Null"})
+
+	if intPoint then
+		return startPoint[2] - intPoint[2]
+	else
+		return maxSearch
+	end
+end
+function contains(set, element)
+	for k = 1, #set do
+		if set[k] == element then
+			return true
+        end
+    end
+	return false
+end
+function getBodyDirectives()
+	local bodyDirectives = ""
+	for _,v in ipairs(world.entityPortrait(entity.id(), "fullnude")) do
+		if string.find(v.image, "body.png") then
+			bodyDirectives = string.sub(v.image,(string.find(v.image, "?")))
+			break
+		end
+	end
+	return bodyDirectives
+end

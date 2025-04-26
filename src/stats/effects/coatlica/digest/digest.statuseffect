@@ -1,0 +1,10 @@
+{
+	"name" : "coatlica_digest",
+	"effectConfig" : {
+		"immuneSpecies" : [
+			"coatlica"
+		]
+    },
+	"defaultDuration" : 100,
+	"scripts" : [ "digest.lua" ]
+}

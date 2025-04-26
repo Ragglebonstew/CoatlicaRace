@@ -1,0 +1,12 @@
+{
+  "name" : "coatlicasegment",
+  "category" : "coatlicasegment",
+  "type" : "body",
+
+  "frames" : {
+    "body" : "body.png",
+    "bulge" : "bulge.png",
+	"tail" : "tail.png",
+	"end" : "end.png"
+  }
+}

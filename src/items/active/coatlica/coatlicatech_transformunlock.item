@@ -1,0 +1,11 @@
+{
+  "itemName" : "coatlicatech_transformunlock",
+  "price" : 800,
+  "category" : "quest",
+  "rarity" : "Legendary",
+  "inventoryIcon" : "coatlicatech_transformunlock.png",
+  "description" : "Core from a limbless statue. Hot to the touch.",
+  "shortdescription" : "Statue Core",
+  
+  "pickupQuestTemplates" : [ "coatlicatech_transformunlock" ]
+}

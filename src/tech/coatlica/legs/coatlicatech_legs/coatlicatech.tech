@@ -1,0 +1,14 @@
+{
+  "name" : "coatlicatech",
+  "type" : "legs",
+
+  "scripts" : ["coatlicatech.lua"],
+  "animator" : "coatlicatech.animation",
+
+  "description" : "You have the body of a snake, so make use of it!\nHold ^green;[down] to coil.\nHold ^green;[up] to lift yourself into the air.",
+  "shortDescription" : "Snake Body",
+  "rarity" : "Common",
+  "icon" : "/tech/distortionsphere.png",
+  
+  "chipCost" : 0
+}

@@ -1,0 +1,21 @@
+{
+  "config" : {
+    "shipUpgrades" : {
+      "capabilities" : ["teleport", "planetTravel", "systemTravel"],
+      "crewSize" : 12
+    }
+  },
+  "backgroundOverlays" : [
+    {
+      "image" : "coatlicaT8.png",
+      "position" : [12, 34],
+      "fullbright" : true
+    },
+    {
+      "image" : "coatlicaT8lit.png",
+      "position" : [12, 34]
+    }
+  ],
+  "blockKey" : "blockKey.config:blockKey",
+  "blockImage" : "coatlicaT8blocks.png"
+}

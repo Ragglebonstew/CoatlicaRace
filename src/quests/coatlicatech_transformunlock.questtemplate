@@ -1,0 +1,29 @@
+{
+  "id" : "coatlicatech_transformunlock",
+  "title" : "^orange;Intermediate Worm Moves",
+  "text" : "What a strange ^purple;core^white;. What is this strange power coming from it?",
+  "completionText" : "I feel a strange power flowing into me.",
+  "moneyRange" : [0,0],
+  "rewards" : [],
+
+  "updateDelta" : 10,
+  "script" : "/quests/scripts/main.lua",
+  "scriptConfig" : {
+    "portraits" : {
+      "questStarted" : "player",
+      "questComplete" : "questReceiver"
+    },
+
+    "conditions" : [
+      {
+        "type" : "gatherItem",
+        "itemName" : "coatlicatech_transformunlock",
+        "count" : 1,
+        "consume" : false
+      }
+    ],
+    "equipTech" : [
+      "coatlica_tech_base"
+    ]
+  }
+}

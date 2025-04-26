@@ -1,0 +1,16 @@
+[
+	{ "op" : "add",
+		"path" : "/speciesShips/coatlica",
+		"value" : [
+		    "/ships/coatlica/coatlicat0.structure",
+			"/ships/coatlica/coatlicat1.structure",
+			"/ships/coatlica/coatlicat2.structure",
+			"/ships/coatlica/coatlicat3.structure",
+			"/ships/coatlica/coatlicat4.structure",
+			"/ships/coatlica/coatlicat5.structure",
+			"/ships/coatlica/coatlicat6.structure",
+			"/ships/coatlica/coatlicat7.structure",
+			"/ships/coatlica/coatlicat8.structure"
+		]
+	}
+]

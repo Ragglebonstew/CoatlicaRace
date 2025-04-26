@@ -1,0 +1,29 @@
+{
+  "id" : "coatlicatechunlock",
+  "title" : "^orange;Simple Worm Moves",
+  "text" : "What a strange ^orange;plaque^white;. What is this strange power coming from it?",
+  "completionText" : "I feel a strange power flowing into me.",
+  "moneyRange" : [0,0],
+  "rewards" : [],
+
+  "updateDelta" : 10,
+  "script" : "/quests/scripts/main.lua",
+  "scriptConfig" : {
+    "portraits" : {
+      "questStarted" : "player",
+      "questComplete" : "questReceiver"
+    },
+
+    "conditions" : [
+      {
+        "type" : "gatherItem",
+        "itemName" : "coatlicatechunlock",
+        "count" : 1,
+        "consume" : false
+      }
+    ],
+    "equipTech" : [
+      "coatlicatech"
+    ]
+  }
+}

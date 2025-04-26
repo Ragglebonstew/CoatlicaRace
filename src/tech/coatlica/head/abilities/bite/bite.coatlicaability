@@ -1,0 +1,22 @@
+{
+	"ability" : {
+		"name" : "bite",
+		"type" : "bite",
+		"class" : "Bite",
+		"shortDescription" : "Bite",
+		"description" : "Gives you a powerful bite!",
+		"icon" : "/interface/statuses/rage.png",
+		"chipCost" : 3,
+		
+		"scripts" : ["/tech/coatlica/head/abilities/bite/bite.lua"],
+		
+		"holdParameters" : {
+			"jawOpen" : true
+		},
+		"releaseParameters" : {
+			"mouthPer" : 1.2
+		},
+		
+		"energyCost" : 20
+	}
+}

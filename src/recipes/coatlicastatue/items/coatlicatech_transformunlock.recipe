@@ -1,0 +1,8 @@
+{
+  "input" : [
+    { "item" : "durasteelore", "count" : 5 }
+  ],
+  "duration" : 5,
+  "output" : { "item" : "coatlicatech_transformunlock", "count" : 1 },
+  "groups" : [ "coatlicastatue", "hazardgear", "all" ]
+}

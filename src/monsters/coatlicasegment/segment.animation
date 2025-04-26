@@ -1,0 +1,138 @@
+{
+"animatedParts" : {
+	"stateTypes" : {
+		"body" : {
+			"priority" : 0,
+			"default" : "body",
+			"states" : {
+				"body" : {},
+				"tail" : {}
+			}
+		},
+		"bulge" : {
+			"priority" : 0,
+			"default" : "off",
+			"states" : {
+				"on" : {},
+				"off" : {}
+			}
+		},
+		"end" : {
+			"priority" : 0,
+			"default" : "off",
+			"states" : {
+				"on" : {},
+				"off" : {}
+			}
+		},
+		"damage" : {
+			"priority" : 3,
+			"default" : "none",
+			"states" : {
+				"none" : {},
+				"stunned" : {}
+			}
+		}
+	},
+	"parts" : {
+		"body" : {
+			"properties" : {
+				"zLevel" : 2,
+				"centered" : true,
+				"transformationGroups" : [ "body" ],
+				"image" : "<partImage>",
+				"offset" : [-0.25, 0]
+			},
+			"partStates" : {
+				"body" : {
+					"body" : {
+						"properties" : {
+							"image" : "<partImage>:body"
+						}
+					},
+					"tail" : {
+						"properties" : {
+							"image" : "<partImage>:tail"
+						}
+					}
+				}
+			}
+		},
+		"bulge" : {
+			"properties" : {
+				"zLevel" : 3,
+				"centered" : true,
+				"anchorPart" : "body",
+				"offset" : [0, 0.125]
+			},
+			"partStates" : {
+				"bulge" : {
+					"on" : {
+						"properties" : {
+							"image" : "<partImage>"
+						}
+					},
+					"off" : {
+						"properties" : {
+							"image" : ""
+						}
+					}
+				}
+			}
+		},
+		"end" : {
+			"properties" : {
+				"zLevel" : 2,
+				"centered" : true,
+				"anchorPart" : "body",
+				"offset" : [1.4375, 0]
+			},
+			"partStates" : {
+				"end" : {
+					"on" : {
+						"properties" : {
+							"image" : "<partImage>"
+						}
+					},
+					"off" : {
+						"properties" : {
+							"image" : ""
+						}
+					}
+				}
+			}
+		}
+	}
+},
+
+  "transformationGroups" : {
+    "body" : { "interpolated" : true },
+    "facing" : { "interpolated" : false }
+  },
+
+  "effects" : {
+    "blink" : {
+      "type" : "flash",
+      "time" : 0,
+      "directives" : "fade=ffffff;0.5"
+    }
+  },
+
+  "particleEmitters" : {
+    "deathPoof" : {
+      "offsetRegion" : [-3.0, -3.0, 3.0, 3.0],
+      "burstCount" : 5,
+      "particles" : [
+        { "particle" : "monstersplosion" },
+        { "particle" : "gleapsplat" },
+        { "particle" : "gleapsplat" },
+        { "particle" : "deathfizz1left" },
+        { "particle" : "deathfizz1right" }
+      ]
+    }
+  },
+
+  "sounds" : {
+    "fire" : []
+  }
+}

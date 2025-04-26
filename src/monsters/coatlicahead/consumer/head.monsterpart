@@ -1,0 +1,10 @@
+{
+  "name" : "coatlicahead_consumer",
+  "category" : "coatlicahead_consumer",
+  "type" : "head",
+
+  "frames" : {
+    "head" : "head.png",
+    "jaw" : "jaw.png"
+  }
+}

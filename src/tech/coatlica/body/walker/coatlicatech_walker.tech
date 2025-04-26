@@ -1,0 +1,14 @@
+{
+  "name" : "enmekotech_walker",
+  "type" : "body",
+
+  "scripts" : ["enmekotech_walker.lua"],
+  "animator" : "enmekotech_walker.animation",
+
+  "description" : "Those limbs look sharp!",
+  "shortDescription" : "Snake Body",
+  "rarity" : "Legendary",
+  "icon" : "/tech/distortionsphere.png",
+  
+  "chipCost" : 0
+}

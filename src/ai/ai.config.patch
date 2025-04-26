@@ -1,0 +1,10 @@
+[{
+		"op" : "add",
+		"path" : "/species/coatlica",
+		"value" : {
+			"aiFrames" : "coatlicaAI.png",
+			"portraitFrames" : "portraits/coatlicaportrait.png",
+			"staticFrames" : "staticcoatlica.png"	
+		}
+	}
+]

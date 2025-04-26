@@ -1,0 +1,9 @@
+{
+  "frameGrid" : {
+    "size" : [32, 18],
+    "dimensions" : [2, 1],
+    "names" : [
+      [ "idle", "mouthopen" ]
+    ]
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "objectName" : "coatlicastatue",
+  "colonyTags" : ["sandstone", "pretty", "misc"],
+  "rarity" : "Uncommon",
+  "description" : "A statue of a limbless deity. A strange power eminates from its base. Can be used to craft coatlica related items.",
+  "shortdescription" : "Limbless Statue",
+  "race" : "coatlica",
+  "category" : "crafting",
+  "price" : 110,
+  "printable" : false,
+  
+  "apexDescription" : "A wriggly worm. Well, it would be if it wasn't a statue.",
+  "avianDescription" : "A statue of a tasty-looking worm.",
+  "floranDescription" : "Floran like to eat wormsss.",
+  "glitchDescription" : "Shocked. A statue of the lesser-spotted brain worm.",
+  "humanDescription" : "A worm so big you could use it to catch a whale.",
+  "hylotlDescription" : "Greetings, my stony worm friend.",
+  "novakidDescription" : "What the heck is that?",
+  "coatlicaDescription" : "These things are usually cursed.",
+  
+  "inventoryIcon" : "coatlicastatueicon.png",
+  "orientations" : [
+    {
+      "dualImage" : "coatlicastatue.png:<color>",
+      "imagePosition" : [-16, 0],
+      "frames" : 1,
+      "animationCycle" : 0.5,
+      "spaceScan" : 0.1,
+      "anchors" : [ "bottom" ]
+    }
+  ],
+  
+  "interactAction" : "ScriptPane",
+  "interactData" : "/interface/coatlicastatue/coatlicastatue.config"
+}

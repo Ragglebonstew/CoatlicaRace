@@ -1,0 +1,12 @@
+{
+	"ability" : {
+		"name" : "fly",
+		"type" : "fly",
+		"class" : "Fly",
+		"shortDescription" : "Fly",
+		"description" : "Gives a burst of flight! Hold for longer airtime!",
+		"icon" : "/interface/statuses/nofalldamage.png",
+		
+		"scripts" : ["/tech/coatlica/head/abilities/fly/fly.lua"]
+	}
+}

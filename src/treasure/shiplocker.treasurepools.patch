@@ -1,0 +1,14 @@
+[
+  {
+    "op": "add",
+    "path": "/coatlicaStarterTreasure",
+    "value": [[0, {
+      "fill" : [
+        {"pool" : "starterTreasure"},
+        {"item" : [ "coatlicastatue", 1 ]},
+        {"item" : [ "bedouinhead", 1 ]},
+        {"item" : [ "bedouinchest", 1 ]}
+      ]
+    }]]
+  }
+]

@@ -1,0 +1,23 @@
+{
+	"name" : "coatlica_tech_head",
+	"headType" : "coatlicahead_base",
+	"type" : "head",
+
+  "scripts" : ["head.lua"],
+  "animator" : "head.animation",
+
+  "description" : "Allows you to transform into a giant snake!",
+  "shortDescription" : "Snake Head",
+  "rarity" : "Rare",
+	"icon" : "/tech/coatlica/head/tech.png",
+  
+  "chipCost" : 0,
+  
+  "energyCost" : 50,
+  
+	"movementParameters" : {
+		"standingPoly" :  [ [0.3, 0.55], [0.775, 0.3], [0.775, -0.6875], [-0.775, -0.6875], [-0.775, 0.3], [-0.3, 0.55] ],
+		"crouchingPoly" : [ [0.3, 0.55], [0.775, 0.3], [0.775, -0.6875], [-0.775, -0.6875], [-0.775, 0.3], [-0.3, 0.55] ]
+    }
+
+}

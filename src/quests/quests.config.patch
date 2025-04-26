@@ -1,0 +1,17 @@
+[
+	{
+		"op": "add",
+		"path": "/initialquests/coatlica",
+		"value": [
+			"protectorate"
+		]
+	},
+	{
+		"op": "add",
+		"path": "/pronounGenders/coatlica",
+		"value": {
+			"male": "neutral",
+			"female": "neutral"
+		}
+	}
+]

@@ -1,0 +1,33 @@
+version 0.3.1
+- moved commander set to tier 5 accelerator, and weird green set to tier 4
+- changed ship tiers from human to floran base
+- tweaked lift ability to scale better with length changes
+- adding slight aiming to coil ability
+- split consumer functionality into head tech and consumer tech
+- started work on new techs
+
+version 0.4
+- head tech revamp
+- added new flyer head sprite
+- added headpiece sprite to flyer
+- added new digger head sprite 
+- added new digger head tech
+- changed race name from Enmeko to Coatlica
+- fixed segment collision snapping
+
+version 0.4.1
+- added hold ability
+- split movement into multiple movement abilities for future modularization
+- fixed bug where drag caused digger to plummet
+- tweaked gravity multiplier for digger
+- fixed limp flyer body
+- fixed limp head lift
+- added more dynamic body behavior to flyer form
+- added burst takeoff to flyer form
+- fixed digger form not able to open mouth
+- fixed non-transformed form able to use hold ability (until visual bug can be fixed)
+- added digger jaw sprite
+- fixed flyer head locking down when not moving
+- separated abilities into own coatlicaaility / lua file pairs
+- deleted deprecated head techs (only one base head tech will be used)
+
