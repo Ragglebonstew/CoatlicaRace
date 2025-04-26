@@ -38,7 +38,7 @@ function update(dt)
 	end
 	
 	--In ground handling 
-	if self.inGround or self.isHolding or self.isFlying then
+	if self.inGround or (self.isHolding and not (self.isPivot and (self.isPivot.num <= 1))) or self.isFlying then
 		mcontroller.controlParameters({
 			collisionEnabled = not self.inGround, 
 			gravityEnabled = false
