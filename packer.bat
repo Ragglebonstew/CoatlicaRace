@@ -1,1 +1,1 @@
-.\asset_packer.exe ".\src" ".\CoatlicaRace.pak"
+.\asset_packer.exe ".\src" "C:\Program Files\OpenStarbound\mods\CoatlicaRace.pak"
