@@ -75,7 +75,6 @@ function update(dt)
 	
 	if self.isHolding or inGround then
 		mcontroller.controlParameters({gravityEnabled = false})
-		mcontroller.controlApproachVelocity({0,0}, 10)
 	end
 end
 

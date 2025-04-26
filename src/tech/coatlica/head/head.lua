@@ -376,8 +376,11 @@ function move(control)
 	local speed = 24
 	local velX = control["right"] and 1 or control["left"] and -1 or 0
 	local velY = control["up"] and 1 or control["down"] and -1 or 0
+	local vel = vec2.mul(vec2.norm({velX,velY}),speed)
 	
-	if distance ~= maxHeight then
+	if not control["run"] then
+		mcontroller.controlApproachVelocity(vel, 95)
+	elseif distance ~= maxHeight then
 		--mcontroller.controlApproachVelocity({velX*speed, velY*speed + (1-distance/maxHeight)*3.8}, gravity*3)
 		mcontroller.controlApproachXVelocity(velX*speed, 95)
 		mcontroller.controlApproachYVelocity(velY*speed + (1-distance/maxHeight)*3.8, gravity ~= 0 and gravity*3 or 95)
