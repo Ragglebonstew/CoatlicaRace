@@ -1,0 +1,1 @@
+.\asset_packer.exe ".\src" ".\CoatlicaRace.pak"
