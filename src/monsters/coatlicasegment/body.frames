@@ -3,12 +3,10 @@
     "size" : [20, 11],
     "dimensions" : [8, 3],
     "names" : [
-      [ "idle"  , "walk.1", "walk.2", "walk.3", "walk.4", "walk.5", "walk.6", "walk.7" ],
+      [ "walk.0"  , "walk.1", "walk.2", "walk.3", "walk.4", "walk.5", "walk.6", "walk.7" ],
       [ "walk.8", "walk.9", "walk.10", "walk.11", "walk.12", "walk.13", "walk.14", "walk.15" ],
-      [ "tail", null, null, null ]
+      [ "tail", "idle", null, null ]
     ]
   },
-  "aliases" : {
-    "walk.0" : "idle"
-  }
+  "aliases" : {}
 }

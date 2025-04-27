@@ -14,6 +14,7 @@ function init()
 	self.btype = self.segmentsLeft == 0 and "tail" or "body"
 	self.passTimer = 0
 	self.animTimer = 0
+	self.lastPos = mcontroller.position()
 
     --status.setPersistentEffects("invulerability", {{stat="invulnerable",amount=1}})
 	status.setPrimaryDirectives(self.directives)
@@ -112,33 +113,39 @@ function updateAnimation(walkFrame)
 	
 	
 	if self.btype == "body" then
-		if world.magnitude(self.lastPos or mcontroller.position(), mcontroller.position()) > 0.02 then
-			
-		else
-			
-		end
-		self.lastPos = mcontroller.position()
 		
-		local maxHeight = 3
-		local distance = distanceToGround(maxHeight)
-		if distance ~= maxHeight then
+		local maxHeight = 1
+		local onGround = distanceToGround(maxHeight) ~= maxHeight
+		local isMoving = world.magnitude(self.lastPos, mcontroller.position()) > 0.5
+		
+		if onGround then
 			animator.setAnimationState("body", "walk")
-			
-			if not walkFrame then
-				self.walkFrame = math.fmod((self.walkFrame or 0) + 0.2, 16)
-				sb.logInfo("walkFrame: "..tostring(self.walkFrame).." on segNum: "..tostring(self.segmentsLeft))
-				walkFrame = math.floor(self.walkFrame)
-			end
 		else
 			animator.setAnimationState("body", "idle", true)
 			walkFrame = nil
 			self.walkFrame = nil
 		end
+		if isMoving then
+			self.lastPos = mcontroller.position()
+		else
+			--walkFrame = nil
+			--self.walkFrame = nil
+		end
 		
-		--next segment will be 8 frames later 
 		if walkFrame then
+			self.walkFrame = nil
+		elseif isMoving and onGround then
+			self.walkFrame = math.fmod((self.walkFrame or 0) + 1, 16)
+		end
+		
+		
+		--after self.walkFrame has been cleared, allow to be passed to walkFrame
+		if self.walkFrame then
+			walkFrame = math.floor(self.walkFrame)
+		end
+		--next segment will be 8 frames later if there is a valid walkFrame to pass
+		if walkFrame and isMoving then
 			animator.setGlobalTag("walkFrame", tostring(walkFrame))
-			--sb.logInfo("walkFrame: "..tostring(walkFrame).." on segNum: "..tostring(self.segmentsLeft))
 			walkFrame = math.fmod(walkFrame + 8, 16)
 		end
 	end
