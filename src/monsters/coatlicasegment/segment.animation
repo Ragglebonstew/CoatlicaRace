@@ -9,13 +9,6 @@
 				"tail" : {}
 			}
 		},
-		"shading" : {
-			"priority" : 0,
-			"default" : "",
-			"states" : {
-				"" : {}
-			}
-		},
 		"bulge" : {
 			"priority" : 0,
 			"default" : "off",
@@ -60,22 +53,6 @@
 					"tail" : {
 						"properties" : {
 							"image" : "<partImage>:tail"
-						}
-					}
-				}
-			}
-		},
-		"shading" : {
-			"properties" : {
-				"zLevel" : 3,
-				"anchorPart" : "body",
-				"transformationGroups" : [ "shading" ]
-			},
-			"partStates" : {
-				"shading" : {
-					"" : {
-						"properties" : {
-							"image" : "<partImage>?crop=<x1>;0;<x2>;11"
 						}
 					}
 				}
@@ -129,7 +106,6 @@
 },
 
   "transformationGroups" : {
-    "shading" : { "interpolated" : true },
     "body" : { "interpolated" : true },
     "facing" : { "interpolated" : false }
   },
@@ -141,10 +117,7 @@
       "directives" : "fade=ffffff;0.5"
     }
   },
-	"globalTagDefaults": {
-		"x1": "1",
-		"x2": "1"
-	},
+	"globalTagDefaults": {},
 
   "particleEmitters" : {
     "deathPoof" : {

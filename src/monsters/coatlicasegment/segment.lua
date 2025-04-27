@@ -59,19 +59,6 @@ end
 function followOwner(ownerPos, coilPer)
 	animator.resetTransformationGroup("body")
 	
-	if not self.isHolding and self.btype ~= "tail" then
-		local maxTime = (19 + 8)
-		local offsetTime = maxTime*math.fmod(self.segmentsLeft,2)
-		if self.animTimer >= maxTime*2 then self.animTimer = 0 end
-		animator.setGlobalTag("x1", util.clamp(self.animTimer - offsetTime - 8, 0, 19))
-		animator.setGlobalTag("x2", util.clamp(self.animTimer - offsetTime    , 0, 19))
-		animator.resetTransformationGroup("shading")
-		local offsetPos = util.clamp(self.animTimer - offsetTime - 8, 0, 19)/20*self.segmentSize - self.segmentSize/2 + 0.375 --math.fmod(self.animTimer/20*self.segmentSize, 20) - self.segmentSize/2 - 0.375
-		animator.translateTransformationGroup("shading", {offsetPos,0})
-		self.animTimer = self.animTimer + 1
-	end
-	
-	
 	local segmentLength = self.segmentSize * coilPer
 	local dirV = vec2.norm(world.distance(ownerPos, mcontroller.position()))
 	local target = vec2.sub(ownerPos, vec2.mul(dirV, segmentLength))

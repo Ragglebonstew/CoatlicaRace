@@ -7,7 +7,6 @@
     "body" : "body.png",
     "bulge" : "bulge.png",
 	"tail" : "tail.png",
-	"end" : "end.png",
-	"shading" : "shading.png"
+	"end" : "end.png"
   }
 }
