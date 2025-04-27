@@ -71,7 +71,7 @@ function update(dt)
 		pos = vec2.add(pos, {0,-2.1875})
 	end
 	local inGround = world.pointCollision(pos, {"Block", "Dynamic", "Slippery", "Null", "Platform"})
-	world.sendEntityMessage(self.bodyId, "updateCommon", pos, self.coilPer, inGround)
+	world.sendEntityMessage(self.bodyId, "updateCommon", pos, self.coilPer)
 	
 	if self.isHolding or inGround then
 		mcontroller.controlParameters({gravityEnabled = false})

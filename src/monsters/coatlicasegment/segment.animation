@@ -6,11 +6,7 @@
 			"default" : "idle",
 			"states" : {
 				"idle" : {},
-				"walk" : {
-					"frames" : 16,
-					"cycle" : 0.3,
-					"mode" : "loop"
-				},
+				"walk" : {},
 				"tail" : {}
 			}
 		},
@@ -57,7 +53,7 @@
 					},
 					"walk" : {
 						"properties" : {
-							"image" : "<partImage>:walk.<frame>"
+							"image" : "<partImage>:walk.<walkFrame>"
 						}
 					},
 					"tail" : {
@@ -127,7 +123,9 @@
       "directives" : "fade=ffffff;0.5"
     }
   },
-	"globalTagDefaults": {},
+	"globalTagDefaults": {
+		"walkFrame" : "1"
+	},
 
   "particleEmitters" : {
     "deathPoof" : {

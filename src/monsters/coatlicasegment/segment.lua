@@ -81,22 +81,6 @@ function followOwner(ownerPos, coilPer)
 	if self.isHolding then
 		world.debugPoint(vec2.add(mcontroller.position(),{0,1}), "red")
 	end
-	
-	if self.btype == "body" then
-		if world.magnitude(self.lastPos or mcontroller.position(), mcontroller.position()) > 0.02 then
-			animator.setAnimationRate(0.3)
-		else
-			animator.setAnimationRate(0)
-		end
-		if mcontroller.onGround() then
-			animator.setAnimationState("body", "walk")
-		else
-			animator.setAnimationState("body", "idle")
-		end
-		self.lastPos = mcontroller.position()
-	end
-	
-	
 end
 function spawnSegment()
     local params = {
@@ -109,19 +93,57 @@ function spawnSegment()
 	}
     self.childId = world.spawnMonster("coatlicasegment", mcontroller.position(), params)
 end
-function updateCommon(ownerPos, coilPer)
+function updateCommon(ownerPos, coilPer, walkFrame)
 	if not (self.ownerId and world.entityExists(self.ownerId)) then
 		die()
 		return
 	end
 	
 	followOwner(ownerPos, coilPer)
+	walkFrame = updateAnimation(walkFrame)
 	
 	if self.childId and world.entityExists(self.childId) then
-		world.callScriptedEntity(self.childId, "updateCommon", mcontroller.position(), coilPer)
+		world.callScriptedEntity(self.childId, "updateCommon", mcontroller.position(), coilPer, walkFrame)
 	elseif self.segmentsLeft > 0 then -- segmentsLeft of 0 refers to the tail, the last body segment
         spawnSegment()
 	end
+end
+function updateAnimation(walkFrame)
+	
+	
+	if self.btype == "body" then
+		if world.magnitude(self.lastPos or mcontroller.position(), mcontroller.position()) > 0.02 then
+			
+		else
+			
+		end
+		self.lastPos = mcontroller.position()
+		
+		local maxHeight = 3
+		local distance = distanceToGround(maxHeight)
+		if distance ~= maxHeight then
+			animator.setAnimationState("body", "walk")
+			
+			if not walkFrame then
+				self.walkFrame = math.fmod((self.walkFrame or 0) + 0.2, 16)
+				sb.logInfo("walkFrame: "..tostring(self.walkFrame).." on segNum: "..tostring(self.segmentsLeft))
+				walkFrame = math.floor(self.walkFrame)
+			end
+		else
+			animator.setAnimationState("body", "idle", true)
+			walkFrame = nil
+			self.walkFrame = nil
+		end
+		
+		--next segment will be 8 frames later 
+		if walkFrame then
+			animator.setGlobalTag("walkFrame", tostring(walkFrame))
+			--sb.logInfo("walkFrame: "..tostring(walkFrame).." on segNum: "..tostring(self.segmentsLeft))
+			walkFrame = math.fmod(walkFrame + 8, 16)
+		end
+	end
+	
+	return walkFrame
 end
 function updateLength(segments)
 	if segments == self.segmentsLeft then return end
