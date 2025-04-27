@@ -1,4 +1,5 @@
 require "/scripts/vec2.lua"
+require "/scripts/util.lua"
 require "/scripts/messageutil.lua"
 require "/scripts/coatlica/util.lua"
 
@@ -12,6 +13,7 @@ function init()
 	self.segmentSize = config.getParameter("segmentSize", 2)
 	self.btype = self.segmentsLeft == 0 and "tail" or "body"
 	self.passTimer = 0
+	self.animTimer = 0
 
     --status.setPersistentEffects("invulerability", {{stat="invulnerable",amount=1}})
 	status.setPrimaryDirectives(self.directives)
@@ -55,12 +57,26 @@ function update(dt)
 end
 
 function followOwner(ownerPos, coilPer)
+	animator.resetTransformationGroup("body")
+	
+	if not self.isHolding and self.btype ~= "tail" then
+		local maxTime = (19 + 8)
+		local offsetTime = maxTime*math.fmod(self.segmentsLeft,2)
+		if self.animTimer >= maxTime*2 then self.animTimer = 0 end
+		animator.setGlobalTag("x1", util.clamp(self.animTimer - offsetTime - 8, 0, 19))
+		animator.setGlobalTag("x2", util.clamp(self.animTimer - offsetTime    , 0, 19))
+		animator.resetTransformationGroup("shading")
+		local offsetPos = util.clamp(self.animTimer - offsetTime - 8, 0, 19)/20*self.segmentSize - self.segmentSize/2 + 0.375 --math.fmod(self.animTimer/20*self.segmentSize, 20) - self.segmentSize/2 - 0.375
+		animator.translateTransformationGroup("shading", {offsetPos,0})
+		self.animTimer = self.animTimer + 1
+	end
+	
+	
 	local segmentLength = self.segmentSize * coilPer
 	local dirV = vec2.norm(world.distance(ownerPos, mcontroller.position()))
 	local target = vec2.sub(ownerPos, vec2.mul(dirV, segmentLength))
 	
 	local animV = {math.abs(dirV[1]), dirV[2]}
-	animator.resetTransformationGroup("body")
 	animator.setFlipped(dirV[1] < 0)
 	animator.rotateTransformationGroup("body", vec2.angle(animV))
 	
@@ -78,6 +94,7 @@ function followOwner(ownerPos, coilPer)
 	if self.isHolding then
 		world.debugPoint(vec2.add(mcontroller.position(),{0,1}), "red")
 	end
+	
 end
 function spawnSegment()
     local params = {

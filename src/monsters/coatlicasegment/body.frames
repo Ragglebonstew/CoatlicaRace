@@ -1,9 +1,9 @@
 {
   "frameGrid" : {
     "size" : [20, 11],
-    "dimensions" : [2, 1],
+    "dimensions" : [3, 1],
     "names" : [
-      [ "body", "tail" ]
+      [ "body", "tail", "shading" ]
     ]
   }
 }
