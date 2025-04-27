@@ -3,9 +3,14 @@
 	"stateTypes" : {
 		"body" : {
 			"priority" : 0,
-			"default" : "body",
+			"default" : "idle",
 			"states" : {
-				"body" : {},
+				"idle" : {},
+				"walk" : {
+					"frames" : 16,
+					"cycle" : 0.3,
+					"mode" : "loop"
+				},
 				"tail" : {}
 			}
 		},
@@ -45,9 +50,14 @@
 			},
 			"partStates" : {
 				"body" : {
-					"body" : {
+					"idle" : {
 						"properties" : {
-							"image" : "<partImage>:body"
+							"image" : "<partImage>:idle"
+						}
+					},
+					"walk" : {
+						"properties" : {
+							"image" : "<partImage>:walk.<frame>"
 						}
 					},
 					"tail" : {

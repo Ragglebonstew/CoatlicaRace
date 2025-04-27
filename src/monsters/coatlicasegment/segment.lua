@@ -82,6 +82,21 @@ function followOwner(ownerPos, coilPer)
 		world.debugPoint(vec2.add(mcontroller.position(),{0,1}), "red")
 	end
 	
+	if self.btype == "body" then
+		if world.magnitude(self.lastPos or mcontroller.position(), mcontroller.position()) > 0.02 then
+			animator.setAnimationRate(0.3)
+		else
+			animator.setAnimationRate(0)
+		end
+		if mcontroller.onGround() then
+			animator.setAnimationState("body", "walk")
+		else
+			animator.setAnimationState("body", "idle")
+		end
+		self.lastPos = mcontroller.position()
+	end
+	
+	
 end
 function spawnSegment()
     local params = {
@@ -125,7 +140,7 @@ function updateLength(segments)
 		else
 			spawnSegment()
 		end
-		animator.setAnimationState("body", "body")
+		animator.setAnimationState("body", "idle")
 	end
 end
 function die()

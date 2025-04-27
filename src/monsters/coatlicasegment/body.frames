@@ -1,9 +1,14 @@
 {
   "frameGrid" : {
     "size" : [20, 11],
-    "dimensions" : [3, 1],
+    "dimensions" : [8, 3],
     "names" : [
-      [ "body", "tail", "shading" ]
+      [ "idle"  , "walk.2", "walk.3", "walk.4", "walk.5", "walk.6", "walk.7", "walk.8" ],
+      [ "walk.9", "walk.10", "walk.11", "walk.12", "walk.13", "walk.14", "walk.15", "walk.16" ],
+      [ "tail", null, null, null ]
     ]
+  },
+  "aliases" : {
+    "walk.1" : "idle"
   }
 }
