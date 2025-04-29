@@ -118,6 +118,7 @@ function updateAnimation(walkFrame)
 		local onGround = distanceToGround(maxHeight) ~= maxHeight
 		local isMoving = world.magnitude(self.lastPos, mcontroller.position()) > 0.5
 		
+		--body gets stretched in the air, so end chain here
 		if onGround then
 			animator.setAnimationState("body", "walk")
 		else
@@ -129,6 +130,7 @@ function updateAnimation(walkFrame)
 			self.lastPos = mcontroller.position()
 		end
 		
+		--save our own frame if we need to start the chain
 		if walkFrame then
 			self.walkFrame = nil
 		elseif isMoving and onGround then
@@ -148,7 +150,7 @@ function updateAnimation(walkFrame)
 			walkFrame = math.fmod(walkFrame + 8, 16)
 		end
 	end
-	
+	--return frame for next segment if anim chain doesn't end here (where nil is returned instead)
 	return walkFrame
 end
 function updateLength(segments)
