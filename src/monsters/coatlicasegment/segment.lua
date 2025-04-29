@@ -127,9 +127,6 @@ function updateAnimation(walkFrame)
 		end
 		if isMoving then
 			self.lastPos = mcontroller.position()
-		else
-			--walkFrame = nil
-			--self.walkFrame = nil
 		end
 		
 		if walkFrame then
@@ -144,8 +141,10 @@ function updateAnimation(walkFrame)
 			walkFrame = math.floor(self.walkFrame)
 		end
 		--next segment will be 8 frames later if there is a valid walkFrame to pass
-		if walkFrame and isMoving then
-			animator.setGlobalTag("walkFrame", tostring(walkFrame))
+		if walkFrame then
+			if isMoving then
+				animator.setGlobalTag("walkFrame", tostring(walkFrame))
+			end
 			walkFrame = math.fmod(walkFrame + 8, 16)
 		end
 	end
