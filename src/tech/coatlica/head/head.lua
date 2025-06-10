@@ -181,10 +181,11 @@ function headUpdate()
 	local headRot
 	local jawRot
 	
-	if self.jawOpen or vec2.mag(mcontroller.velocity()) < 2.0 or self.headLocked then
+	local adjustedVelDir = vec2.add(mcontroller.velocity(), {0,2}) -- when motionless, y-vel = -2 for some reason
+	if self.jawOpen or vec2.mag(adjustedVelDir) < 5.0 or self.headLocked then
 		headRot = world.distance(tech.aimPosition(), mcontroller.position())
 	else
-		headRot = vec2.add(mcontroller.velocity(),{0,2})
+		headRot = adjustedVelDir
 	end
 	world.debugLine(mcontroller.position(), vec2.add(mcontroller.position(), headRot), "blue")
 	
