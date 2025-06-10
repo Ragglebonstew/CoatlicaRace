@@ -29,7 +29,7 @@ function update(dt)
 		mcontroller.controlParameters(self.movementParameters)
 	end
 	
-	if self.disabled or mcontroller.anchorState() then
+	if self.disabled or (mcontroller.anchorState() and world.entityType(mcontroller.anchorState()) == "vehicle") then
 		killBody()
 		return
 	end
