@@ -3,6 +3,7 @@ require "/scripts/messageutil.lua"
 require "/scripts/coatlica/util.lua"
 
 function init()
+	message.setHandler("setDisabled", simpleHandler(setDisabled))
 	message.setHandler("setHold", simpleHandler(setHold))
 	message.setHandler("replyHold", simpleHandler(replyHold))
 	message.setHandler("setCoil", simpleHandler(setCoil))
@@ -11,6 +12,7 @@ function init()
 	self.length = 1
 	self.coilPer = 1
 	self.transformed = false
+	self.disabled = false
 	self.movementParameters = effect.getParameter("movementParameters")
 	--effect.setParentDirectives("?addmask=/humanoid/coatlica/tailmask.png")
 	
@@ -25,6 +27,11 @@ end
 function update(dt)
 	if not self.transformed then
 		mcontroller.controlParameters(self.movementParameters)
+	end
+	
+	if self.disabled then
+		killBody()
+		return
 	end
 		
 		--[[
@@ -98,6 +105,9 @@ function killBody()
 	self.bodyId = nil
 end
 --util----------
+function setDisabled(isDisabled)
+	self.disabled = isDisabled
+end
 function setHold(isHolding)
 	local segCheck = math.floor(self.length * 2/3)
 	world.sendEntityMessage(self.bodyId, "requestHold", isHolding, segCheck)
