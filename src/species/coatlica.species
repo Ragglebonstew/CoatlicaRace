@@ -8,7 +8,7 @@
   
   "statusEffects" : [ "snakelike" ],
   
-  //"humanoidConfig" : "/species/coatlicaoid.config",
+  //"humanoidConfig" : "/species/coatlica.config",
   "nameGen" : [ "/species/coatlicamalenamegen.config:names", "/species/coatlicafemalenamegen.config:names" ],
   "ouchNoises" : [ "/sfx/humanoid/coatlicahurt_male1.ogg", "/sfx/humanoid/coatlicahurt_female1.ogg" ],
   "charGenTextLabels" : [ "Skin Color", "Hair Style", "Shirt", "Pants", "Eye Color", "Hair Color", "Shirt Color", "Pants Color", "coatlica", "Personality" ],
