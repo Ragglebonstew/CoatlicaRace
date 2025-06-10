@@ -30,3 +30,13 @@ function getBodyDirectives()
 	end
 	return bodyDirectives
 end
+function getHairDirectives()
+	local headDirectives = ""
+	for _,v in ipairs(world.entityPortrait(entity.id(), "fullnude")) do
+		if string.find(v.image, "hair") then
+			headDirectives = string.sub(v.image,(string.find(v.image, "?")))
+			break
+		end
+	end
+	return headDirectives
+end

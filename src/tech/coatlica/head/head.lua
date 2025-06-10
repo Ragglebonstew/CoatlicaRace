@@ -86,7 +86,7 @@ function deactivate()
 	abilityUninit()
 end
 function spawnHead()
-	local params = {directives = getBodyDirectives(), playerId = entity.id()}
+	local params = {directives = getBodyDirectives()..getHairDirectives(), playerId = entity.id()}
 	self.headId = world.spawnMonster(self.headType, mcontroller.position(), params)
 end
 function killHead()
@@ -184,7 +184,7 @@ function headUpdate()
 	if self.jawOpen or vec2.mag(mcontroller.velocity()) < 2.0 or self.headLocked then
 		headRot = world.distance(tech.aimPosition(), mcontroller.position())
 	else
-		headRot = mcontroller.velocity()
+		headRot = vec2.add(mcontroller.velocity(),{0,2})
 	end
 	world.debugLine(mcontroller.position(), vec2.add(mcontroller.position(), headRot), "blue")
 	
