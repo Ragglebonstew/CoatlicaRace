@@ -29,7 +29,7 @@ function update(dt)
 		mcontroller.controlParameters(self.movementParameters)
 	end
 	
-	if self.disabled then
+	if self.disabled or mcontroller.anchorState() then
 		killBody()
 		return
 	end
