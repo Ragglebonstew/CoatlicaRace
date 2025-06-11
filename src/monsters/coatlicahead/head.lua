@@ -17,8 +17,12 @@ function init()
 	status.setPrimaryDirectives(self.directives)
 	monster.setInteractive(false)
 	monster.setDamageBar("none")
+	monster.setDamageTeam(world.entityDamageTeam(self.playerId))
+	monster.setDamageParts({"body"})
+	monster.setDamageOnTouch(false)
 	message.setHandler("updateAnim", simpleHandler(updateAnim))
 	message.setHandler("die", simpleHandler(die))
+	message.setHandler("setDamageOnTouch", simpleHandler(monster.setDamageOnTouch))
 end
 function update(dt)
 	self.updateTimer = self.updateTimer - dt
@@ -39,6 +43,7 @@ function updateAnim(pos, headRot, jawRot)
 	if jawRot == 0 then
 		animator.setAnimationState("head", "idle")
 		animator.setAnimationState("jaw", "invisible")
+		monster.setDamageOnTouch(false)
 	else
 		animator.setAnimationState("head", "mouthopen")
 		animator.setAnimationState("jaw", "visible")

@@ -165,7 +165,7 @@ function updateAbilityFire(args, fireType, ability)
 		end
 	else
 		if fire_last[fireType] then
-			ability:release()
+			ability:release(self.headId)
 			if ability.releaseParameters then
 				for entry, param in pairs(ability.releaseParameters) do
 					self[entry] = param

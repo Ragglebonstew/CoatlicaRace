@@ -24,7 +24,7 @@
 
     "seeThroughLiquid" : true,
     "behaviorConfig" : {
-      "damageOnTouch" : false,
+      "damageOnTouch" : true,
 
       "targetQueryRange" : 50,
       "targetOnDamage" : false,
@@ -42,9 +42,9 @@
 
     "touchDamage" : {
       "poly" : [ [0.3, 0.55], [0.85, 0.3], [0.85, -0.3], [0.3, -0.6875], [-0.3, -0.6875], [-0.85, -0.3], [-0.85, 0.3], [-0.3, 0.55] ],
-      "damage" : 5,
+      "damage" : 13,
 
-      "teamType" : "enemy",
+      "teamType" : "friendly",
       "damageSourceKind" : "impact",
       "knockback" : 40,
       "statusEffects" : [ ]
