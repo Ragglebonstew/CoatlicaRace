@@ -24,7 +24,6 @@ function update(args)
 	if not status.statPositive("activeMovementAbilities") then 
 		coilAbility(args.moves["down"])
 		liftAbility(args.moves, dt)
-	else
 		holdAbility(not args.moves["run"])
 	end
 	

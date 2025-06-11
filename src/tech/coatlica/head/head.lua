@@ -67,6 +67,10 @@ function activate()
 	transformed = true
 	world.sendEntityMessage(entity.id(), "setTransformed", true)
 	
+	if self.isHolding then
+		world.sendEntityMessage(entity.id(), "setHold", false)
+	end
+	
 	abilityInit()
 end
 function deactivate()
@@ -339,6 +343,7 @@ end
 function movementUpdate(args)
 	drag()
 	move(args.moves)
+	holdAbility(not args.moves["run"])
 end
 
 function regurgitate(carryingId)
@@ -385,6 +390,15 @@ function move(control)
 		--mcontroller.controlApproachVelocity({velX*speed, velY*speed + (1-distance/maxHeight)*3.8}, gravity*3)
 		mcontroller.controlApproachXVelocity(velX*speed, 95)
 		mcontroller.controlApproachYVelocity(velY*speed + (1-distance/maxHeight)*3.8, gravity ~= 0 and gravity*3 or 95)
+	end
+end
+local holdLast = false
+function holdAbility(button)
+	if button ~= holdLast then
+		holdLast = button
+		world.sendEntityMessage(entity.id(), "setHold", button)
+	elseif button then
+		world.sendEntityMessage(entity.id(), "setHold", button)
 	end
 end
 function lift(control)
