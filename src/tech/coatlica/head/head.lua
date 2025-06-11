@@ -44,9 +44,12 @@ function update(args)
 	if args.moves["special1"] ~= self.specialLast then
 		self.specialLast = args.moves["special1"]
 		if args.moves["special1"] then
-			if not transformed then
+			if not transformed 
+				and not tech.parentLounging()
+				and not status.statPositive("activeMovementAbilities") then
+				
 				activate()
-			else
+			elseif transformed then
 				deactivate()
 			end
 		end
