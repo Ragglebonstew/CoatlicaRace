@@ -26,8 +26,6 @@ function init()
 	self.mouthPer = 0
 	self.updateTimer = 0
 	
-	message.setHandler("replyHold", simpleHandler(replyHold))
-	
 	message.setHandler("addAbility", simpleHandler(addAbility))
 end
 
@@ -397,9 +395,6 @@ end
 --util----------
 function updateStatus()
 	self.bodyId = status.statusProperty("coatlica_bodyId")
-end
-function replyHold(isHolding)
-	self.isHolding = isHolding
 end
 
 --abilities (temp till can be moved to own files)

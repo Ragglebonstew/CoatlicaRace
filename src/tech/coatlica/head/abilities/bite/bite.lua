@@ -15,8 +15,7 @@ function Bite:hold(dt) end
 function Bite:release(headId)
 	--lunge forward
 	local maxHeight = 6
-	local distance = distanceToGround(maxHeight)
-	if distance ~= maxHeight and not status.resourceLocked("energy") then
+	if (status.statusProperty("isHolding", false) or distanceToGround(maxHeight) ~= maxHeight) and not status.resourceLocked("energy") then
 		local maxVel = 10
 		local dir = world.distance(tech.aimPosition(), mcontroller.position())
 		if vec2.mag(dir) > maxVel then

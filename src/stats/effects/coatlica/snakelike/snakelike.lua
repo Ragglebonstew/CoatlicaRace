@@ -114,6 +114,7 @@ function setHold(isHolding)
 end
 function replyHold(isHolding)
 	self.isHolding = isHolding
+	status.setStatusProperty("isHolding", isHolding)
 end
 function setCoil(per)
 	self.coilPer = per
