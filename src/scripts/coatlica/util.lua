@@ -12,6 +12,18 @@ function distanceToGround(maxSearch)
 		return maxSearch
 	end
 end
+function positionOffset()
+  return minY(self.movementParameters.collisionPoly) - minY(self.basePoly)
+end
+function minY(poly)
+  local lowest = 0
+  for _,point in pairs(poly) do
+    if point[2] < lowest then
+      lowest = point[2]
+    end
+  end
+  return lowest
+end
 function contains(set, element)
 	for k = 1, #set do
 		if set[k] == element then

@@ -17,8 +17,10 @@ function init()
 
 	self.stomach = {}
 	self.movementParameters = config.getParameter("movementParameters")
+	self.basePoly = mcontroller.baseParameters().standingPoly
 	self.energyCost = config.getParameter("energyCost", 50)
 	self.jerkMul = config.getParameter("jerkMul", 0.005)
+	self.collisionSet = {"Null", "Block", "Dynamic", "Slippery"}
 	message.setHandler("regurgitate", simpleHandler(regurgitate))
 	
 	self.mouthPer = 0
@@ -48,14 +50,40 @@ function update(args)
 				and not tech.parentLounging()
 				and not status.statPositive("activeMovementAbilities") then
 				
-				activate()
+				local pos = transformPosition()
+				if pos then
+					mcontroller.setPosition(pos)
+					activate()
+				end
 			elseif transformed then
-				deactivate()
+				local pos = restorePosition()
+				if pos then
+					mcontroller.setPosition(pos)
+					deactivate()
+				end
 			end
 		end
 	end
 	
 	if transformed then run(args) end
+end
+function transformPosition(pos)
+  pos = pos or mcontroller.position()
+  local groundPos = world.resolvePolyCollision(self.movementParameters.collisionPoly, {pos[1], pos[2] - positionOffset()}, 1, self.collisionSet)
+  if groundPos then
+    return groundPos
+  else
+    return world.resolvePolyCollision(self.movementParameters.collisionPoly, pos, 1, self.collisionSet)
+  end
+end
+function restorePosition(pos)
+  pos = pos or mcontroller.position()
+  local groundPos = world.resolvePolyCollision(self.basePoly, {pos[1], pos[2] + positionOffset()}, 1, self.collisionSet)
+  if groundPos then
+    return groundPos
+  else
+    return world.resolvePolyCollision(self.basePoly, pos, 1, self.collisionSet)
+  end
 end
 function activate()
 	mcontroller.setVelocity(vec2.mul(world.distance(tech.aimPosition(), mcontroller.position()), 3))
