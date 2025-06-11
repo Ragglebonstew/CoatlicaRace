@@ -103,7 +103,7 @@
 					"male60", "male61", "male62", "male63", "male64"
 	  ],
       "shirt" : [ "coatlicaoutfit1chest", "coatlicaoutfit2chest", "coatlicaoutfit3chest", "coatlicaoutfit4chest", "bedouinchest" ],
-      "pants" : [ "coatlicaoutfit2legs", "floranhunterlegs", "floranpeltlegs", "avianfancyskirt", "" ],
+      "pants" : [ "coatlicaoutfit1legs",  "coatlicaoutfit2legs",  "coatlicaoutfit3legs",  "coatlicaoutfit4legs", " floranhunterlegs", "floranpeltlegs", "avianfancyskirt", "" ],
       "facialHairGroup" : "",
       "facialHair" : [ ],
       "facialMaskGroup" : "",
@@ -126,7 +126,7 @@
 					"PatchHair01", "PatchHair02",  "PatchHair03",  "PatchHair04",  "PatchHair05",
 					"PatchHuman01", "PatchHuman02", "PatchHuman03", "PatchHuman04", "PatchHuman05" ],
       "shirt" : [ "coatlicaoutfit1chest", "coatlicaoutfit2chest", "coatlicaoutfit3chest", "coatlicaoutfit4chest", "bedouinchest" ],
-      "pants" : [ "coatlicaoutfit2legs", "coatlicaoutfit3legs", "coatlicaoutfit4legs", "floranhunterlegs", "floranpeltlegs", "avianfancyskirt", "" ],
+      "pants" : [ "coatlicaoutfit1legs",  "coatlicaoutfit2legs",  "coatlicaoutfit3legs",  "coatlicaoutfit4legs", " floranhunterlegs", "floranpeltlegs", "avianfancyskirt", "" ],
       "facialHairGroup" : "",
       "facialHair" : [ ],
       "facialMaskGroup" : "",
