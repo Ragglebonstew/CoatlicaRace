@@ -149,7 +149,8 @@ end
 
 function equipTech(techName)
 	player.setProperty("coatlica_"..self.selectedSlot.."Ability", techName)
-
+	player.makeTechAvailable("coatlica_tech_head")
+	player.makeTechAvailable("coatlicatech")
 	updateEquippedIcons()
 end
 
