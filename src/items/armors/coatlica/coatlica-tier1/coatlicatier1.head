@@ -5,14 +5,13 @@
   "maxStack" : 1,
   "rarity" : "Common",
   "category" : "headarmour",
-  "description" : "This sharp enhancement to your jaws will allow you to dig them further into your enemies.",
-  "shortdescription" : "Digger's Helmet",
+  "description" : "Recognition for the great adventurers of old.",
+  "shortdescription" : "Scout's Circlet",
   "tooltipKind" : "armor",
 
   "maleFrames" : "head.png",
   "femaleFrames" : "head.png",
   "mask" : "mask.png",
-  "wormHead": "wormhead.png",
 
   "level" : 1,
   "leveledStatusEffects" : [
