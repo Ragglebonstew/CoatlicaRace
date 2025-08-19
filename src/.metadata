@@ -1,11 +1,9 @@
 {
   "author" : "Ragglebonstew",
-  "description" : "Yielding from the depths of desert and scorched planets, the Coatlica rarely interact with the rest of the universe. Their size makes it difficult to maneuver the colonies of other species, but easy to navigate the ruins of species past. Many of the Coatlica find interest in forgotten history and mysticism. Older Coatlica are rumored to have access to special abilities, such as tranforming into a giant snake!\n\n[h3]Other Mechanics[/h3] (mechanic : how to get)\nCoatlica can increase body length : [spoiler]length scales on health. 1 segment for every 25 points of hp[/spoiler]\nCoatlica can gain extra abilities : [spoiler]Accessed by crafting in a limbless statue. Different items unlock different Coatlica techs[/spoiler]\nOther races can become part Coatlica : [spoiler]Accessed by talking to a Coatlica Handmaiden and equipping the given item[/spoiler]",
+  "description" : "Yielding from the depths of desert and scorched planets, the Coatlica rarely interact with the rest of the universe. Their size makes it difficult to maneuver the colonies of other species, but easy to navigate the ruins of species past. Many of the Coatlica find interest in forgotten history and mysticism. Older Coatlica are rumored to have access to special abilities, such as tranforming into a giant snake!",
   "friendlyName" : "Coatlica Race",
-  "link" : "steam://url/CommunityFilePage/3120404886",
   "name" : "Coatlica Race",
   "path" : ".",
-  "steamContentId" : "3120404886",
   "tags" : "Species|Character Improvements|Mechanics",
   "version" : "0.4.0"
 }
