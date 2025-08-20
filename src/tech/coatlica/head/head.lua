@@ -10,9 +10,6 @@ local transformed = false
 local regTimer = 0
 
 function init()
-	
-	--build(directory, config, parameters, level, seed)
-	
 	self.headType = config.getParameter("headtype", "coatlicahead_base")
 
 	self.stomach = {}
@@ -20,10 +17,12 @@ function init()
 	self.basePoly = mcontroller.baseParameters().standingPoly
 	self.energyCost = config.getParameter("energyCost", 50)
 	self.jerkMul = config.getParameter("jerkMul", 0.005)
+	self.coilSpeed = config.getParameter("coilSpeed", 0.02)
 	self.collisionSet = {"Null", "Block", "Dynamic", "Slippery"}
 	message.setHandler("regurgitate", simpleHandler(regurgitate))
 	
 	self.mouthPer = 0
+	self.coilPer = 1
 	self.updateTimer = 0
 	
 	message.setHandler("addAbility", simpleHandler(addAbility))
@@ -63,7 +62,16 @@ function update(args)
 		end
 	end
 	
-	if transformed then run(args) end
+	local shiftHeld = not args.moves["run"]
+	if transformed then
+		move(args.moves)
+		holdAbility(shiftHeld)
+		run(args)
+	else
+		if shiftHeld then move(args.moves) end
+		coilAbility(args.moves["down"])
+		holdAbility(shiftHeld)
+	end
 end
 function transformPosition(pos)
   pos = pos or mcontroller.position()
@@ -134,8 +142,6 @@ function run(args)
 	
 	mcontroller.controlParameters(self.movementParameters)
 	
-	
-	movementUpdate(args)
 	abilityUpdate(args)
 	headUpdate()
 end
@@ -369,12 +375,6 @@ function addAbility(config, parameters, abilitySlot, abilitySource)
   end
 end
 
-function movementUpdate(args)
-	drag()
-	move(args.moves)
-	holdAbility(not args.moves["run"])
-end
-
 function regurgitate(carryingId)
 	world.sendEntityMessage(carryingId, "applyStatusEffect", "wet")
 	
@@ -438,6 +438,18 @@ function lift(control)
 		if maxHeight - distance < 0.25 then
 			--mcontroller.controlParameters({gravityEnabled = false})
 		end
+	end
+end
+function coilAbility(button)
+	local lastCoilPer = self.coilPer
+	if button and mcontroller.onGround() then
+		if self.coilPer > 0.5 then self.coilPer = self.coilPer - self.coilSpeed end
+	elseif self.coilPer < 1 then
+		self.coilPer = math.min(self.coilPer + self.coilSpeed*5, 1)
+	end
+	--update master coil percent
+	if lastCoilPer ~= self.coilPer then
+		world.sendEntityMessage(entity.id(), "setCoil", self.coilPer)
 	end
 end
 function drag()

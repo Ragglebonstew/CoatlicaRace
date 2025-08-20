@@ -3,6 +3,9 @@ require "/scripts/messageutil.lua"
 require "/scripts/coatlica/util.lua"
 
 function init()
+	
+	sb.logError("Deprecated Coalitca Leg Tech being used")
+
 	self.coilPer = 1
 	self.coiled = false
 	self.coilSpeed = 0.02
