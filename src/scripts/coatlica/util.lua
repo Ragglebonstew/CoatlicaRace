@@ -43,12 +43,14 @@ function getBodyDirectives()
 	return bodyDirectives
 end
 function getHairDirectives()
-	local headDirectives = ""
+	local directives = ""
 	for _,v in ipairs(world.entityPortrait(entity.id(), "fullnude")) do
 		if string.find(v.image, "hair") then
-			headDirectives = string.sub(v.image,(string.find(v.image, "?")))
+			local stringStart = string.find(v.image, "?")
+			local stringEnd   = string.find(v.image, "?addmask")
+			directives = string.sub(v.image, stringStart, stringEnd)
 			break
 		end
 	end
-	return headDirectives
+	return directives
 end
