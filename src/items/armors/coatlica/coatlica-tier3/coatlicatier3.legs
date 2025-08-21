@@ -8,9 +8,11 @@
   "description" : "For the sturdy garden snake.",
   "shortdescription" : "Guardener Belt",
   "tooltipKind" : "armor",
+  
   "maleFrames" : "pants.png",
   "femaleFrames" : "pants.png",
-  "wormTail": "wormtail.png",
+  
+  
   "level" : 3,
   "leveledStatusEffects" : [
     {

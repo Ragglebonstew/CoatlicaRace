@@ -12,7 +12,6 @@
   "maleFrames" : "head.png",
   "femaleFrames" : "head.png",
   "mask" : "mask.png",
-  "wormHead": "wormhead.png",
 
   "level" : 3,
   "leveledStatusEffects" : [

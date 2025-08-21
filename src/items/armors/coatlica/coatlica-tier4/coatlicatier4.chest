@@ -1,26 +1,26 @@
 {
-  "itemName" : "coatlicatier4chest",
-  "price" : 4000,
-  "inventoryIcon" : "icons.png:chest",
-  "maxStack" : 1,
-  "rarity" : "Uncommon",
-  "category" : "chestarmour",
-  "description" : "Coatlica robes for mysterious rituals.",
-  "shortdescription" : "Ritual Master Robes",
-  "tooltipKind" : "armor",
-  "segments" : 4,
-  "maleFrames" : {
-    "body" : "chestm.png",
-    "backSleeve" : "bsleeve.png",
-    "frontSleeve" : "fsleeve.png"
-  },
-  "femaleFrames" : {
-    "body" : "chestf.png",
-    "backSleeve" : "bsleeve.png",
-    "frontSleeve" : "fsleeve.png"
-  },
-  "level" : 4,
-  "leveledStatusEffects" : [
+	"itemName" : "coatlicatier4chest",
+	"price" : 4000,
+	"inventoryIcon" : "icons.png:chest",
+	"maxStack" : 1,
+	"rarity" : "Uncommon",
+	"category" : "chestarmour",
+	"description" : "Coatlica robes for mysterious rituals.",
+	"shortdescription" : "Ritual Master Robes",
+	"tooltipKind" : "armor",
+	"segments" : 4,
+	"maleFrames" : {
+		"body" : "chestm.png",
+		"backSleeve" : "bsleeve.png",
+		"frontSleeve" : "fsleeve.png"
+	},
+	"femaleFrames" : {
+		"body" : "chestf.png",
+		"backSleeve" : "bsleeve.png",
+		"frontSleeve" : "fsleeve.png"
+	},
+	"level" : 4,
+	"leveledStatusEffects" : [
     {
       "levelFunction" : "standardArmorLevelPowerMultiplierMultiplier",
       "stat" : "powerMultiplier",

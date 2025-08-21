@@ -1,25 +1,26 @@
 {
-  "itemName" : "coatlicatier1chest",
-  "price" : 800,
-  "inventoryIcon" : "icons.png:chest",
-  "maxStack" : 1,
-  "rarity" : "Common",
-  "category" : "chestarmour",
-  "description" : "Meant to evoke the idea of adventure.",
-  "shortdescription" : "Scout's Chestguard",
-  "tooltipKind" : "armor",
-  "maleFrames" : {
-    "body" : "chestm.png",
-    "backSleeve" : "bsleeve.png",
-    "frontSleeve" : "fsleeve.png"
-  },
-  "femaleFrames" : {
-    "body" : "chestf.png",
-    "backSleeve" : "bsleeve.png",
-    "frontSleeve" : "fsleeve.png"
-  },
-"level" : 1,
-  "leveledStatusEffects" : [
+	"itemName" : "coatlicatier1chest",
+	"price" : 800,
+	"inventoryIcon" : "icons.png:chest",
+	"maxStack" : 1,
+	"rarity" : "Common",
+	"category" : "chestarmour",
+	"description" : "Meant to evoke the idea of adventure.",
+	"shortdescription" : "Scout's Chestguard",
+	"tooltipKind" : "armor",
+  
+	"maleFrames" : {
+		"body" : "chestm.png",
+		"backSleeve" : "bsleeve.png",
+		"frontSleeve" : "fsleeve.png"
+	},
+	"femaleFrames" : {
+		"body" : "chestf.png",
+		"backSleeve" : "bsleeve.png",
+		"frontSleeve" : "fsleeve.png"
+	},
+	"level" : 1,
+	"leveledStatusEffects" : [
     {
       "levelFunction" : "standardArmorLevelPowerMultiplierMultiplier",
       "stat" : "powerMultiplier",

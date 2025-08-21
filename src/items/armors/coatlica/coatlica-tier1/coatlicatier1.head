@@ -1,20 +1,20 @@
 {
-  "itemName" : "coatlicatier1head",
-  "price" : 480,
-  "inventoryIcon" : "icons.png:head",
-  "maxStack" : 1,
-  "rarity" : "Common",
-  "category" : "headarmour",
-  "description" : "Recognition for the great adventurers of old.",
-  "shortdescription" : "Scout's Circlet",
-  "tooltipKind" : "armor",
-
-  "maleFrames" : "head.png",
-  "femaleFrames" : "head.png",
-  "mask" : "mask.png",
-
-  "level" : 1,
-  "leveledStatusEffects" : [
+	"itemName" : "coatlicatier1head",
+	"price" : 480,
+	"inventoryIcon" : "icons.png:head",
+	"maxStack" : 1,
+	"rarity" : "Common",
+	"category" : "headarmour",
+	"description" : "Recognition for the great adventurers of old.",
+	"shortdescription" : "Scout's Circlet",
+	"tooltipKind" : "armor",
+	
+	"maleFrames" : "head.png",
+	"femaleFrames" : "head.png",
+	"mask" : "mask.png",
+	
+	"level" : 1,
+	"leveledStatusEffects" : [
     {
       "levelFunction" : "standardArmorLevelPowerMultiplierMultiplier",
       "stat" : "powerMultiplier",

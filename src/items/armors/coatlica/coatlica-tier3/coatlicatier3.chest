@@ -8,6 +8,7 @@
   "description" : "For the sturdy garden snake.",
   "shortdescription" : "Guardener Chestplate",
   "tooltipKind" : "armor",
+  
   "maleFrames" : {
     "body" : "chestm.png",
     "backSleeve" : "bsleeve.png",
@@ -18,7 +19,6 @@
     "backSleeve" : "bsleeve.png",
     "frontSleeve" : "fsleeve.png"
   },
-  "wormBody": "wormbody.png",
   "level" : 3,
   "leveledStatusEffects" : [
     {
