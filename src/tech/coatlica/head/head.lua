@@ -30,7 +30,7 @@ end
 
 function uninit()
 	self.stomach = {}
-	if transformed then deactivate() end
+	deactivate()
 end
 function update(args)
 	self.updateTimer = self.updateTimer - script.updateDt()
