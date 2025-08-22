@@ -19,12 +19,16 @@ function init()
 
 	abilityTypes = root.assetJson(abilityTablePath)
 	self.techs = {}
-	for abilityName, abilitySource in pairs(abilityTypes) do
+	for abilityName, abilitySource in pairs(abilityTypes.active) do
 		self.techs[abilityName] = root.assetJson(abilitySource).ability
+	end
+	self.passives = {}
+	for abilityName, abilitySource in pairs(abilityTypes.passive) do
+		self.passives[abilityName] = root.assetJson(abilitySource).ability
 	end
 	
 	for _,abilityName in ipairs(getEnabledAbilities()) do
-		if not abilityTypes[abilityName] then
+		if not abilityTypes.active[abilityName] or abilityTypes.passive[abilityName] then
 			player.setProperty("coatlica_enabledAbilities."..abilityName, nil)
 		end
 	end
@@ -68,19 +72,19 @@ function populateTechList(slot)
 	for _,techName in pairs(techs) do
 		local config = self.techs[techName]
 		--if root.techType(techName) == slot then
-		local listItem = widget.addListItem(self.techList)
-		widget.setText(string.format("%s.%s.techName", self.techList, listItem), config.shortDescription)
-		widget.setData(string.format("%s.%s", self.techList, listItem), techName)
-
-		if player.getProperty("coatlica_enabledAbilities."..techName) then
-			widget.setImage(string.format("%s.%s.techIcon", self.techList, listItem), config.icon)
-		else
-			widget.setImage(string.format("%s.%s.techIcon", self.techList, listItem), self.techLockedIcon)
-		end
-
-		if player.getProperty("coatlica_"..slot.."Ability") == techName then
-			widget.setListSelected(self.techList, listItem)
-		end
+			local listItem = widget.addListItem(self.techList)
+			widget.setText(string.format("%s.%s.techName", self.techList, listItem), config.shortDescription)
+			widget.setData(string.format("%s.%s", self.techList, listItem), techName)
+	
+			if player.getProperty("coatlica_enabledAbilities."..techName) then
+				widget.setImage(string.format("%s.%s.techIcon", self.techList, listItem), config.icon)
+			else
+				widget.setImage(string.format("%s.%s.techIcon", self.techList, listItem), self.techLockedIcon)
+			end
+	
+			if player.getProperty("coatlica_"..slot.."Ability") == techName then
+				widget.setListSelected(self.techList, listItem)
+			end
 		--end
 	end
 end

@@ -42,6 +42,7 @@ function update(args)
 	--toggles the transformation state
 	if args.moves["special1"] ~= self.specialLast then
 		self.specialLast = args.moves["special1"]
+		sb.logInfo("special pressed")
 		if args.moves["special1"] then
 			if not transformed 
 				and not tech.parentLounging()
@@ -92,6 +93,7 @@ function restorePosition(pos)
   end
 end
 function activate()
+	sb.logInfo("Activating")
 	mcontroller.setVelocity(vec2.mul(world.distance(tech.aimPosition(), mcontroller.position()), 3))
 	world.spawnProjectile("clustermineexplosion", mcontroller.position())
 	tech.setParentHidden(true)
@@ -347,7 +349,8 @@ function setupAbility(config, parameters, abilitySlot, builderConfig, seed)
     local abilitiesKey = abilitySlot .. "Abilities"
     if builderConfig[abilitiesKey] and #builderConfig[abilitiesKey] > 0 then
       local abilityType = randomFromList(builderConfig[abilitiesKey], seed, abilitySlot .. "AbilityType")
-      abilitySource = getAbilitySourceFromType(abilityType)
+	  local isPassive = abilitySlot == "Passive"
+      abilitySource = getAbilitySourceFromType(abilityType)[isPassive and "passive" or "active"]
     end
   end
 
