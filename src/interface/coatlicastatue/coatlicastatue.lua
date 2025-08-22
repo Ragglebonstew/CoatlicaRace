@@ -71,7 +71,7 @@ function populateTechList(slot)
 	util.appendLists(techs, disabled)
 	for _,techName in pairs(techs) do
 		local config = self.techs[techName]
-		--if root.techType(techName) == slot then
+		if techType(techName, slot) then
 			local listItem = widget.addListItem(self.techList)
 			widget.setText(string.format("%s.%s.techName", self.techList, listItem), config.shortDescription)
 			widget.setData(string.format("%s.%s", self.techList, listItem), techName)
@@ -85,7 +85,28 @@ function populateTechList(slot)
 			if player.getProperty("coatlica_"..slot.."Ability") == techName then
 				widget.setListSelected(self.techList, listItem)
 			end
-		--end
+		end
+	end
+end
+
+function techType(techName, slot)
+	for abilityName,_ in pairs(self.techs) do
+		if abilityName == techName then 
+			if slot == "Primary" or slot == "Secondary" then 
+				return true
+			else
+				return false
+			end
+		end
+	end
+	for abilityName,_ in pairs(self.passives) do
+		if abilityName == techName then 
+			if slot == "Passive" then 
+				return true
+			else
+				return false
+			end
+		end
 	end
 end
 
@@ -158,7 +179,6 @@ function equipTech(techName)
 end
 
 function setSelectedTech(techName)
-  local config = root.assetJson(abilityTypes[techName])
   widget.setText("lblDescription", self.techs[techName].description)
   self.selectedTech = techName
 
@@ -173,7 +193,12 @@ end
 
 function getEnabledAbilities()
 	local enabledAbilities = {}
-	for abilityName, _ in pairs(abilityTypes) do
+	for abilityName, _ in pairs(abilityTypes.active) do
+		if player.getProperty("coatlica_enabledAbilities."..abilityName) then
+			table.insert(enabledAbilities, abilityName)
+		end
+	end
+	for abilityName, _ in pairs(abilityTypes.passive) do
 		if player.getProperty("coatlica_enabledAbilities."..abilityName) then
 			table.insert(enabledAbilities, abilityName)
 		end
