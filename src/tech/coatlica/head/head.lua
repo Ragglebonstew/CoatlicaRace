@@ -42,7 +42,6 @@ function update(args)
 	--toggles the transformation state
 	if args.moves["special1"] ~= self.specialLast then
 		self.specialLast = args.moves["special1"]
-		sb.logInfo("special pressed")
 		if args.moves["special1"] then
 			if not transformed 
 				and not tech.parentLounging()
@@ -93,7 +92,6 @@ function restorePosition(pos)
   end
 end
 function activate()
-	sb.logInfo("Activating")
 	mcontroller.setVelocity(vec2.mul(world.distance(tech.aimPosition(), mcontroller.position()), 3))
 	world.spawnProjectile("clustermineexplosion", mcontroller.position())
 	tech.setParentHidden(true)
