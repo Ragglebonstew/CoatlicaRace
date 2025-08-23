@@ -64,6 +64,6 @@ function die()
 	status.setResource("health", 0)
 end
 function setHeadType(headType)
-	local headImage = "/monsters/coatlicahead/head_images/"..(headType or "default.png")
+	local headImage = "/monsters/coatlicahead/head_images/"..(headType or "default")
 	animator.setGlobalTag("headImage", headImage)
 end

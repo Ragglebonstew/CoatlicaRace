@@ -39,12 +39,12 @@
 					"head" : {
 						"idle" : {
 							"properties" : {
-								"image" : "<headImage>:idle"
+								"image" : "<headImage>.png:idle"
 							}
 						},
 						"mouthopen" : {
 							"properties" : {
-								"image" : "<headImage>:mouthopen"
+								"image" : "<headImage>.png:mouthopen"
 							}
 						}
 					}
@@ -61,7 +61,7 @@
 					"jaw" : {
 						"visible" : {
 							"properties" : {
-								"image" : "<partImage>"
+								"image" : "<headImage>_jaw.png"
 							}
 						},
 						"invisible" : {
