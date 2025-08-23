@@ -22,6 +22,7 @@ function init()
 	monster.setDamageOnTouch(false)
 	message.setHandler("updateAnim", simpleHandler(updateAnim))
 	message.setHandler("die", simpleHandler(die))
+	message.setHandler("setHeadType", simpleHandler(setHeadType))
 	message.setHandler("setDamageOnTouch", simpleHandler(monster.setDamageOnTouch))
 end
 function update(dt)
@@ -61,4 +62,8 @@ function updateStatus()
 end
 function die()
 	status.setResource("health", 0)
+end
+function setHeadType(headType)
+	local headImage = "/monsters/coatlicahead/head_images/"..(headType or "default.png")
+	animator.setGlobalTag("headImage", headImage)
 end

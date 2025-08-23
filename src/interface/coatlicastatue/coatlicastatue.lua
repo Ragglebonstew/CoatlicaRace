@@ -19,16 +19,12 @@ function init()
 
 	abilityTypes = root.assetJson(abilityTablePath)
 	self.techs = {}
-	for abilityName, abilitySource in pairs(abilityTypes.active) do
+	for abilityName, abilitySource in pairs(abilityTypes) do
 		self.techs[abilityName] = root.assetJson(abilitySource).ability
-	end
-	self.passives = {}
-	for abilityName, abilitySource in pairs(abilityTypes.passive) do
-		self.passives[abilityName] = root.assetJson(abilitySource).ability
 	end
 	
 	for _,abilityName in ipairs(getEnabledAbilities()) do
-		if not abilityTypes.active[abilityName] or abilityTypes.passive[abilityName] then
+		if not abilityTypes[abilityName] then
 			player.setProperty("coatlica_enabledAbilities."..abilityName, nil)
 		end
 	end
@@ -71,7 +67,9 @@ function populateTechList(slot)
 	util.appendLists(techs, disabled)
 	for _,techName in pairs(techs) do
 		local config = self.techs[techName]
-		if techType(techName, slot) then
+		
+		--Why I can't do (slot == "Passive") == self.techs[techName].isPassive... only god knows ToT
+		if (slot ~= "Passive") == not self.techs[techName].isPassive then
 			local listItem = widget.addListItem(self.techList)
 			widget.setText(string.format("%s.%s.techName", self.techList, listItem), config.shortDescription)
 			widget.setData(string.format("%s.%s", self.techList, listItem), techName)
@@ -84,27 +82,6 @@ function populateTechList(slot)
 	
 			if player.getProperty("coatlica_"..slot.."Ability") == techName then
 				widget.setListSelected(self.techList, listItem)
-			end
-		end
-	end
-end
-
-function techType(techName, slot)
-	for abilityName,_ in pairs(self.techs) do
-		if abilityName == techName then 
-			if slot == "Primary" or slot == "Secondary" then 
-				return true
-			else
-				return false
-			end
-		end
-	end
-	for abilityName,_ in pairs(self.passives) do
-		if abilityName == techName then 
-			if slot == "Passive" then 
-				return true
-			else
-				return false
 			end
 		end
 	end
@@ -193,12 +170,7 @@ end
 
 function getEnabledAbilities()
 	local enabledAbilities = {}
-	for abilityName, _ in pairs(abilityTypes.active) do
-		if player.getProperty("coatlica_enabledAbilities."..abilityName) then
-			table.insert(enabledAbilities, abilityName)
-		end
-	end
-	for abilityName, _ in pairs(abilityTypes.passive) do
+	for abilityName, _ in pairs(abilityTypes) do
 		if player.getProperty("coatlica_enabledAbilities."..abilityName) then
 			table.insert(enabledAbilities, abilityName)
 		end

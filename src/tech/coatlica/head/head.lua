@@ -150,12 +150,16 @@ function abilityInit()
 	
 	self.primaryAbility = getAbility("Primary", abilityConfig.PrimaryAbility)
 	self.secondaryAbility = getAbility("Secondary", abilityConfig.SecondaryAbility)
+	self.passiveAbility = getAbility("Passive", abilityConfig.PassiveAbility)
 	
 	if self.primaryAbility then
 		self.primaryAbility:init()
 	end
 	if self.secondaryAbility then
 		self.secondaryAbility:init()
+	end
+	if self.passiveAbility then
+		self.passiveAbility:init()
 	end
 end
 function abilityUninit()
@@ -164,6 +168,9 @@ function abilityUninit()
 	end
 	if self.secondaryAbility then
 		self.secondaryAbility:uninit()
+	end
+	if self.passiveAbility then
+		self.passiveAbility:uninit()
 	end
 end
 function abilityUpdate(args)
@@ -178,13 +185,14 @@ function abilityUpdate(args)
 	if self.secondaryAbility then
 		self.secondaryAbility:update(script.updateDt(), dir, not args.moves["run"])
 	end
+	if self.passiveAbility then
+		self.passiveAbility:update(script.updateDt(), dir, not args.moves["run"])
+	end
 	
-	--for _,ability in pairs(self.passiveAbilities) do
-		--ability:update(args.moves)
-	--end
 	
 	updateAbilityFire(args, "primaryFire", self.primaryAbility)
 	updateAbilityFire(args, "altFire", self.secondaryAbility)
+	self.passiveAbility:update(args.moves)
 	
 end
 
@@ -297,6 +305,7 @@ function build(directory, config, parameters, level, seed)
   -- select, load and merge abilities
   setupAbility(config, parameters, "Primary")
   setupAbility(config, parameters, "Secondary")
+  setupAbility(config, parameters, "Passive")
 
   -- elemental type
   local elementalType = parameters.elementalType or config.elementalType or "physical"
@@ -340,21 +349,22 @@ end
 -- If builderConfig is given, it will randomly choose an ability from
 -- builderConfig if the ability is not specified in the config/parameters.
 function setupAbility(config, parameters, abilitySlot, builderConfig, seed)
-  seed = seed or parameters.seed or config.seed or 0
+	seed = seed or parameters.seed or config.seed or 0
 
-  local abilitySource = getAbilitySource(config, parameters, abilitySlot)
-  if not abilitySource and builderConfig then
-    local abilitiesKey = abilitySlot .. "Abilities"
-    if builderConfig[abilitiesKey] and #builderConfig[abilitiesKey] > 0 then
-      local abilityType = randomFromList(builderConfig[abilitiesKey], seed, abilitySlot .. "AbilityType")
-	  local isPassive = abilitySlot == "Passive"
-      abilitySource = getAbilitySourceFromType(abilityType)[isPassive and "passive" or "active"]
-    end
-  end
+	local abilitySource = getAbilitySource(config, parameters, abilitySlot)
+	local isPassive = abilitySlot == "Passive"
+	
+	if not abilitySource and builderConfig then
+		local abilitiesKey = abilitySlot .. "Abilities"
+		if builderConfig[abilitiesKey] and #builderConfig[abilitiesKey] > 0 then
+			local abilityType = randomFromList(builderConfig[abilitiesKey], seed, abilitySlot .. "AbilityType")
+			abilitySource = getAbilitySourceFromType(abilityType)[isPassive and "passive" or "active"]
+		end
+	end
 
-  if abilitySource then
-    addAbility(config, parameters, abilitySlot, abilitySource)
-  end
+	if abilitySource then
+		addAbility(config, parameters, abilitySlot, abilitySource)
+	end
 end
 
 -- Adds the new ability to the config (modifying it)
@@ -386,16 +396,17 @@ function regurgitate(carryingId)
 		end
 	end
 	
-	--local bodyDirectives = getBodyDirectives()
-	--local legsItem = {name = "coatlicawanabelegs", count=1}
-	--legsItem.parameters = {directives = bodyDirectives, price = 0, rarity = "essential"}
-	--world.spawnItem(legsItem, mcontroller.position())
 	regTimer = 10
 end
 
 --util----------
 function updateStatus()
 	self.bodyId = status.statusProperty("coatlica_bodyId")
+end
+function setHeadType(headType)
+	if self.headId and world.entityExists(self.headId) then
+		world.callScriptedEntity(self.headId, "setHeadType", headType)
+	end
 end
 
 --abilities (temp till can be moved to own files)
@@ -428,19 +439,6 @@ function holdAbility(button)
 		world.sendEntityMessage(entity.id(), "setHold", button)
 	end
 end
-function lift(control)
-	local gravity = world.gravity(mcontroller.position())
-	if gravity and gravity ~= 0 then
-		local maxHeight = 6
-		local distance = distanceToGround(maxHeight)
-		if maxHeight ~= distance then
-			--mcontroller.controlApproachYVelocity(maxHeight-distance, gravity*3.8)
-		end
-		if maxHeight - distance < 0.25 then
-			--mcontroller.controlParameters({gravityEnabled = false})
-		end
-	end
-end
 function coilAbility(button)
 	local lastCoilPer = self.coilPer
 	if button and mcontroller.onGround() then
@@ -452,10 +450,6 @@ function coilAbility(button)
 	if lastCoilPer ~= self.coilPer then
 		world.sendEntityMessage(entity.id(), "setCoil", self.coilPer)
 	end
-end
-function drag()
-	local dragMult = world.pointCollision(mcontroller.position(), {"Block", "Dynamic", "Slippery", "Null", "Platform"}) and 0.9 or 0.4
-	--mcontroller.controlApproachVelocity({0,0}, vec2.mag(mcontroller.velocity())*dragMult)
 end
 
 function bite() end
