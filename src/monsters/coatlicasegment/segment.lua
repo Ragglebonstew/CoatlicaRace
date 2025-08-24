@@ -161,13 +161,13 @@ function updateLength(segments)
 		self.btype = "tail"
 		animator.setAnimationState("body", "tail")
 		if self.childId and world.entityExists(self.childId) then
-			world.callScriptedEntity(self.childId, "die")
+			world.sendEntityMessage(self.childId, "die")
 			self.childId = nil
 		end
 	else
 		self.btype = "body"
 		if self.childId and world.entityExists(self.childId) then
-			world.callScriptedEntity(self.childId, "updateLength", segments-1)
+			world.sendEntityMessage(self.childId, "updateLength", segments-1)
 		else
 			spawnSegment()
 		end
@@ -177,7 +177,7 @@ end
 function die()
 	status.setResource("health", 0)
 	if self.childId and world.entityExists(self.childId) then
-		world.callScriptedEntity(self.childId, "die")
+		world.sendEntityMessage(self.childId, "die")
 	end
 end
 
