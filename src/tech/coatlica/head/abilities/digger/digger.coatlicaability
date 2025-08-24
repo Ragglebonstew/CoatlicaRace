@@ -6,6 +6,7 @@
 		"shortDescription" : "Digger",
 		"description" : "Gives the ability to tunnel through the earth!",
 		"icon" : "/interface/statuses/nofalldamage.png",
+		"chipCost" : 10,
 		
 		"isPassive" : true,
 		
