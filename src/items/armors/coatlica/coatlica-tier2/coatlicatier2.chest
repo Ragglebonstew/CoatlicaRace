@@ -1,26 +1,26 @@
 {
-  "itemName" : "coatlicatier2chest",
-  "price" : 2400,
-  "inventoryIcon" : "icons.png:chest",
-  "maxStack" : 1,
-  "rarity" : "Common",
-  "category" : "chestarmour",
-  "description" : "The slash of a sword will be stopped in its tracks by these plates on your body.",
-  "shortdescription" : "Spelunker's Body Plating",
-  "tooltipKind" : "armor",
-  "maleFrames" : {
-    "body" : "chest.png",
-    "backSleeve" : "bsleeve.png",
-    "frontSleeve" : "fsleeve.png"
-  },
-  "femaleFrames" : {
-    "body" : "chest.png",
-    "backSleeve" : "bsleeve.png",
-    "frontSleeve" : "fsleeve.png"
-  },
-  "wormBody": "wormbody.png",
-  "level" : 2,
-  "leveledStatusEffects" : [
+	"itemName" : "coatlicatier2chest",
+	"price" : 2400,
+	"inventoryIcon" : "icons.png:chest",
+	"maxStack" : 1,
+	"rarity" : "Common",
+	"category" : "chestarmour",
+	"description" : "An unruly chestplate.",
+	"shortdescription" : "Wild Chestplate",
+	"tooltipKind" : "armor",
+  
+	"maleFrames" : {
+		"body" : "chest.png",
+		"backSleeve" : "bsleeve.png",
+		"frontSleeve" : "fsleeve.png"
+	},
+	"femaleFrames" : {
+		"body" : "chest.png",
+		"backSleeve" : "bsleeve.png",
+		"frontSleeve" : "fsleeve.png"
+	},
+	"level" : 2,
+	"leveledStatusEffects" : [
     {
       "levelFunction" : "standardArmorLevelPowerMultiplierMultiplier",
       "stat" : "powerMultiplier",

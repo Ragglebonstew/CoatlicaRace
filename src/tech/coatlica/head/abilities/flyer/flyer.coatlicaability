@@ -1,0 +1,15 @@
+{
+	"ability" : {
+		"name" : "flyer",
+		"type" : "flyer",
+		"class" : "Flyer",
+		"shortDescription" : "Eyeless",
+		"description" : "One who sees through walls was never using their eyes.",
+		"icon" : "/interface/statuses/nofalldamage.png",
+		"chipCost" : 3,
+		
+		"isPassive" : true,
+		
+		"scripts" : ["/tech/coatlica/head/abilities/flyer/flyer.lua"]
+	}
+}

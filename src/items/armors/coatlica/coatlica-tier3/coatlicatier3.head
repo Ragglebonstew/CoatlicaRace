@@ -5,14 +5,13 @@
   "maxStack" : 1,
   "rarity" : "Uncommon",
   "category" : "headarmour",
-  "description" : "The sleek titanium helm of the pioneer.",
-  "shortdescription" : "Pioneer's Helm",
+  "description" : "For the sturdy garden snake.",
+  "shortdescription" : "Guardener Headpiece",
   "tooltipKind" : "armor",
 
   "maleFrames" : "head.png",
   "femaleFrames" : "head.png",
   "mask" : "mask.png",
-  "wormHead": "wormhead.png",
 
   "level" : 3,
   "leveledStatusEffects" : [

@@ -1,4 +1,5 @@
 require "/scripts/vec2.lua"
+require "/scripts/util.lua"
 require "/scripts/messageutil.lua"
 require "/scripts/coatlica/util.lua"
 
@@ -12,6 +13,8 @@ function init()
 	self.segmentSize = config.getParameter("segmentSize", 2)
 	self.btype = self.segmentsLeft == 0 and "tail" or "body"
 	self.passTimer = 0
+	self.animTimer = 0
+	self.lastPos = mcontroller.position()
 
     --status.setPersistentEffects("invulerability", {{stat="invulnerable",amount=1}})
 	status.setPrimaryDirectives(self.directives)
@@ -38,7 +41,7 @@ function update(dt)
 	end
 	
 	--In ground handling 
-	if self.inGround or self.isHolding or self.isFlying then
+	if self.inGround or (self.isHolding and not (self.isPivot and (self.isPivot.num <= 1))) or self.isFlying then
 		mcontroller.controlParameters({
 			collisionEnabled = not self.inGround, 
 			gravityEnabled = false
@@ -55,12 +58,13 @@ function update(dt)
 end
 
 function followOwner(ownerPos, coilPer)
+	animator.resetTransformationGroup("body")
+	
 	local segmentLength = self.segmentSize * coilPer
 	local dirV = vec2.norm(world.distance(ownerPos, mcontroller.position()))
 	local target = vec2.sub(ownerPos, vec2.mul(dirV, segmentLength))
 	
 	local animV = {math.abs(dirV[1]), dirV[2]}
-	animator.resetTransformationGroup("body")
 	animator.setFlipped(dirV[1] < 0)
 	animator.rotateTransformationGroup("body", vec2.angle(animV))
 	
@@ -90,19 +94,64 @@ function spawnSegment()
 	}
     self.childId = world.spawnMonster("coatlicasegment", mcontroller.position(), params)
 end
-function updateCommon(ownerPos, coilPer)
+function updateCommon(ownerPos, coilPer, walkFrame)
 	if not (self.ownerId and world.entityExists(self.ownerId)) then
 		die()
 		return
 	end
 	
 	followOwner(ownerPos, coilPer)
+	walkFrame = updateAnimation(walkFrame)
 	
 	if self.childId and world.entityExists(self.childId) then
-		world.callScriptedEntity(self.childId, "updateCommon", mcontroller.position(), coilPer)
+		world.callScriptedEntity(self.childId, "updateCommon", mcontroller.position(), coilPer, walkFrame)
 	elseif self.segmentsLeft > 0 then -- segmentsLeft of 0 refers to the tail, the last body segment
         spawnSegment()
 	end
+end
+function updateAnimation(walkFrame)
+	
+	
+	if self.btype == "body" then
+		
+		local maxHeight = 1
+		local onGround = distanceToGround(maxHeight) ~= maxHeight
+		local isMoving = world.magnitude(self.lastPos, mcontroller.position()) > 0.5
+		
+		--body gets stretched in the air, so end chain here
+		if onGround then
+			animator.setAnimationState("body", "walk")
+		else
+			animator.setAnimationState("body", "idle", true)
+			walkFrame = nil
+			self.walkFrame = nil
+		end
+		if isMoving then
+			self.lastPos = mcontroller.position()
+		end
+		
+		--save our own frame if we need to start the chain
+		if walkFrame then
+			self.walkFrame = nil
+		elseif isMoving and onGround then
+			self.walkFrame = math.fmod((self.walkFrame or 0) + 1, 16)
+		end
+		
+		
+		--after self.walkFrame has been cleared, allow to be passed to walkFrame
+		if self.walkFrame then
+			walkFrame = math.floor(self.walkFrame)
+		end
+		--next segment will be 8 frames later if there is a valid walkFrame to pass
+		if walkFrame then
+			if isMoving then
+				animator.setGlobalTag("walkFrame", tostring(walkFrame))
+			end
+			walkFrame = math.fmod(walkFrame + 8, 16)
+		end
+	end
+	--return frame for next segment if anim chain doesn't end here (where nil is returned instead)
+	return walkFrame
 end
 function updateLength(segments)
 	if segments == self.segmentsLeft then return end
@@ -121,7 +170,7 @@ function updateLength(segments)
 		else
 			spawnSegment()
 		end
-		animator.setAnimationState("body", "body")
+		animator.setAnimationState("body", "idle")
 	end
 end
 function die()

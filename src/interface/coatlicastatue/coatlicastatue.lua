@@ -55,7 +55,11 @@ function update(dt)
 end
 
 function techCost(techName)
-  return self.techs[techName].chipCost or config.getParameter("defaultCost")
+	if player.isAdmin() then
+		return 0
+	else
+		return self.techs[techName].chipCost or config.getParameter("defaultCost")
+	end
 end
 
 function populateTechList(slot)
@@ -67,21 +71,23 @@ function populateTechList(slot)
 	util.appendLists(techs, disabled)
 	for _,techName in pairs(techs) do
 		local config = self.techs[techName]
-		--if root.techType(techName) == slot then
-		local listItem = widget.addListItem(self.techList)
-		widget.setText(string.format("%s.%s.techName", self.techList, listItem), config.shortDescription)
-		widget.setData(string.format("%s.%s", self.techList, listItem), techName)
-
-		if player.getProperty("coatlica_enabledAbilities."..techName) then
-			widget.setImage(string.format("%s.%s.techIcon", self.techList, listItem), config.icon)
-		else
-			widget.setImage(string.format("%s.%s.techIcon", self.techList, listItem), self.techLockedIcon)
+		
+		--Why I can't do (slot == "Passive") == self.techs[techName].isPassive... only god knows ToT
+		if (slot ~= "Passive") == not self.techs[techName].isPassive then
+			local listItem = widget.addListItem(self.techList)
+			widget.setText(string.format("%s.%s.techName", self.techList, listItem), config.shortDescription)
+			widget.setData(string.format("%s.%s", self.techList, listItem), techName)
+	
+			if player.getProperty("coatlica_enabledAbilities."..techName) then
+				widget.setImage(string.format("%s.%s.techIcon", self.techList, listItem), config.icon)
+			else
+				widget.setImage(string.format("%s.%s.techIcon", self.techList, listItem), self.techLockedIcon)
+			end
+	
+			if player.getProperty("coatlica_"..slot.."Ability") == techName then
+				widget.setListSelected(self.techList, listItem)
+			end
 		end
-
-		if player.getProperty("coatlica_"..slot.."Ability") == techName then
-			widget.setListSelected(self.techList, listItem)
-		end
-		--end
 	end
 end
 
@@ -149,12 +155,11 @@ end
 
 function equipTech(techName)
 	player.setProperty("coatlica_"..self.selectedSlot.."Ability", techName)
-
+	player.makeTechAvailable("coatlica_tech_head")
 	updateEquippedIcons()
 end
 
 function setSelectedTech(techName)
-  local config = root.assetJson(abilityTypes[techName])
   widget.setText("lblDescription", self.techs[techName].description)
   self.selectedTech = techName
 

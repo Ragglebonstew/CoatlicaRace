@@ -1,17 +1,20 @@
 {
-  "itemName" : "coatlicatier1pants",
-  "price" : 320,
-  "inventoryIcon" : "icons.png:pants",
-  "maxStack" : 1,
-  "rarity" : "Common",
-  "category" : "legarmour",
-  "description" : "A worm can always use some more health.",
-  "shortdescription" : "Digger's Tail Plating",
-  "tooltipKind" : "armor",
-  "maleFrames" : "pants.png",
-  "femaleFrames" : "pants.png",
-  "level" : 1,
-  "leveledStatusEffects" : [
+	"itemName" : "coatlicatier1pants",
+	"price" : 320,
+	"inventoryIcon" : "icons.png:pants",
+	"maxStack" : 1,
+	"rarity" : "Common",
+	"category" : "legarmour",
+	"description" : "Made with sturdy materials!",
+	"shortdescription" : "Scout's Loincloth",
+	"tooltipKind" : "armor",
+	
+	"maleFrames" : "pants.png",
+	"femaleFrames" : "pants.png",
+	
+	
+	"level" : 1,
+	"leveledStatusEffects" : [
     {
       "levelFunction" : "standardArmorLevelPowerMultiplierMultiplier",
       "stat" : "powerMultiplier",

@@ -1,0 +1,15 @@
+{
+	"ability" : {
+		"name" : "default",
+		"type" : "default",
+		"class" : "Default",
+		"shortDescription" : "Snake",
+		"description" : "A non-remarkable head type. The default.",
+		"icon" : "/interface/statuses/nofalldamage.png",
+		"chipCost" : 0,
+		
+		"isPassive" : true,
+		
+		"scripts" : ["/tech/coatlica/head/abilities/default/default.lua"]
+	}
+}

@@ -1,21 +1,20 @@
 {
-  "itemName" : "coatlicatier2head",
-  "price" : 1440,
-  "inventoryIcon" : "icons.png:head",
-  "maxStack" : 1,
-  "rarity" : "Common",
-  "category" : "headarmour",
-  "description" : "A worm with powerful jaws is a worm that will end up growing longer than the others.",
-  "shortdescription" : "Spelunker's Helmet",
-  "tooltipKind" : "armor",
-
-  "maleFrames" : "head.png",
-  "femaleFrames" : "head.png",
-  "mask" : "mask.png",
-  "wormHead": "wormhead.png",
-
-  "level" : 2,
-  "leveledStatusEffects" : [
+	"itemName" : "coatlicatier2head",
+	"price" : 1440,
+	"inventoryIcon" : "icons.png:head",
+	"maxStack" : 1,
+	"rarity" : "Common",
+	"category" : "headarmour",
+	"description" : "An unruly helmet.",
+	"shortdescription" : "Wild Helmet",
+	"tooltipKind" : "armor",
+	
+	"maleFrames" : "head.png",
+	"femaleFrames" : "head.png",
+	"mask" : "mask.png",
+	
+	"level" : 2,
+	"leveledStatusEffects" : [
     {
       "levelFunction" : "standardArmorLevelPowerMultiplierMultiplier",
       "stat" : "powerMultiplier",

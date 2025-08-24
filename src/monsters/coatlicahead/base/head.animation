@@ -39,12 +39,12 @@
 					"head" : {
 						"idle" : {
 							"properties" : {
-								"image" : "<partImage>:idle"
+								"image" : "<headImage>.png:idle"
 							}
 						},
 						"mouthopen" : {
 							"properties" : {
-								"image" : "<partImage>:mouthopen"
+								"image" : "<headImage>.png:mouthopen"
 							}
 						}
 					}
@@ -61,7 +61,7 @@
 					"jaw" : {
 						"visible" : {
 							"properties" : {
-								"image" : "<partImage>"
+								"image" : "<headImage>_jaw.png"
 							}
 						},
 						"invisible" : {
@@ -75,10 +75,13 @@
 		}
 	},
 
-  "transformationGroups" : {
-    "head" : { "interpolated" : true },
-    "jaw" : { "interpolated" : true }
-  },
+	"globalTagDefaults" : {
+		"headImage": "/monsters/coatlicahead/base/head.png"
+	},
+	"transformationGroups" : {
+		"head" : { "interpolated" : true },
+		"jaw" : { "interpolated" : true }
+	},
   
 	"effects" : {
 		"blink" : {

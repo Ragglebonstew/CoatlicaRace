@@ -10,28 +10,27 @@ local transformed = false
 local regTimer = 0
 
 function init()
-	
-	--build(directory, config, parameters, level, seed)
-	
 	self.headType = config.getParameter("headtype", "coatlicahead_base")
 
 	self.stomach = {}
 	self.movementParameters = config.getParameter("movementParameters")
+	self.basePoly = mcontroller.baseParameters().standingPoly
 	self.energyCost = config.getParameter("energyCost", 50)
 	self.jerkMul = config.getParameter("jerkMul", 0.005)
+	self.coilSpeed = config.getParameter("coilSpeed", 0.02)
+	self.collisionSet = {"Null", "Block", "Dynamic", "Slippery"}
 	message.setHandler("regurgitate", simpleHandler(regurgitate))
 	
 	self.mouthPer = 0
+	self.coilPer = 1
 	self.updateTimer = 0
-	
-	message.setHandler("replyHold", simpleHandler(replyHold))
 	
 	message.setHandler("addAbility", simpleHandler(addAbility))
 end
 
 function uninit()
 	self.stomach = {}
-	if transformed then deactivate() end
+	deactivate()
 end
 function update(args)
 	self.updateTimer = self.updateTimer - script.updateDt()
@@ -44,15 +43,53 @@ function update(args)
 	if args.moves["special1"] ~= self.specialLast then
 		self.specialLast = args.moves["special1"]
 		if args.moves["special1"] then
-			if not transformed then
-				activate()
-			else
-				deactivate()
+			if not transformed 
+				and not tech.parentLounging()
+				and not status.statPositive("activeMovementAbilities") then
+				
+				local pos = transformPosition()
+				if pos then
+					mcontroller.setPosition(pos)
+					activate()
+				end
+			elseif transformed then
+				local pos = restorePosition()
+				if pos then
+					mcontroller.setPosition(pos)
+					deactivate()
+				end
 			end
 		end
 	end
 	
-	if transformed then run(args) end
+	local shiftHeld = not args.moves["run"]
+	if transformed then
+		move(args.moves)
+		holdAbility(shiftHeld)
+		run(args)
+	else
+		if shiftHeld then move(args.moves) end
+		coilAbility(args.moves["down"])
+		holdAbility(shiftHeld)
+	end
+end
+function transformPosition(pos)
+  pos = pos or mcontroller.position()
+  local groundPos = world.resolvePolyCollision(self.movementParameters.collisionPoly, {pos[1], pos[2] - positionOffset()}, 1, self.collisionSet)
+  if groundPos then
+    return groundPos
+  else
+    return world.resolvePolyCollision(self.movementParameters.collisionPoly, pos, 1, self.collisionSet)
+  end
+end
+function restorePosition(pos)
+  pos = pos or mcontroller.position()
+  local groundPos = world.resolvePolyCollision(self.basePoly, {pos[1], pos[2] + positionOffset()}, 1, self.collisionSet)
+  if groundPos then
+    return groundPos
+  else
+    return world.resolvePolyCollision(self.basePoly, pos, 1, self.collisionSet)
+  end
 end
 function activate()
 	mcontroller.setVelocity(vec2.mul(world.distance(tech.aimPosition(), mcontroller.position()), 3))
@@ -66,6 +103,10 @@ function activate()
 	spawnHead()
 	transformed = true
 	world.sendEntityMessage(entity.id(), "setTransformed", true)
+	
+	if self.isHolding then
+		world.sendEntityMessage(entity.id(), "setHold", false)
+	end
 	
 	abilityInit()
 end
@@ -86,7 +127,7 @@ function deactivate()
 	abilityUninit()
 end
 function spawnHead()
-	local params = {directives = getBodyDirectives(), playerId = entity.id()}
+	local params = {directives = getBodyDirectives()..getHairDirectives(), playerId = entity.id()}
 	self.headId = world.spawnMonster(self.headType, mcontroller.position(), params)
 end
 function killHead()
@@ -101,8 +142,6 @@ function run(args)
 	
 	mcontroller.controlParameters(self.movementParameters)
 	
-	
-	movementUpdate(args)
 	abilityUpdate(args)
 	headUpdate()
 end
@@ -111,12 +150,16 @@ function abilityInit()
 	
 	self.primaryAbility = getAbility("Primary", abilityConfig.PrimaryAbility)
 	self.secondaryAbility = getAbility("Secondary", abilityConfig.SecondaryAbility)
+	self.passiveAbility = getAbility("Passive", abilityConfig.PassiveAbility)
 	
 	if self.primaryAbility then
 		self.primaryAbility:init()
 	end
 	if self.secondaryAbility then
 		self.secondaryAbility:init()
+	end
+	if self.passiveAbility then
+		self.passiveAbility:init()
 	end
 end
 function abilityUninit()
@@ -125,6 +168,9 @@ function abilityUninit()
 	end
 	if self.secondaryAbility then
 		self.secondaryAbility:uninit()
+	end
+	if self.passiveAbility then
+		self.passiveAbility:uninit()
 	end
 end
 function abilityUpdate(args)
@@ -139,13 +185,14 @@ function abilityUpdate(args)
 	if self.secondaryAbility then
 		self.secondaryAbility:update(script.updateDt(), dir, not args.moves["run"])
 	end
+	if self.passiveAbility then
+		self.passiveAbility:update(script.updateDt(), dir, not args.moves["run"])
+	end
 	
-	--for _,ability in pairs(self.passiveAbilities) do
-		--ability:update(args.moves)
-	--end
 	
 	updateAbilityFire(args, "primaryFire", self.primaryAbility)
 	updateAbilityFire(args, "altFire", self.secondaryAbility)
+	self.passiveAbility:update(args.moves)
 	
 end
 
@@ -165,7 +212,7 @@ function updateAbilityFire(args, fireType, ability)
 		end
 	else
 		if fire_last[fireType] then
-			ability:release()
+			ability:release(self.headId)
 			if ability.releaseParameters then
 				for entry, param in pairs(ability.releaseParameters) do
 					self[entry] = param
@@ -181,10 +228,11 @@ function headUpdate()
 	local headRot
 	local jawRot
 	
-	if self.jawOpen or vec2.mag(mcontroller.velocity()) < 2.0 or self.headLocked then
+	local adjustedVelDir = vec2.add(mcontroller.velocity(), {0,2}) -- when motionless, y-vel = -2 for some reason
+	if self.jawOpen or vec2.mag(adjustedVelDir) < 5.0 or self.headLocked then
 		headRot = world.distance(tech.aimPosition(), mcontroller.position())
 	else
-		headRot = mcontroller.velocity()
+		headRot = adjustedVelDir
 	end
 	world.debugLine(mcontroller.position(), vec2.add(mcontroller.position(), headRot), "blue")
 	
@@ -257,6 +305,7 @@ function build(directory, config, parameters, level, seed)
   -- select, load and merge abilities
   setupAbility(config, parameters, "Primary")
   setupAbility(config, parameters, "Secondary")
+  setupAbility(config, parameters, "Passive")
 
   -- elemental type
   local elementalType = parameters.elementalType or config.elementalType or "physical"
@@ -300,20 +349,22 @@ end
 -- If builderConfig is given, it will randomly choose an ability from
 -- builderConfig if the ability is not specified in the config/parameters.
 function setupAbility(config, parameters, abilitySlot, builderConfig, seed)
-  seed = seed or parameters.seed or config.seed or 0
+	seed = seed or parameters.seed or config.seed or 0
 
-  local abilitySource = getAbilitySource(config, parameters, abilitySlot)
-  if not abilitySource and builderConfig then
-    local abilitiesKey = abilitySlot .. "Abilities"
-    if builderConfig[abilitiesKey] and #builderConfig[abilitiesKey] > 0 then
-      local abilityType = randomFromList(builderConfig[abilitiesKey], seed, abilitySlot .. "AbilityType")
-      abilitySource = getAbilitySourceFromType(abilityType)
-    end
-  end
+	local abilitySource = getAbilitySource(config, parameters, abilitySlot)
+	local isPassive = abilitySlot == "Passive"
+	
+	if not abilitySource and builderConfig then
+		local abilitiesKey = abilitySlot .. "Abilities"
+		if builderConfig[abilitiesKey] and #builderConfig[abilitiesKey] > 0 then
+			local abilityType = randomFromList(builderConfig[abilitiesKey], seed, abilitySlot .. "AbilityType")
+			abilitySource = getAbilitySourceFromType(abilityType)[isPassive and "passive" or "active"]
+		end
+	end
 
-  if abilitySource then
-    addAbility(config, parameters, abilitySlot, abilitySource)
-  end
+	if abilitySource then
+		addAbility(config, parameters, abilitySlot, abilitySource)
+	end
 end
 
 -- Adds the new ability to the config (modifying it)
@@ -335,11 +386,6 @@ function addAbility(config, parameters, abilitySlot, abilitySource)
   end
 end
 
-function movementUpdate(args)
-	drag()
-	move(args.moves)
-end
-
 function regurgitate(carryingId)
 	world.sendEntityMessage(carryingId, "applyStatusEffect", "wet")
 	
@@ -350,10 +396,6 @@ function regurgitate(carryingId)
 		end
 	end
 	
-	--local bodyDirectives = getBodyDirectives()
-	--local legsItem = {name = "coatlicawanabelegs", count=1}
-	--legsItem.parameters = {directives = bodyDirectives, price = 0, rarity = "essential"}
-	--world.spawnItem(legsItem, mcontroller.position())
 	regTimer = 10
 end
 
@@ -361,8 +403,10 @@ end
 function updateStatus()
 	self.bodyId = status.statusProperty("coatlica_bodyId")
 end
-function replyHold(isHolding)
-	self.isHolding = isHolding
+function setHeadType(headType)
+	if self.headId and world.entityExists(self.headId) then
+		world.callScriptedEntity(self.headId, "setHeadType", headType)
+	end
 end
 
 --abilities (temp till can be moved to own files)
@@ -376,29 +420,36 @@ function move(control)
 	local speed = 24
 	local velX = control["right"] and 1 or control["left"] and -1 or 0
 	local velY = control["up"] and 1 or control["down"] and -1 or 0
+	local vel = vec2.mul(vec2.norm({velX,velY}),speed)
 	
-	if distance ~= maxHeight then
+	if mcontroller.zeroG() then
+		mcontroller.controlApproachVelocity(vel, 95)
+	elseif distance ~= maxHeight then
 		--mcontroller.controlApproachVelocity({velX*speed, velY*speed + (1-distance/maxHeight)*3.8}, gravity*3)
 		mcontroller.controlApproachXVelocity(velX*speed, 95)
 		mcontroller.controlApproachYVelocity(velY*speed + (1-distance/maxHeight)*3.8, gravity ~= 0 and gravity*3 or 95)
 	end
 end
-function lift(control)
-	local gravity = world.gravity(mcontroller.position())
-	if gravity and gravity ~= 0 then
-		local maxHeight = 6
-		local distance = distanceToGround(maxHeight)
-		if maxHeight ~= distance then
-			--mcontroller.controlApproachYVelocity(maxHeight-distance, gravity*3.8)
-		end
-		if maxHeight - distance < 0.25 then
-			--mcontroller.controlParameters({gravityEnabled = false})
-		end
+local holdLast = false
+function holdAbility(button)
+	if button ~= holdLast then
+		holdLast = button
+		world.sendEntityMessage(entity.id(), "setHold", button)
+	elseif button then
+		world.sendEntityMessage(entity.id(), "setHold", button)
 	end
 end
-function drag()
-	local dragMult = world.pointCollision(mcontroller.position(), {"Block", "Dynamic", "Slippery", "Null", "Platform"}) and 0.9 or 0.4
-	--mcontroller.controlApproachVelocity({0,0}, vec2.mag(mcontroller.velocity())*dragMult)
+function coilAbility(button)
+	local lastCoilPer = self.coilPer
+	if button and mcontroller.onGround() then
+		if self.coilPer > 0.5 then self.coilPer = self.coilPer - self.coilSpeed end
+	elseif self.coilPer < 1 then
+		self.coilPer = math.min(self.coilPer + self.coilSpeed*5, 1)
+	end
+	--update master coil percent
+	if lastCoilPer ~= self.coilPer then
+		world.sendEntityMessage(entity.id(), "setCoil", self.coilPer)
+	end
 end
 
 function bite() end

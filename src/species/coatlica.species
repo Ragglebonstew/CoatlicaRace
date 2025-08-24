@@ -1,14 +1,14 @@
 {
   "kind" : "coatlica",
 	"charCreationTooltip" : {
-	"title" : "coatlica",
+	"title" : "Coatlica",
 	"subTitle" : "O2",
 	"description" : "Yielding from the depths of desert and scorched planets, the coatlica rarely interact with the rest of the universe. Their size makes it difficult to maneuver the colonies of other species, but easy to navigate the ruins of species past. Many of the coatlica find interest in forgotten history and mysticism."
   },
   
   "statusEffects" : [ "snakelike" ],
   
-  //"humanoidConfig" : "/species/coatlicaoid.config",
+  //"humanoidConfig" : "/species/coatlica.config",
   "nameGen" : [ "/species/coatlicamalenamegen.config:names", "/species/coatlicafemalenamegen.config:names" ],
   "ouchNoises" : [ "/sfx/humanoid/coatlicahurt_male1.ogg", "/sfx/humanoid/coatlicahurt_female1.ogg" ],
   "charGenTextLabels" : [ "Skin Color", "Hair Style", "Shirt", "Pants", "Eye Color", "Hair Color", "Shirt Color", "Pants Color", "coatlica", "Personality" ],
@@ -103,7 +103,7 @@
 					"male60", "male61", "male62", "male63", "male64"
 	  ],
       "shirt" : [ "coatlicaoutfit1chest", "coatlicaoutfit2chest", "coatlicaoutfit3chest", "coatlicaoutfit4chest", "bedouinchest" ],
-      "pants" : [ "coatlicaoutfit2legs", "floranhunterlegs", "floranpeltlegs", "avianfancyskirt" ],
+      "pants" : [ "coatlicaoutfit1legs",  "coatlicaoutfit2legs",  "coatlicaoutfit3legs",  "coatlicaoutfit4legs", "" ],
       "facialHairGroup" : "",
       "facialHair" : [ ],
       "facialMaskGroup" : "",
@@ -126,7 +126,7 @@
 					"PatchHair01", "PatchHair02",  "PatchHair03",  "PatchHair04",  "PatchHair05",
 					"PatchHuman01", "PatchHuman02", "PatchHuman03", "PatchHuman04", "PatchHuman05" ],
       "shirt" : [ "coatlicaoutfit1chest", "coatlicaoutfit2chest", "coatlicaoutfit3chest", "coatlicaoutfit4chest", "bedouinchest" ],
-      "pants" : [ "coatlicaoutfit2legs", "floranhunterlegs", "floranpeltlegs", "avianfancyskirt" ],
+      "pants" : [ "coatlicaoutfit1legs",  "coatlicaoutfit2legs",  "coatlicaoutfit3legs",  "coatlicaoutfit4legs", "" ],
       "facialHairGroup" : "",
       "facialHair" : [ ],
       "facialMaskGroup" : "",
