@@ -1,10 +1,10 @@
-Default = CoatlicaAbility:new()
+Flyer = CoatlicaAbility:new()
 
-function Default:init()
+function Flyer:init()
 	setHeadType("flyer")
 end
-function Default:uninit()
+function Flyer:uninit()
 	setHeadType()
 end
 
-function Default:update(dt, dir, shiftHeld)end
+function Flyer:update(dt, dir, shiftHeld)end
