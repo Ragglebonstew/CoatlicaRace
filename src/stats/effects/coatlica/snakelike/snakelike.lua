@@ -61,7 +61,7 @@ function update(dt)
 		return
 	end
 	--check for length change
-	local newlength = math.floor(status.stat("maxHealth")/25)
+	local newlength = math.min(math.floor(status.stat("maxHealth")/25), 30)
 	if newlength ~= self.length then
 		self.length = newlength
 		world.sendEntityMessage(self.bodyId, "updateLength", newlength)
