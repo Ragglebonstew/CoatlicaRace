@@ -1,0 +1,20 @@
+{
+	"ability" : {
+		"name" : "icebreath",
+		"type" : "icebreath",
+		"class" : "FireBreath",
+		"shortDescription" : "Ice Breath",
+		"description" : "Gives you ice breath!",
+		"icon" : "/interface/statuses/fire.png",
+		
+		"scripts" : ["/tech/coatlica/head/abilities/firebreath/firebreath.lua"],
+		
+		"holdParameters" : {
+			"jawOpen" : true,
+			"headLocked" : true
+		},
+		
+		"projectileType" : "icethrower",
+		"energyCost" : 1
+	}
+}

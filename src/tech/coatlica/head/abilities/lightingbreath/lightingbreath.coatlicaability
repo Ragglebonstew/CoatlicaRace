@@ -1,0 +1,20 @@
+{
+	"ability" : {
+		"name" : "lightingbreath",
+		"type" : "lightingbreath",
+		"class" : "FireBreath",
+		"shortDescription" : "Lighting Breath",
+		"description" : "Gives you electric breath!",
+		"icon" : "/interface/statuses/fire.png",
+		
+		"scripts" : ["/tech/coatlica/head/abilities/firebreath/firebreath.lua"],
+		
+		"holdParameters" : {
+			"jawOpen" : true,
+			"headLocked" : true
+		},
+		
+		"projectileType" : "lightningthrower",
+		"energyCost" : 1
+	}
+}
