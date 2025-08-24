@@ -76,7 +76,7 @@
 	},
 
 	"globalTagDefaults" : {
-		"headImage": "/monsters/coatlicahead/base/head.png"
+		"headImage": "/monsters/coatlicahead/base/head"
 	},
 	"transformationGroups" : {
 		"head" : { "interpolated" : true },
