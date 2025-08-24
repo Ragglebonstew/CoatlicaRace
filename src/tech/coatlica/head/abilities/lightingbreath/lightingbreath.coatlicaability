@@ -5,7 +5,7 @@
 		"class" : "FireBreath",
 		"shortDescription" : "Lighting Breath",
 		"description" : "Gives you electric breath!",
-		"icon" : "/interface/statuses/fire.png",
+		"icon" : "/interface/statuses/energy.png",
 		
 		"scripts" : ["/tech/coatlica/head/abilities/firebreath/firebreath.lua"],
 		

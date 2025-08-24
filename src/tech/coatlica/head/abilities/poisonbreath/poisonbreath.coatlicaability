@@ -5,7 +5,7 @@
 		"class" : "FireBreath",
 		"shortDescription" : "Poison Breath",
 		"description" : "Gives you poisonous breath!",
-		"icon" : "/interface/statuses/fire.png",
+		"icon" : "/interface/statuses/poison.png",
 		
 		"scripts" : ["/tech/coatlica/head/abilities/firebreath/firebreath.lua"],
 		

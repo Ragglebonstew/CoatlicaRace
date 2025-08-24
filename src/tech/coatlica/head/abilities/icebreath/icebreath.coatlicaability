@@ -5,7 +5,7 @@
 		"class" : "FireBreath",
 		"shortDescription" : "Ice Breath",
 		"description" : "Gives you ice breath!",
-		"icon" : "/interface/statuses/fire.png",
+		"icon" : "/interface/statuses/ice.png",
 		
 		"scripts" : ["/tech/coatlica/head/abilities/firebreath/firebreath.lua"],
 		
