@@ -20,6 +20,7 @@ function init()
 	status.setPrimaryDirectives(self.directives)
 	monster.setInteractive(false)
 	monster.setDamageBar("none")
+	monster.setDamageTeam(world.entityDamageTeam(self.playerId))
 	if self.btype == "tail" then animator.setAnimationState("body", "tail") end
 	if self.isFirst then animator.setAnimationState("end", "on") end
 	
