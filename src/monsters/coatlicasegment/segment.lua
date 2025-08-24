@@ -155,7 +155,10 @@ function updateAnimation(walkFrame)
 	return walkFrame
 end
 function updateLength(segments)
-	if segments < 0 then die() end
+	if segments < 0 then
+		die()
+		return
+	end
 	if segments == self.segmentsLeft then return end
 	self.segmentsLeft = segments
 	if segments == 0 then
