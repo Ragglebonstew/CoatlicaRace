@@ -84,7 +84,7 @@ function populateTechList(slot)
 				widget.setImage(string.format("%s.%s.techIcon", self.techList, listItem), self.techLockedIcon)
 			end
 	
-			if player.getProperty("coatlica_"..slot.."Ability") == techName then
+			if status.statusProperty("coatlica_"..slot.."Ability") == techName then
 				widget.setListSelected(self.techList, listItem)
 			end
 		end
@@ -144,7 +144,7 @@ end
 
 function updateEquippedIcons()
   for _,slot in pairs({"Primary", "Secondary", "Passive"}) do
-    local tech = player.getProperty("coatlica_"..slot.."Ability", {})
+    local tech = status.statusProperty("coatlica_"..slot.."Ability", {})
     if tech and self.techs[tech] then
       widget.setImage(string.format("techIcon%s", slot), self.techs[tech].icon)
     else
@@ -154,7 +154,7 @@ function updateEquippedIcons()
 end
 
 function equipTech(techName)
-	player.setProperty("coatlica_"..self.selectedSlot.."Ability", techName)
+	status.setStatusProperty("coatlica_"..self.selectedSlot.."Ability", techName)
 	player.makeTechAvailable("coatlica_tech_head")
 	updateEquippedIcons()
 end

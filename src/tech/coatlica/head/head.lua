@@ -33,11 +33,11 @@ function uninit()
 	deactivate()
 end
 function update(args)
-	self.updateTimer = self.updateTimer - script.updateDt()
+	--[[self.updateTimer = self.updateTimer - script.updateDt()
 	if self.updateTimer <= 0 then
 		self.updateTimer = 5
 		updateStatus()
-	end
+	end]]--
 	
 	--toggles the transformation state
 	if args.moves["special1"] ~= self.specialLast then
@@ -138,6 +138,11 @@ function killHead()
 end
 
 function run(args)
+
+	if not self.headId or not world.entityExists(self.headId) then
+		return
+	end
+
 	tech.setVisible(true)
 	
 	mcontroller.controlParameters(self.movementParameters)
@@ -199,7 +204,7 @@ end
 
 local fire_last = {}
 function updateAbilityFire(args, fireType, ability)
-	if not ability then return end
+	if not ability or not self.headId then return end
 	
 	if args.moves[fireType] then
 		if not fire_last[fireType] then
@@ -340,7 +345,7 @@ end
 -- abilitySlot is either "Primary" or "Secondary"
 function getAbilitySource(config, parameters, abilitySlot)
 	local typeKey = "coatlica_"..abilitySlot.."Ability"
-	local abilityType = player.getProperty(typeKey)
+	local abilityType = status.statusProperty(typeKey)
 
 	return getAbilitySourceFromType(abilityType)
 end
