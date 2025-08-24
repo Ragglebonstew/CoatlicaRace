@@ -55,7 +55,11 @@ function update(dt)
 end
 
 function techCost(techName)
-  return self.techs[techName].chipCost or config.getParameter("defaultCost")
+	if player.isAdmin() then
+		return 0
+	else
+		return self.techs[techName].chipCost or config.getParameter("defaultCost")
+	end
 end
 
 function populateTechList(slot)
