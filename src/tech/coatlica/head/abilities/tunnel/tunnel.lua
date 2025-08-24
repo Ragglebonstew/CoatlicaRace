@@ -13,9 +13,6 @@ function Tunnel:update(dt, dir, shiftHeld)
 	else
 		local headPoly = { {0.75, 1.0}, {1.0, 0.75}, {1.0, -0.75}, {0.75, -1.0}, {-0.75, -1.0}, {-1.0, -0.75}, {-1.0, 0.75}, {-0.75, 1.0} }
 		inGround = world.polyCollision(headPoly, playerPos, {"Block", "Platform", "Dynamic", "Slippery", "Null"})
-		if not inGround and world.liquidAt({math.floor(playerPos[1]+0.5), math.floor(playerPos[2]+0.5)}) then
-			inGround = config.getParameter("treatLiquidAsGround", false)
-		end
 	end
 	
 	mcontroller.controlParameters({

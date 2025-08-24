@@ -8,7 +8,7 @@
 		"icon" : "/interface/statuses/nofalldamage.png",
 		"chipCost" : 10,
 		
-		"isPassive" : true,
+		"isPassive" : false,
 		
 		"scripts" : ["/tech/coatlica/head/abilities/tunnel/tunnel.lua"]
 	}
