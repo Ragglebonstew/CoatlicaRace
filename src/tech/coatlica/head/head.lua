@@ -192,8 +192,9 @@ function abilityUpdate(args)
 	
 	updateAbilityFire(args, "primaryFire", self.primaryAbility)
 	updateAbilityFire(args, "altFire", self.secondaryAbility)
-	self.passiveAbility:update(args.moves)
-	
+	if self.passiveAbility then 
+		self.passiveAbility:update(args.moves)
+	end
 end
 
 local fire_last = {}
