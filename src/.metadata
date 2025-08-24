@@ -2,8 +2,10 @@
   "author" : "Ragglebonstew",
   "description" : "Yielding from the depths of desert and scorched planets, the Coatlica rarely interact with the rest of the universe. Their size makes it difficult to maneuver the colonies of other species, but easy to navigate the ruins of species past. Many of the Coatlica find interest in forgotten history and mysticism. Older Coatlica are rumored to have access to special abilities, such as tranforming into a giant snake!",
   "friendlyName" : "Coatlica Race",
+  "link" : "steam://url/CommunityFilePage/3554878759",
   "name" : "Coatlica Race",
   "path" : ".",
+  "steamContentId" : "3554878759",
   "tags" : "Species|Character Improvements|Mechanics",
   "version" : "0.4.0"
 }
