@@ -1,0 +1,15 @@
+{
+	"ability" : {
+		"name" : "tunnel",
+		"type" : "tunnel",
+		"class" : "Tunnel",
+		"shortDescription" : "Tunnel",
+		"description" : "Gives the ability to tunnel through the earth!",
+		"icon" : "/interface/statuses/nofalldamage.png",
+		"chipCost" : 10,
+		
+		"isPassive" : true,
+		
+		"scripts" : ["/tech/coatlica/head/abilities/tunnel/tunnel.lua"]
+	}
+}

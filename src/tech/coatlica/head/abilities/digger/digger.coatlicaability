@@ -3,8 +3,8 @@
 		"name" : "digger",
 		"type" : "digger",
 		"class" : "Digger",
-		"shortDescription" : "Digger",
-		"description" : "Gives the ability to tunnel through the earth!",
+		"shortDescription" : "Tipped",
+		"description" : "A sharp nose for the impatient snake!",
 		"icon" : "/interface/statuses/nofalldamage.png",
 		"chipCost" : 10,
 		
