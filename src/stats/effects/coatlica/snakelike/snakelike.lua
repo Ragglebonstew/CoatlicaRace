@@ -109,8 +109,10 @@ function setDisabled(isDisabled)
 	self.disabled = isDisabled
 end
 function setHold(isHolding)
-	local segCheck = math.floor(self.length * 2/3)
-	world.sendEntityMessage(self.bodyId, "requestHold", isHolding, segCheck)
+	if self.bodyId and world.entityExists(self.bodyId) then
+		local segCheck = math.floor(self.length * 2/3)
+		world.sendEntityMessage(self.bodyId, "requestHold", isHolding, segCheck)
+	end
 end
 function replyHold(isHolding)
 	self.isHolding = isHolding
