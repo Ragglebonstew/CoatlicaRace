@@ -5,13 +5,13 @@ function Tunnel:uninit() end
 
 function Tunnel:update(dt, dir, shiftHeld)
 
-	local playerPos = mcontroller.position()
 	local inGround = false
 	
-	if world.gravity(playerPos) == 0 or world.type() == "unknown" then
+	if mcontroller.zeroG() then
 		inGround = true
 	else
 		local headPoly = { {0.75, 1.0}, {1.0, 0.75}, {1.0, -0.75}, {0.75, -1.0}, {-0.75, -1.0}, {-1.0, -0.75}, {-1.0, 0.75}, {-0.75, 1.0} }
+		local playerPos = mcontroller.position()
 		inGround = world.polyCollision(headPoly, playerPos, {"Block", "Platform", "Dynamic", "Slippery", "Null"})
 	end
 	
