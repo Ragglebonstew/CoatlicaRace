@@ -238,13 +238,15 @@ function requestHold(isHolding, num)
 			self.isHolding = true
 			self.isPivot = {hold = true, num = num}
 			world.sendEntityMessage(self.ownerId, "replyHold", isHolding)
-		else
+		elseif self.childId and world.entityExists(self.childId) then
 			world.sendEntityMessage(self.childId, "requestHold", isHolding, num-1)
 		end
 	else
 		self.isHolding = false
 		self.isPivot = {hold = false, num = num}
-		world.sendEntityMessage(self.childId, "requestHold", isHolding, -1)
+		if self.childId and world.entityExists(self.childId) then
+			world.sendEntityMessage(self.childId, "requestHold", isHolding, -1)
+		end
 	end
 end
 function replyHold(isHolding)
