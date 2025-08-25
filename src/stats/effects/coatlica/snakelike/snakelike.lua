@@ -25,11 +25,12 @@ function uninit()
 end
 
 function update(dt)
-	if not self.transformed then
+	if not status.statPositive("activeMovementAbilities") then
 		mcontroller.controlParameters(self.movementParameters)
 	end
 	
-	if self.disabled or (mcontroller.anchorState() and world.entityType(mcontroller.anchorState()) == "vehicle") then
+	local isRidingVehicle = mcontroller.anchorState() and world.entityType(mcontroller.anchorState()) == "vehicle"
+	if self.disabled or isRidingVehicle or (not self.transformed and status.statPositive("activeMovementAbilities")) then
 		killBody()
 		return
 	end
