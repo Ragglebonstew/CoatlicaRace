@@ -209,11 +209,12 @@ function updateAbilityFire(args, fireType, ability)
 	if args.moves[fireType] then
 		if not fire_last[fireType] then
 			ability:fire()
-		end
-		ability:hold(script.updateDt())
-		if ability.holdParameters then
-			for entry, param in pairs(ability.holdParameters) do
-				self[entry] = param
+		else
+			ability:hold(script.updateDt())
+			if ability.holdParameters then
+				for entry, param in pairs(ability.holdParameters) do
+					self[entry] = param
+				end
 			end
 		end
 	else

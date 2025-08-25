@@ -5,7 +5,7 @@ function FireBreath:uninit() end
 function FireBreath:update(dt, dir, shiftHeld) end
 function FireBreath:fire()
 	local dir = vec2.norm(world.distance(tech.aimPosition(), mcontroller.position()))
-	mcontroller.setVelocity(vec2.mul(dir, -10))
+	mcontroller.controlApproachVelocity(vec2.mul(dir, -50), 400)
 end
 function FireBreath:hold(dt)
 	if not status.resourceLocked("energy") then
