@@ -27,8 +27,6 @@ end
 function update(dt)
 	if not status.statPositive("activeMovementAbilities") then
 		mcontroller.controlParameters(self.movementParameters)
-	else
-		sb.logInfo(getBodyDirectives())
 	end
 	
 	local isRidingVehicle = mcontroller.anchorState() and world.entityType(mcontroller.anchorState()) == "vehicle"
