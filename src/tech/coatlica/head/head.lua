@@ -92,7 +92,9 @@ function restorePosition(pos)
   end
 end
 function activate()
-	mcontroller.setVelocity(vec2.mul(world.distance(tech.aimPosition(), mcontroller.position()), 3))
+	local launchDir = vec2.norm(world.distance(tech.aimPosition(), mcontroller.position()))
+	local launchVel = vec2.mul(launchDir, 3)
+	mcontroller.setVelocity(launchVel)
 	world.spawnProjectile("clustermineexplosion", mcontroller.position())
 	tech.setParentHidden(true)
 	tech.setToolUsageSuppressed(true)
