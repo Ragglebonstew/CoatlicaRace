@@ -5,8 +5,8 @@
   "maxStack" : 1,
   "rarity" : "Legendary",
   "category" : "chestarmour",
-  "description" : "A powerful chestguard to strengthen the wearer - even the most vicious prey will fall.",
-  "shortdescription" : "Synthesizer's Chestguard",
+  "description" : "A powerful chestguard to strengthen the wearer.",
+  "shortdescription" : "Monarch's Chestguard",
   "tooltipKind" : "armor",
   "segments" : 6,
   "maleFrames" : {

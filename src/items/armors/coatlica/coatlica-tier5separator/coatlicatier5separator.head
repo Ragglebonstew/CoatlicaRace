@@ -6,7 +6,7 @@
   "rarity" : "Legendary",
   "category" : "headarmour",
   "description" : "An incredibly durable helmet which is downright terrifying to all who dare to oppose you.",
-  "shortdescription" : "Frontliner's Helm",
+  "shortdescription" : "Elite's Helm",
   "tooltipKind" : "armor",
 
   "maleFrames" : "head.png",
