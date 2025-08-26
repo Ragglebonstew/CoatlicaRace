@@ -1,6 +1,3 @@
-- Add transformation preview to Limbless Statue
-- Add coatlica sprites to techupgrade station
-- Hair artifact fix
 - Triple segment causes coil on enemies (with mouse drag)
 - Weapons
   - Coatlica Spear - Kluex Crystal attack
@@ -11,6 +8,8 @@
 - Walker ability - tier 6
 - Shadow ability - tier 4
 - Ritual Master Mask sprite
+- Bite should count as hunting weapon for meat drops
+- Knockback immunity?
 - Compatibility
   - BYOS
   - Race traits
