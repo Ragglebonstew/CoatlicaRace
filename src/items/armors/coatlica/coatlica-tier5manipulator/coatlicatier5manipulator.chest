@@ -5,8 +5,8 @@
   "maxStack" : 1,
   "rarity" : "Rare",
   "category" : "chestarmour",
-  "description" : "A chestpiece built for adventure",
-  "shortdescription" : "Trailblazer's Chestpiece",
+  "description" : "A chestpiece built for adventure.",
+  "shortdescription" : "Traveler's Chestpiece",
   "tooltipKind" : "armor",
   "segments" : 5,
   "maleFrames" : {

@@ -5,8 +5,8 @@
   "maxStack" : 1,
   "rarity" : "Legendary",
   "category" : "headarmour",
-  "description" : "A hooded mask that suits the enigmatic nature of those that would overthrow regimes.",
-  "shortdescription" : "Usurper's Hood",
+  "description" : "You know much and understand little, but now is no time to rest.",
+  "shortdescription" : "Devout's Headdress",
   "tooltipKind" : "armor",
 
   "maleFrames" : "head.png",
