@@ -365,7 +365,7 @@ function setupAbility(config, parameters, abilitySlot, builderConfig, seed)
 		local abilitiesKey = abilitySlot .. "Abilities"
 		if builderConfig[abilitiesKey] and #builderConfig[abilitiesKey] > 0 then
 			local abilityType = randomFromList(builderConfig[abilitiesKey], seed, abilitySlot .. "AbilityType")
-			abilitySource = getAbilitySourceFromType(abilityType)[isPassive and "passive" or "active"]
+			abilitySource = getAbilitySourceFromType(abilityType)
 		end
 	end
 

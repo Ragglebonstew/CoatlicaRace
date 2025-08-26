@@ -14,8 +14,10 @@ function init()
   self.suitImagePath = config.getParameter("suitImagePath")
   self.suitSelectedPath = config.getParameter("suitSelectedPath")
   self.selectionPulse = config.getParameter("selectionPulse")
+  
+	self.suitImagePath = self.suitImagePath..getBodyDirectives()..getHairDirectives()
 
-	widget.setImage("imgSuit", string.format(self.suitImagePath, player.species(), player.gender()))
+	widget.setImage("imgSuit", self.suitImagePath)
 
 	abilityTypes = root.assetJson(abilityTablePath)
 	self.techs = {}
@@ -109,7 +111,7 @@ function setSelectedSlot(slot)
     self.tweenSelector = nil
   end)
 
-  self.selectionImage = string.format(self.suitSelectedPath, player.species(), player.gender(), string.lower(slot))
+  self.selectionImage = string.format(self.suitSelectedPath, status.statusProperty("coatlica_PassiveAbility","default"))
   self.animationTimer = 0
 
   widget.setVisible("imgSelectedPrimary", slot == "Primary")
@@ -126,7 +128,7 @@ function animateSelection(dt)
   local ratio = (self.animationTimer / self.selectionPulse) * 2
   local opacity = interp.sin(ratio, 0, 1)
   local highlightDirectives = string.format("?multiply=FFFFFF%2x", math.floor(opacity * 255))
-  widget.setImage("imgSelected", self.selectionImage..highlightDirectives)
+  widget.setImage("imgSelected", self.selectionImage..getBodyDirectives())
 end
 
 function enableTech(techName)
@@ -180,6 +182,28 @@ function getEnabledAbilities()
 		end
 	end
 	return enabledAbilities
+end
+function getBodyDirectives()
+	local bodyDirectives = ""
+	for _,v in ipairs(world.entityPortrait(player.id(), "fullnude")) do
+		if string.find(v.image, "body.png") then
+			bodyDirectives = string.sub(v.image,(string.find(v.image, "?")))
+			break
+		end
+	end
+	return bodyDirectives
+end
+function getHairDirectives()
+	local directives = ""
+	for _,v in ipairs(world.entityPortrait(player.id(), "fullnude")) do
+		if string.find(v.image, "hair") then
+			local stringStart = string.find(v.image, "?")
+			local stringEnd   = string.find(v.image, "?addmask")
+			directives = string.sub(v.image, stringStart, stringEnd)
+			break
+		end
+	end
+	return directives
 end
 
 -- callbacks
