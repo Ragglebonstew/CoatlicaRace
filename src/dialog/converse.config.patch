@@ -1,0 +1,121 @@
+[
+  [
+  {"op": "add", "path": "/greeting/coatlica", "value":{
+    "default":[
+      "Greetings, traveler...",
+      "Hmmm?",
+      "Friendly faces are always appreciated",
+      "...",
+      "Yes?",
+      "Need something?",
+      "Eh?",
+      "Huh?",
+      "Hi there."
+    ],
+	"human":[
+      "Ah, a human! How's Earth doing?",
+	  "My sympathies for the loss of your home."
+	],
+    "floran":[
+      "Ah. Greetings."
+    ],
+	"glitch":[
+      "Ah... a marvel of history."
+	],
+	"coatlica":[
+      "[playername]? Is that you?",
+      "Good to see you.",
+	  "Ah! Hail fellow traveler!"
+	]
+    }
+  },
+  {"op": "add", "path": "/converse/coatlica", "value":{
+    "generic":[
+      "No need to fear. I'm here on business.",
+	  "Life treating you well?"
+    ],
+    "default":[
+      "Stay safe out there"
+    ],
+    "coatlica":[
+		"Find anything interesting on your travels?"
+    ],
+    "human":[
+	  "My sympathies for the loss of your home."
+    ],
+    "apex":[
+      "History is on your side, Apex."
+    ],
+    "avian":[
+      "*chira*"
+    ],
+    "floran":[
+      "...",
+	  "Please don't poke me."
+    ],
+    "glitch":[
+      "How's life treating you?"
+    ],
+    "hylotl":[
+      "You haven't, by chance, heard any rumors of a city called Atlantis, have you?"
+    ],
+    "novakid":[
+      "If only the sun was so soft.",
+	  "Tell me your secrets sun man.",
+	  "Got any nova-snakes?"
+    ],
+    "fenerox":[
+      "How do you survive in this heat!",
+      "Do you enjoy the sun? Or do you hide from it as well?"
+    ],
+    "penguin":[
+      "Find anything interesting on your travels?",
+	  "Know where I can sell things around here?"
+    ],
+    "lamia":[
+      "Snek!",
+      "Where are your parents?",
+      "Something about you looks familiar...",
+      "Legs are overrated."
+    ]
+    }
+  },
+  {"op": "add", "path": "/converse/human/coatlica", "value":[
+      "What are you?"
+      ]
+    },
+  {"op": "add", "path": "/converse/apex/coatlica", "value":[
+      "O.O"
+      ]
+    },
+  {"op": "add", "path": "/converse/avian/coatlica", "value":[
+      "Don't eat me!"
+      ]
+    },
+  {"op": "add", "path": "/converse/floran/coatlica", "value":[
+      "Predator or prey?"
+      ]
+    },
+  {"op": "add", "path": "/converse/glitch/coatlica", "value":[
+      "Nervous. Are you a wyrm?",
+	  "Gladitorial. Are you a wyrm?"
+      ]
+    },
+  {"op": "add", "path": "/converse/hylotl/coatlica", "value":[
+      "You seem like a good swimmer."
+      ]
+    },
+  {"op": "add", "path": "/converse/novakid/coatlica", "value":[
+      
+      ]
+    }
+  ],
+  [
+    {"op":"test", "path":"/converse/lamia"
+    },
+    {"op": "add", "path": "/converse/lamia/coatlica", "value":[
+      "Snek!"
+      ]
+    }
+  ]
+]
