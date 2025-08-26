@@ -1,11 +1,7 @@
 require "/scripts/vec2.lua"
-function init()
-	message.setHandler("applyStatusEffect", function(_, _, effectConfig, duration, sourceEntityId)
-		status.addEphemeralEffect(effectConfig, duration, sourceEntityId)
-    end)
-end
 
 function applyDamageRequest(damageRequest)
+	return {}
 	if world.getProperty("nonCombat") then
 		return {}
 	end
