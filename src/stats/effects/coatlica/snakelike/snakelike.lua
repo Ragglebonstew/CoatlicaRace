@@ -25,11 +25,12 @@ function uninit()
 end
 
 function update(dt)
-	if not self.transformed then
+	if not status.statPositive("activeMovementAbilities") then
 		mcontroller.controlParameters(self.movementParameters)
 	end
 	
-	if self.disabled or (mcontroller.anchorState() and world.entityType(mcontroller.anchorState()) == "vehicle") then
+	local isRidingVehicle = mcontroller.anchorState() and world.entityType(mcontroller.anchorState()) == "vehicle"
+	if self.disabled or isRidingVehicle or (not self.transformed and status.statPositive("activeMovementAbilities")) then
 		killBody()
 		return
 	end
@@ -61,7 +62,7 @@ function update(dt)
 		return
 	end
 	--check for length change
-	local newlength = math.floor(status.stat("maxHealth")/25)
+	local newlength = math.max(math.min(math.floor(status.stat("maxHealth")/25), 30),0)
 	if newlength ~= self.length then
 		self.length = newlength
 		world.sendEntityMessage(self.bodyId, "updateLength", newlength)
@@ -109,8 +110,10 @@ function setDisabled(isDisabled)
 	self.disabled = isDisabled
 end
 function setHold(isHolding)
-	local segCheck = math.floor(self.length * 2/3)
-	world.sendEntityMessage(self.bodyId, "requestHold", isHolding, segCheck)
+	if self.bodyId and world.entityExists(self.bodyId) then
+		local segCheck = math.floor(self.length * 2/3)
+		world.sendEntityMessage(self.bodyId, "requestHold", isHolding, segCheck)
+	end
 end
 function replyHold(isHolding)
 	self.isHolding = isHolding

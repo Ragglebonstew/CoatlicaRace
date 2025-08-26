@@ -14,8 +14,10 @@ function init()
   self.suitImagePath = config.getParameter("suitImagePath")
   self.suitSelectedPath = config.getParameter("suitSelectedPath")
   self.selectionPulse = config.getParameter("selectionPulse")
+  
+	self.suitImagePath = self.suitImagePath..getBodyDirectives()..getHairDirectives()
 
-	widget.setImage("imgSuit", string.format(self.suitImagePath, player.species(), player.gender()))
+	widget.setImage("imgSuit", self.suitImagePath)
 
 	abilityTypes = root.assetJson(abilityTablePath)
 	self.techs = {}
@@ -84,7 +86,7 @@ function populateTechList(slot)
 				widget.setImage(string.format("%s.%s.techIcon", self.techList, listItem), self.techLockedIcon)
 			end
 	
-			if player.getProperty("coatlica_"..slot.."Ability") == techName then
+			if status.statusProperty("coatlica_"..slot.."Ability") == techName then
 				widget.setListSelected(self.techList, listItem)
 			end
 		end
@@ -109,7 +111,7 @@ function setSelectedSlot(slot)
     self.tweenSelector = nil
   end)
 
-  self.selectionImage = string.format(self.suitSelectedPath, player.species(), player.gender(), string.lower(slot))
+  self.selectionImage = string.format(self.suitSelectedPath, status.statusProperty("coatlica_PassiveAbility","default"))
   self.animationTimer = 0
 
   widget.setVisible("imgSelectedPrimary", slot == "Primary")
@@ -126,7 +128,7 @@ function animateSelection(dt)
   local ratio = (self.animationTimer / self.selectionPulse) * 2
   local opacity = interp.sin(ratio, 0, 1)
   local highlightDirectives = string.format("?multiply=FFFFFF%2x", math.floor(opacity * 255))
-  widget.setImage("imgSelected", self.selectionImage..highlightDirectives)
+  widget.setImage("imgSelected", self.selectionImage..getBodyDirectives())
 end
 
 function enableTech(techName)
@@ -144,7 +146,7 @@ end
 
 function updateEquippedIcons()
   for _,slot in pairs({"Primary", "Secondary", "Passive"}) do
-    local tech = player.getProperty("coatlica_"..slot.."Ability", {})
+    local tech = status.statusProperty("coatlica_"..slot.."Ability", {})
     if tech and self.techs[tech] then
       widget.setImage(string.format("techIcon%s", slot), self.techs[tech].icon)
     else
@@ -154,7 +156,7 @@ function updateEquippedIcons()
 end
 
 function equipTech(techName)
-	player.setProperty("coatlica_"..self.selectedSlot.."Ability", techName)
+	status.setStatusProperty("coatlica_"..self.selectedSlot.."Ability", techName)
 	player.makeTechAvailable("coatlica_tech_head")
 	updateEquippedIcons()
 end
@@ -180,6 +182,28 @@ function getEnabledAbilities()
 		end
 	end
 	return enabledAbilities
+end
+function getBodyDirectives()
+	local bodyDirectives = ""
+	for _,v in ipairs(world.entityPortrait(player.id(), "fullnude")) do
+		if string.find(v.image, "body.png") then
+			bodyDirectives = string.sub(v.image,(string.find(v.image, "?")))
+			break
+		end
+	end
+	return bodyDirectives
+end
+function getHairDirectives()
+	local directives = ""
+	for _,v in ipairs(world.entityPortrait(player.id(), "fullnude")) do
+		if string.find(v.image, "hair") then
+			local stringStart = string.find(v.image, "?")
+			local stringEnd   = string.find(v.image, "?addmask")
+			directives = string.sub(v.image, stringStart, stringEnd)
+			break
+		end
+	end
+	return directives
 end
 
 -- callbacks

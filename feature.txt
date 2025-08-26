@@ -1,0 +1,20 @@
+- Triple segment causes coil on enemies (with mouse drag)
+- Weapons
+  - Coatlica Spear - Kluex Crystal attack
+  - Coatlica Shield - Boulder summon, defend, and throw
+  - Coatlica Dagger - Stun enemy
+  - Coatlica Broadsword - idk lmao
+- Infiltrator ability - tier 6
+- Walker ability - tier 6
+- Shadow ability - tier 4
+- Ritual Master Mask sprite
+- Bite should count as hunting weapon for meat drops
+- Knockback immunity?
+- Compatibility
+  - BYOS
+  - Race traits
+
+- Dev statues
+
+Sus Stuff
+- Hydra head type

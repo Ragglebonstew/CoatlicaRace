@@ -1,0 +1,20 @@
+{
+	"ability" : {
+		"name" : "poisonbreath",
+		"type" : "poisonbreath",
+		"class" : "FireBreath",
+		"shortDescription" : "Poison Breath",
+		"description" : "Gives you poisonous breath!",
+		"icon" : "/interface/statuses/poison.png",
+		
+		"scripts" : ["/tech/coatlica/head/abilities/firebreath/firebreath.lua"],
+		
+		"holdParameters" : {
+			"jawOpen" : true,
+			"headLocked" : true
+		},
+		
+		"projectileType" : "poisonthrower",
+		"energyCost" : 1
+	}
+}

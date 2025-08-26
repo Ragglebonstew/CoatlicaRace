@@ -20,6 +20,7 @@ function init()
 	status.setPrimaryDirectives(self.directives)
 	monster.setInteractive(false)
 	monster.setDamageBar("none")
+	monster.setDamageTeam(world.entityDamageTeam(self.playerId))
 	if self.btype == "tail" then animator.setAnimationState("body", "tail") end
 	if self.isFirst then animator.setAnimationState("end", "on") end
 	
@@ -154,19 +155,23 @@ function updateAnimation(walkFrame)
 	return walkFrame
 end
 function updateLength(segments)
+	if segments < 0 then
+		die()
+		return
+	end
 	if segments == self.segmentsLeft then return end
 	self.segmentsLeft = segments
 	if segments == 0 then
 		self.btype = "tail"
 		animator.setAnimationState("body", "tail")
 		if self.childId and world.entityExists(self.childId) then
-			world.callScriptedEntity(self.childId, "die")
+			world.sendEntityMessage(self.childId, "die")
 			self.childId = nil
 		end
 	else
 		self.btype = "body"
 		if self.childId and world.entityExists(self.childId) then
-			world.callScriptedEntity(self.childId, "updateLength", segments-1)
+			world.sendEntityMessage(self.childId, "updateLength", segments-1)
 		else
 			spawnSegment()
 		end
@@ -176,7 +181,7 @@ end
 function die()
 	status.setResource("health", 0)
 	if self.childId and world.entityExists(self.childId) then
-		world.callScriptedEntity(self.childId, "die")
+		world.sendEntityMessage(self.childId, "die")
 	end
 end
 
@@ -233,13 +238,15 @@ function requestHold(isHolding, num)
 			self.isHolding = true
 			self.isPivot = {hold = true, num = num}
 			world.sendEntityMessage(self.ownerId, "replyHold", isHolding)
-		else
+		elseif self.childId and world.entityExists(self.childId) then
 			world.sendEntityMessage(self.childId, "requestHold", isHolding, num-1)
 		end
 	else
 		self.isHolding = false
 		self.isPivot = {hold = false, num = num}
-		world.sendEntityMessage(self.childId, "requestHold", isHolding, -1)
+		if self.childId and world.entityExists(self.childId) then
+			world.sendEntityMessage(self.childId, "requestHold", isHolding, -1)
+		end
 	end
 end
 function replyHold(isHolding)

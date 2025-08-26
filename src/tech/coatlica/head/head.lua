@@ -33,11 +33,11 @@ function uninit()
 	deactivate()
 end
 function update(args)
-	self.updateTimer = self.updateTimer - script.updateDt()
+	--[[self.updateTimer = self.updateTimer - script.updateDt()
 	if self.updateTimer <= 0 then
 		self.updateTimer = 5
 		updateStatus()
-	end
+	end]]--
 	
 	--toggles the transformation state
 	if args.moves["special1"] ~= self.specialLast then
@@ -92,7 +92,9 @@ function restorePosition(pos)
   end
 end
 function activate()
-	mcontroller.setVelocity(vec2.mul(world.distance(tech.aimPosition(), mcontroller.position()), 3))
+	local launchDir = vec2.norm(world.distance(tech.aimPosition(), mcontroller.position()))
+	local launchVel = vec2.mul(launchDir, 3)
+	mcontroller.setVelocity(launchVel)
 	world.spawnProjectile("clustermineexplosion", mcontroller.position())
 	tech.setParentHidden(true)
 	tech.setToolUsageSuppressed(true)
@@ -138,6 +140,11 @@ function killHead()
 end
 
 function run(args)
+
+	if not self.headId or not world.entityExists(self.headId) then
+		return
+	end
+
 	tech.setVisible(true)
 	
 	mcontroller.controlParameters(self.movementParameters)
@@ -192,22 +199,24 @@ function abilityUpdate(args)
 	
 	updateAbilityFire(args, "primaryFire", self.primaryAbility)
 	updateAbilityFire(args, "altFire", self.secondaryAbility)
-	self.passiveAbility:update(args.moves)
-	
+	if self.passiveAbility then 
+		self.passiveAbility:update(args.moves)
+	end
 end
 
 local fire_last = {}
 function updateAbilityFire(args, fireType, ability)
-	if not ability then return end
+	if not ability or not self.headId then return end
 	
 	if args.moves[fireType] then
 		if not fire_last[fireType] then
 			ability:fire()
-		end
-		ability:hold(script.updateDt())
-		if ability.holdParameters then
-			for entry, param in pairs(ability.holdParameters) do
-				self[entry] = param
+		else
+			ability:hold(script.updateDt())
+			if ability.holdParameters then
+				for entry, param in pairs(ability.holdParameters) do
+					self[entry] = param
+				end
 			end
 		end
 	else
@@ -339,7 +348,7 @@ end
 -- abilitySlot is either "Primary" or "Secondary"
 function getAbilitySource(config, parameters, abilitySlot)
 	local typeKey = "coatlica_"..abilitySlot.."Ability"
-	local abilityType = player.getProperty(typeKey)
+	local abilityType = status.statusProperty(typeKey)
 
 	return getAbilitySourceFromType(abilityType)
 end
@@ -358,7 +367,7 @@ function setupAbility(config, parameters, abilitySlot, builderConfig, seed)
 		local abilitiesKey = abilitySlot .. "Abilities"
 		if builderConfig[abilitiesKey] and #builderConfig[abilitiesKey] > 0 then
 			local abilityType = randomFromList(builderConfig[abilitiesKey], seed, abilitySlot .. "AbilityType")
-			abilitySource = getAbilitySourceFromType(abilityType)[isPassive and "passive" or "active"]
+			abilitySource = getAbilitySourceFromType(abilityType)
 		end
 	end
 
