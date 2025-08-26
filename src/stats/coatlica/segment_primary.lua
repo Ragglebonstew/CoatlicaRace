@@ -2,6 +2,7 @@ require "/scripts/vec2.lua"
 
 function applyDamageRequest(damageRequest)
 	return {}
+	--[[
 	if world.getProperty("nonCombat") then
 		return {}
 	end
@@ -55,6 +56,7 @@ function applyDamageRequest(damageRequest)
 		end
 	end
 	return {}
+	]]--
 end
 
 function knockbackMomentum(momentum)
