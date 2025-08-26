@@ -128,7 +128,7 @@ function animateSelection(dt)
   local ratio = (self.animationTimer / self.selectionPulse) * 2
   local opacity = interp.sin(ratio, 0, 1)
   local highlightDirectives = string.format("?multiply=FFFFFF%2x", math.floor(opacity * 255))
-  widget.setImage("imgSelected", self.selectionImage..getBodyDirectives())
+  --widget.setImage("imgSelected", self.selectionImage..getBodyDirectives())
 end
 
 function enableTech(techName)
