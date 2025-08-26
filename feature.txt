@@ -1,4 +1,5 @@
 - Add transformation preview to Limbless Statue
+- Add coatlica sprites to techupgrade station
 - Hair artifact fix
 - Triple segment causes coil on enemies (with mouse drag)
 - Weapons
@@ -13,6 +14,8 @@
 - Compatibility
   - BYOS
   - Race traits
+
+- Dev statues
 
 Sus Stuff
 - Hydra head type
