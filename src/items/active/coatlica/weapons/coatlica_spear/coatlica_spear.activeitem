@@ -3,7 +3,7 @@
   "price" : 990,
   "maxStack" : 1,
   "rarity" : "Uncommon",
-  "description" : "A spear imbued with power all have forgotten except you.",
+  "description" : "A spear imbued with power most others have forgotten.",
   "shortdescription" : "Coatlica Spear",
   "tooltipKind" : "sword",
   "category" : "spear",
