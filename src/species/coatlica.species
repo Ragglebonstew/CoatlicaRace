@@ -40,9 +40,12 @@
       { "item" : "coatlicatier4pants" },
       { "item" : "titaniumdagger" },
       { "item" : "titaniumspear" },
-      { "item" : "durasteelbroadsword" },
-      { "item" : "durasteelshortsword" },
 // Anvil3
+      { "item" : "coatlica_broadsword" },
+      { "item" : "coatlica_spear" },
+      { "item" : "coatlica_dagger" },
+      { "item" : "coatlica_shield" },
+	  
       { "item" : "coatlicatier5ahead" },
       { "item" : "coatlicatier5achest" },
       { "item" : "coatlicatier5apants" },
