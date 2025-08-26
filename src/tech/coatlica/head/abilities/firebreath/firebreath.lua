@@ -22,7 +22,10 @@ function FireBreath:hold(dt)
 			entity.id(),
 			dir,
 			false,
-			{speed = vec2.dot(mcontroller.velocity(), dir)+30}
+			{
+				speed = vec2.dot(mcontroller.velocity(), dir)+30,
+				power = 1
+			}
 		)
 		status.overConsumeResource("energy", self.energyCost)
 	end
