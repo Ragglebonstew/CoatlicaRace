@@ -8,7 +8,10 @@
 	"description" : "Coatlica robes for mysterious rituals.",
 	"shortdescription" : "Ritual Master Robes",
 	"tooltipKind" : "armor",
-	"segments" : 4,
+	
+	"coatlica_ability" : ["lightingbreath"],
+	"coatlica_segments" : 4,
+	
 	"maleFrames" : {
 		"body" : "chestm.png",
 		"backSleeve" : "bsleeve.png",

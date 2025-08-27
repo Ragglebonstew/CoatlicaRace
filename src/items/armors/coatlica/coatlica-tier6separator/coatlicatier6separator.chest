@@ -8,7 +8,10 @@
   "description" : "A powerful chestguard to strengthen the wearer.",
   "shortdescription" : "Monarch's Chestguard",
   "tooltipKind" : "armor",
-  "segments" : 6,
+	
+	"coatlica_ability" : ["tunnel"],
+	"coatlica_segments" : 6,
+	
   "maleFrames" : {
     "body" : "chestm.png",
     "backSleeve" : "bsleeve.png",

@@ -8,7 +8,10 @@
   "description" : "The boldest belt.",
   "shortdescription" : "Monarch's Belt",
   "tooltipKind" : "armor",
-  "segments" : 6,
+	
+	"coatlica_ability" : ["tunnel"],
+	"coatlica_segments" : 6,
+  
   "maleFrames" : "pants.png",
   "femaleFrames" : "pants.png",
   "level" : 6,

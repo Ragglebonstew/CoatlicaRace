@@ -1,13 +1,16 @@
 {
-  "itemName" : "coatlicatier6mchest",
-  "price" : 6400,
-  "inventoryIcon" : "icons.png:chest",
-  "maxStack" : 1,
-  "rarity" : "Legendary",
-  "category" : "chestarmour",
-  "description" : "A solarium laced jacket that offers far greater protection than the average observer might suspect.",
-  "shortdescription" : "Devout's Coat",
-  "tooltipKind" : "armor",
+	"itemName" : "coatlicatier6mchest",
+	"price" : 6400,
+	"inventoryIcon" : "icons.png:chest",
+	"maxStack" : 1,
+	"rarity" : "Legendary",
+	"category" : "chestarmour",
+	"description" : "A solarium laced jacket that offers far greater protection than the average observer might suspect.",
+	"shortdescription" : "Devout's Coat",
+	"tooltipKind" : "armor",
+	
+	"coatlica_ability" : ["fly"],
+	
   "maleFrames" : {
     "body" : "chestm.png",
     "backSleeve" : "bsleeve.png",

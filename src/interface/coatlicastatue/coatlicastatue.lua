@@ -206,6 +206,8 @@ function getHairDirectives()
 	return directives
 end
 function isTechAvailable(techName)
+
+	if player.isAdmin() then return true end
 	
 	local armorAbility
 
@@ -213,17 +215,23 @@ function isTechAvailable(techName)
 	local chest = player.equippedItem("chest")
 	local legs = player.equippedItem("legs")
 	if head and chest and legs then
-		local headConfig  = root.itemConfig(head).config
-		local chestConfig = root.itemConfig(chest).config
-		local legsConfig  = root.itemConfig(legs).config
+		local headAbilities  = root.itemConfig(head).config.coatlica_ability
+		local chestAbilities = root.itemConfig(chest).config.coatlica_ability
+		local legsAbilities  = root.itemConfig(legs).config.coatlica_ability
 		
-		if 		headConfig["coatlica_ability"] ~= nil
-			and headConfig["coatlica_ability"] == chestConfig["coatlica_ability"]
-			and headConfig["coatlica_ability"] == legsConfig["coatlica_ability"] then
-			armorAbility = headConfig["coatlica_ability"]
+		if headAbilities and chestAbilities and legsAbilities then
+			for _,abilityName in pairs(headAbilities) do
+				sb.logInfo("This ability is "..abilityName.." compared to "..techName)
+				if abilityName == techName then
+					if contains(chestAbilities, abilityName) and contains(legsAbilities, abilityName) then
+						return true
+					end
+					break
+				end
+			end
 		end
 	end
-	return self.techs[techName].unlockByDefault or armorAbility == techName
+	return self.techs[techName].unlockByDefault
 end
 -- callbacks
 function techSelected()

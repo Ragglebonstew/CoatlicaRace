@@ -1,13 +1,15 @@
 {
-  "itemName" : "coatlicatier3chest",
-  "price" : 3200,
-  "inventoryIcon" : "icons.png:chest",
-  "maxStack" : 1,
-  "rarity" : "Uncommon",
-  "category" : "chestarmour",
-  "description" : "For the sturdy garden snake.",
-  "shortdescription" : "Guardener Chestplate",
-  "tooltipKind" : "armor",
+	"itemName" : "coatlicatier3chest",
+	"price" : 3200,
+	"inventoryIcon" : "icons.png:chest",
+	"maxStack" : 1,
+	"rarity" : "Uncommon",
+	"category" : "chestarmour",
+	"description" : "For the sturdy garden snake.",
+	"shortdescription" : "Guardener Chestplate",
+	"tooltipKind" : "armor",
+	
+	"coatlica_ability" : ["poisonbreath"],
   
   "maleFrames" : {
     "body" : "chestm.png",

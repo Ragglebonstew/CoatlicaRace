@@ -8,6 +8,8 @@
 	"description" : "An unruly chestplate.",
 	"shortdescription" : "Wild Chestplate",
 	"tooltipKind" : "armor",
+	
+	"coatlica_ability" : ["icebreath"],
   
 	"maleFrames" : {
 		"body" : "chest.png",

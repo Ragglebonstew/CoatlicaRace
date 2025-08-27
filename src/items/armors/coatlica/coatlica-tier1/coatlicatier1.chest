@@ -9,7 +9,7 @@
 	"shortdescription" : "Scout's Chestguard",
 	"tooltipKind" : "armor",
 	
-	"coatlica_ability" : "bite",
+	"coatlica_ability" : ["bite", "firebreath"],
   
 	"maleFrames" : {
 		"body" : "chestm.png",
