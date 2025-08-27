@@ -69,7 +69,7 @@ function populateTechList(slot)
 
   -- Show enabled techs at the top of the list
 	local techs = getEnabledAbilities()
-	local disabled = util.filter(util.keys(self.techs), function(a) return not contains(techs, a) end)
+	local disabled = util.filter(util.keys(self.techs), function(a) return not contains(techs, a) and isTechAvailable(a) end)
 	util.appendLists(techs, disabled)
 	for _,techName in pairs(techs) do
 		local config = self.techs[techName]
@@ -205,7 +205,26 @@ function getHairDirectives()
 	end
 	return directives
 end
+function isTechAvailable(techName)
+	
+	local armorAbility
 
+	local head = player.equippedItem("head")
+	local chest = player.equippedItem("chest")
+	local legs = player.equippedItem("legs")
+	if head and chest and legs then
+		local headConfig  = root.itemConfig(head).config
+		local chestConfig = root.itemConfig(chest).config
+		local legsConfig  = root.itemConfig(legs).config
+		
+		if 		headConfig["coatlica_ability"] ~= nil
+			and headConfig["coatlica_ability"] == chestConfig["coatlica_ability"]
+			and headConfig["coatlica_ability"] == legsConfig["coatlica_ability"] then
+			armorAbility = headConfig["coatlica_ability"]
+		end
+	end
+	return self.techs[techName].unlockByDefault or armorAbility == techName
+end
 -- callbacks
 function techSelected()
   local listItem = widget.getListSelected(self.techList)

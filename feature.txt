@@ -1,3 +1,5 @@
+- Fix weapon dmg
+- Fix pivot segment falling off ledge
 - Triple segment causes coil on enemies (with mouse drag)
 - Weapons
   - Coatlica Spear - Kluex Crystal attack

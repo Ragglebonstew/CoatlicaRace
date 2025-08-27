@@ -9,6 +9,7 @@
 		"chipCost" : 3,
 		
 		"isPassive" : true,
+		"unlockByDefault" : true,
 		
 		"scripts" : ["/tech/coatlica/head/abilities/digger/digger.lua"]
 	}

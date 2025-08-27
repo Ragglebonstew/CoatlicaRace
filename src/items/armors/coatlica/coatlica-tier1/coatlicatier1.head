@@ -9,6 +9,8 @@
 	"shortdescription" : "Scout's Circlet",
 	"tooltipKind" : "armor",
 	
+	"coatlica_ability" : "bite",
+	
 	"maleFrames" : "head.png",
 	"femaleFrames" : "head.png",
 	"mask" : "mask.png",

@@ -9,6 +9,8 @@
 	"shortdescription" : "Scout's Loincloth",
 	"tooltipKind" : "armor",
 	
+	"coatlica_ability" : "bite",
+	
 	"maleFrames" : "pants.png",
 	"femaleFrames" : "pants.png",
 	

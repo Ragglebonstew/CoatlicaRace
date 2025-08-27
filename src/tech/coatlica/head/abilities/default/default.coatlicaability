@@ -9,6 +9,7 @@
 		"chipCost" : 0,
 		
 		"isPassive" : true,
+		"unlockByDefault" : true,
 		
 		"scripts" : ["/tech/coatlica/head/abilities/default/default.lua"]
 	}

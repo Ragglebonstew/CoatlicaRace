@@ -8,6 +8,8 @@
 	"description" : "Meant to evoke the idea of adventure.",
 	"shortdescription" : "Scout's Chestguard",
 	"tooltipKind" : "armor",
+	
+	"coatlica_ability" : "bite",
   
 	"maleFrames" : {
 		"body" : "chestm.png",
