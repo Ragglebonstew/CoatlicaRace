@@ -221,7 +221,6 @@ function isTechAvailable(techName)
 		
 		if headAbilities and chestAbilities and legsAbilities then
 			for _,abilityName in pairs(headAbilities) do
-				sb.logInfo("This ability is "..abilityName.." compared to "..techName)
 				if abilityName == techName then
 					if contains(chestAbilities, abilityName) and contains(legsAbilities, abilityName) then
 						return true
