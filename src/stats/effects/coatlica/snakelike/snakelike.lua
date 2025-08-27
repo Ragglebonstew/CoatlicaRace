@@ -34,28 +34,6 @@ function update(dt)
 		killBody()
 		return
 	end
-		
-		--[[
-		local pantsDirectory
-		for _,v in ipairs(world.entityPortrait(entity.id(), "fullnude")) do
-			sb.logInfo("stuff: "..v.image)
-			--local pantsCheck = string.find(v.image, "pants.png")
-			--if pantsCheck then
-				--pantsDirectory = string.sub(v.image, 1, pantsCheck-1)
-				--break
-			--end
-		end
-		---[[
-		if pantsDirectory then
-			local size = root.imageSize(pantsDirectory.."coatlicamask.png")
-			if size[1] ~= 64 then
-				effect.setParentDirectives("?addmask="..pantsDirectory.."coatlicamask.png")
-			else
-				effect.setParentDirectives()
-			end
-		end
-		]]--
-	
 	
 	if not self.bodyId or not world.entityExists(self.bodyId) then
 		spawnBody()
@@ -79,7 +57,8 @@ function update(dt)
 		pos = vec2.add(pos, {0,-2.1875})
 	end
 	local inGround = world.pointCollision(pos, {"Block", "Dynamic", "Slippery", "Null", "Platform"})
-	world.sendEntityMessage(self.bodyId, "updateCommon", pos, self.coilPer)
+	
+	world.sendEntityMessage(self.bodyId, "updateCommon", pos, self.coilPer, nil)
 	
 	if self.isHolding or inGround then
 		mcontroller.controlParameters({gravityEnabled = false})

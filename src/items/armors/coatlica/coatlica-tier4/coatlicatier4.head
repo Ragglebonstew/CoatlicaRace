@@ -9,7 +9,7 @@
 	"shortdescription" : "Ritual Master Mask",
 	"tooltipKind" : "armor",
 	
-	"coatlica_ability" : ["lightingbreath"],
+	"coatlica_ability" : ["shadow", "lightingbreath"],
 
   "maleFrames" : "head.png",
   "femaleFrames" : "head.png",

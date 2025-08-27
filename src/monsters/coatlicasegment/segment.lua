@@ -95,17 +95,18 @@ function spawnSegment()
 	}
     self.childId = world.spawnMonster("coatlicasegment", mcontroller.position(), params)
 end
-function updateCommon(ownerPos, coilPer, walkFrame)
+function updateCommon(ownerPos, coilPer, directives, walkFrame)
 	if not (self.ownerId and world.entityExists(self.ownerId)) then
 		die()
 		return
 	end
 	
 	followOwner(ownerPos, coilPer)
+	status.setPrimaryDirectives(directives or self.directives)
 	walkFrame = updateAnimation(walkFrame)
 	
 	if self.childId and world.entityExists(self.childId) then
-		world.callScriptedEntity(self.childId, "updateCommon", mcontroller.position(), coilPer, walkFrame)
+		world.callScriptedEntity(self.childId, "updateCommon", mcontroller.position(), coilPer, directives, walkFrame)
 	elseif self.segmentsLeft > 0 then -- segmentsLeft of 0 refers to the tail, the last body segment
         spawnSegment()
 	end

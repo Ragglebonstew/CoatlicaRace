@@ -261,7 +261,7 @@ function headUpdate()
 	if self.mouthPer <= 0 then jawRot = 0
 	else jawRot = -math.pi/5 * self.mouthPer end
 	if self.headId and world.entityExists(self.headId) then
-		world.sendEntityMessage(self.headId, "updateAnim", pos, headRot, jawRot)
+		world.sendEntityMessage(self.headId, "updateAnim", pos, headRot, jawRot, getBodyDirectives()..getHairDirectives())
 	end
 	
 	self.jawOpen = false

@@ -9,7 +9,7 @@
 	"shortdescription" : "Ritual Master Skirt",
 	"tooltipKind" : "armor",
 	
-	"coatlica_ability" : ["lightingbreath"],
+	"coatlica_ability" : ["shadow", "lightingbreath"],
 	
 	"maleFrames" : "pants.png",
 	"femaleFrames" : "pants.png",

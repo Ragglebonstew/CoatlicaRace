@@ -9,7 +9,7 @@
 	"shortdescription" : "Ritual Master Robes",
 	"tooltipKind" : "armor",
 	
-	"coatlica_ability" : ["lightingbreath"],
+	"coatlica_ability" : ["shadow", "lightingbreath"],
 	"coatlica_segments" : 4,
 	
 	"maleFrames" : {

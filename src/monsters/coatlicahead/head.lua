@@ -32,8 +32,9 @@ function update(dt)
 		updateStatus()
 	end
 end
-function updateAnim(pos, headRot, jawRot)
+function updateAnim(pos, headRot, jawRot, directives)
 	mcontroller.setPosition(pos)
+	status.setPrimaryDirectives(directives or self.directives)
 	
 	local rotVec = {math.abs(headRot[1]), headRot[2]}
 	angle = vec2.angle(rotVec)
