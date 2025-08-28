@@ -1,12 +1,18 @@
 {
-  "kind" : "coatlica",
+	"kind" : "coatlica",
 	"charCreationTooltip" : {
-	"title" : "Coatlica",
-	"subTitle" : "O2",
-	"description" : "Yielding from the depths of desert and scorched planets, the coatlica rarely interact with the rest of the universe. Their size makes it difficult to maneuver the colonies of other species, but easy to navigate the ruins of species past. Many of the coatlica find interest in forgotten history and mysticism."
-  },
-  
-  "statusEffects" : [ "snakelike" ],
+		"title" : "Coatlica",
+		"subTitle" : "O2",
+		"description" : "Yielding from the depths of desert and scorched planets, the coatlica rarely interact with the rest of the universe. Their size makes it difficult to maneuver the colonies of other species, but easy to navigate the ruins of species past. Many of the coatlica find interest in forgotten history and mysticism.
+^yellow;Attributes^reset;
+^cyan;Energy Regen^reset;: ^red;-25%^reset;
+^yellow;Resistances^reset;
+^cyan;Electric Resistance^reset;: ^green;+35%^reset;
+^yellow;Racial Traits^reset;: ^green;Subterranean^reset;
+^cyan;Max Breath^reset;: ^green;200^reset;, ^cyan;Knockback Resistance^reset;: ^green;+25%^reset;^reset;, ^cyan;Jump Modifier^reset;: ^green;+20%^reset;^reset;"
+	},
+
+	"statusEffects" : [ "snakelike" ],
   
   //"humanoidConfig" : "/species/coatlica.config",
   "nameGen" : [ "/species/coatlicamalenamegen.config:names", "/species/coatlicafemalenamegen.config:names" ],
