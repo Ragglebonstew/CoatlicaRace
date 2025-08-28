@@ -1,7 +1,7 @@
 {
   "itemName" : "coatlica_broadsword",
   "price" : 960,
-  "level" : 1,
+  "level" : 4,
   "maxStack" : 1,
   "rarity" : "Uncommon",
   "description" : "Its purpose has been lost to history.",
