@@ -9,6 +9,7 @@ function init()
 	message.setHandler("setCoil", simpleHandler(setCoil))
 	message.setHandler("setTransformed", simpleHandler(setTransformed))
 	message.setHandler("setFly", simpleHandler(setFly))
+	message.setHandler("setDirectives", simpleHandler(setDirectives))
 	self.length = 1
 	self.coilPer = 1
 	self.transformed = false
@@ -58,7 +59,7 @@ function update(dt)
 	end
 	local inGround = world.pointCollision(pos, {"Block", "Dynamic", "Slippery", "Null", "Platform"})
 	
-	world.sendEntityMessage(self.bodyId, "updateCommon", pos, self.coilPer, nil)
+	world.sendEntityMessage(self.bodyId, "updateCommon", pos, self.coilPer)
 	
 	if self.isHolding or inGround then
 		mcontroller.controlParameters({gravityEnabled = false})
@@ -108,5 +109,10 @@ function setFly(isFlying)
 	self.isFlying = isFlying
 	if self.bodyId and not isFlying then
 		world.sendEntityMessage(self.bodyId, "updateFlying", true)
+	end
+end
+function setDirectives(directives)
+	if self.bodyId and world.entityExists(self.bodyId) then
+		world.sendEntityMessage(self.bodyId, "setDirectives", directives)
 	end
 end

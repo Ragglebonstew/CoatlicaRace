@@ -16,7 +16,7 @@
 				{"stat": "poisonStatusImmunity","amount": 0.0},
 				{"stat": "iceResistance","amount": 0.0},
 				{"stat": "iceStatusImmunity","amount": 0.0},
-				{"stat": "physicalResistance","amount": 0.0}
+				{"stat": "physicalResistance","amount": 0.0},
 				{"stat": "maxBreath", "amount": 150.0},
 				{"stat": "knockbackThreshold", "amount": 11.25}
 			],

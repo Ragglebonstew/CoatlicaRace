@@ -23,6 +23,7 @@ function init()
 	message.setHandler("updateAnim", simpleHandler(updateAnim))
 	message.setHandler("die", simpleHandler(die))
 	message.setHandler("setHeadType", simpleHandler(setHeadType))
+	message.setHandler("setDirectives", simpleHandler(setDirectives))
 	message.setHandler("setDamageOnTouch", simpleHandler(monster.setDamageOnTouch))
 end
 function update(dt)
@@ -32,9 +33,9 @@ function update(dt)
 		updateStatus()
 	end
 end
-function updateAnim(pos, headRot, jawRot, directives)
+function updateAnim(pos, headRot, jawRot)
 	mcontroller.setPosition(pos)
-	status.setPrimaryDirectives(directives or self.directives)
+	status.setPrimaryDirectives(self.directives..(self.customDirectives or ""))
 	
 	local rotVec = {math.abs(headRot[1]), headRot[2]}
 	angle = vec2.angle(rotVec)
@@ -67,4 +68,7 @@ end
 function setHeadType(headType)
 	local headImage = "/monsters/coatlicahead/head_images/"..(headType or "default")
 	animator.setGlobalTag("headImage", headImage)
+end
+function setDirectives(directives)
+	self.customDirectives = directives
 end

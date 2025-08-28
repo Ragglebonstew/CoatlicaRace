@@ -32,6 +32,7 @@ function init()
 	message.setHandler("requestHold", simpleHandler(requestHold))
 	message.setHandler("replyHold", simpleHandler(replyHold))
 	message.setHandler("updateFlying", simpleHandler(updateFlying))
+	message.setHandler("setDirectives", simpleHandler(setDirectives))
 end
 function update(dt)
 	if self.passTimer > 0 then self.passTimer = self.passTimer - dt
@@ -95,18 +96,18 @@ function spawnSegment()
 	}
     self.childId = world.spawnMonster("coatlicasegment", mcontroller.position(), params)
 end
-function updateCommon(ownerPos, coilPer, directives, walkFrame)
+function updateCommon(ownerPos, coilPer, walkFrame)
 	if not (self.ownerId and world.entityExists(self.ownerId)) then
 		die()
 		return
 	end
 	
 	followOwner(ownerPos, coilPer)
-	status.setPrimaryDirectives(directives or self.directives)
+	status.setPrimaryDirectives(self.directives..(self.customDirectives or ""))
 	walkFrame = updateAnimation(walkFrame)
 	
 	if self.childId and world.entityExists(self.childId) then
-		world.callScriptedEntity(self.childId, "updateCommon", mcontroller.position(), coilPer, directives, walkFrame)
+		world.callScriptedEntity(self.childId, "updateCommon", mcontroller.position(), coilPer, walkFrame)
 	elseif self.segmentsLeft > 0 then -- segmentsLeft of 0 refers to the tail, the last body segment
         spawnSegment()
 	end
@@ -264,5 +265,11 @@ function updateFlying(drop)
 	end
 	if self.btype ~= "tail" and self.childId then
 		world.sendEntityMessage(self.childId, "updateFlying", drop)
+	end
+end
+function setDirectives(directives)
+	self.customDirectives = directives
+	if self.childId and world.entityExists(self.childId) then
+		world.sendEntityMessage(self.childId, "setDirectives", directives)
 	end
 end

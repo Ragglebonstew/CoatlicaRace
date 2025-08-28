@@ -1,9 +1,28 @@
 Shadow = CoatlicaAbility:new()
 
 function Shadow:init()
+	self.progress = 0
 end
-function Shadow:uninit() end
-function Shadow:update(dt, dir, shiftHeld) end
-function Shadow:fire() end
+function Shadow:uninit()
+	local directives = ""
+	setDirectives(directives)
+	self.active = false
+end
+function Shadow:update(dt, dir, shiftHeld)
+	if self.active then
+		self.progress = math.min(self.progress+dt*40,100)
+	else
+		self.progress = math.max(self.progress-dt*40,0)
+	end
+	local brightnessDirective = "?brightness=-"..math.floor(self.progress*0.8)
+	local transparntDirective = "?multiply=FFFFFF"..string.format("%X", math.floor((1-self.progress/100*0.8)*255))
+	setDirectives(brightnessDirective..transparntDirective)
+
+end
+function Shadow:fire()
+	self.active = true
+end
 function Shadow:hold(dt) end
-function Shadow:release(headId) end
+function Shadow:release(headId)
+	self.active = false
+end
