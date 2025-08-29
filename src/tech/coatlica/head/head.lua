@@ -208,7 +208,7 @@ local fire_last = {}
 function updateAbilityFire(args, fireType, ability)
 	if not ability or not self.headId then return end
 	
-	if args.moves[fireType] then
+	if args.moves[fireType] and not status.resourceLocked("energy") then
 		if not fire_last[fireType] then
 			ability:fire()
 		else
