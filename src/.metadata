@@ -4,7 +4,7 @@
   "friendlyName" : "Coatlica Race",
   "includes" : ["OmRaceTraits"],
   "link" : "steam://url/CommunityFilePage/3554878759",
-  "name" : "coatlica_race",
+  "name" : "Coatlica Race",
   "path" : ".",
   "steamContentId" : "3554878759",
   "tags" : "Species|Character Improvements|Mechanics",
