@@ -93,6 +93,8 @@ function setHold(isHolding)
 	if self.bodyId and world.entityExists(self.bodyId) then
 		local segCheck = math.floor(self.length * 2/3)
 		world.sendEntityMessage(self.bodyId, "requestHold", isHolding, segCheck)
+	else
+		replyHold(isHolding)
 	end
 end
 function replyHold(isHolding)

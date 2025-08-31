@@ -52,7 +52,7 @@ function update(dt)
 	end
 	
 	if self.isPivot and self.isPivot.hold then
-		if not self.inGround and not mcontroller.isColliding() then
+		if not self.inGround and not mcontroller.isColliding() and self.childId and world.entityExists(self.childId) then
 			world.sendEntityMessage(self.childId, "requestHold", true, self.isPivot.num-1)
 			self.isPivot = nil
 		end
@@ -248,6 +248,9 @@ function requestHold(isHolding, num)
 		self.isPivot = {hold = false, num = num}
 		if self.childId and world.entityExists(self.childId) then
 			world.sendEntityMessage(self.childId, "requestHold", isHolding, -1)
+		end
+		if self.isFirst then
+			world.sendEntityMessage(self.ownerId, "replyHold", isHolding)
 		end
 	end
 end
