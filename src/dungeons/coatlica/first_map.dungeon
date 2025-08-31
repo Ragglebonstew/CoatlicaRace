@@ -1,0 +1,19 @@
+{
+	"metadata": {
+		"name": "first_map",
+		"species": "coatlica",
+		"rules": [],
+		"anchor": ["first_map"],
+		"gravity": 80,
+		"maxRadius": 200,
+		"maxParts": 1,
+		"protected": true
+	},
+	"parts": [{
+		"name": "first_map",
+		"rules": [
+			["maxSpawnCount", [1]]
+		],
+		"def": ["tmx", "first_map.json"]
+	}]
+}
