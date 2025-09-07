@@ -1,0 +1,38 @@
+{
+
+  "ends" : [
+    [5.0, "coatlica_collect_artifact"]
+  ],
+
+  "quests" : {
+    "coatlica_collect_artifact" : {
+      "templateId" : "coatlica_collect_artifact.generated",
+      "difficulty" : 0.1,
+      "participants" : {
+        "questGiver" : { "turnInQuest" : true },
+        "target" : {
+          "critical" : true,
+          "behaviorOverrides" : [{
+            "type" : "notification",
+            "behavior" : { "name" : "quest-collect_gift-notification" }
+          }]
+        }
+      },
+
+      "chance" : 0.15,
+
+      "preconditions" : [
+        ["likes", "target", "questGiver"],
+        ["owns", "player", "item", 0],
+        ["isNpc", "target"],
+        ["!npcHasFurniture", "target", "item"],
+        ["!=", "target", "questGiver"]
+      ],
+      "postconditions" : [
+        ["!owns", "player", "item", 0],
+        ["owns", "player", "item", 1]
+      ]
+    }
+  }
+
+}

@@ -1,0 +1,19 @@
+{
+	"metadata": {
+		"name": "coatlica_digsite",
+		"species": "coatlica",
+		"rules": [],
+		"anchor": ["coatlica_digsite"],
+		"gravity": 80,
+		"maxRadius": 200,
+		"maxParts": 1,
+		"protected": false
+	},
+	"parts": [{
+		"name": "coatlica_digsite",
+		"rules": [
+			["maxSpawnCount", [1]]
+		],
+		"def": ["tmx", "coatlica_digsite.json"]
+	}]
+}

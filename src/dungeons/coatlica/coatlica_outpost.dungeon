@@ -1,19 +1,19 @@
 {
 	"metadata": {
-		"name": "first_map",
+		"name": "coatlica_outpost",
 		"species": "coatlica",
 		"rules": [],
-		"anchor": ["first_map"],
+		"anchor": ["coatlica_outpost"],
 		"gravity": 80,
 		"maxRadius": 200,
 		"maxParts": 1,
-		"protected": true
+		"protected": false
 	},
 	"parts": [{
-		"name": "first_map",
+		"name": "coatlica_outpost",
 		"rules": [
 			["maxSpawnCount", [1]]
 		],
-		"def": ["tmx", "first_map.json"]
+		"def": ["tmx", "coatlica_outpost.json"]
 	}]
 }
