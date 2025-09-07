@@ -10,6 +10,8 @@
 		
 		"isPassive" : false,
 		
+		"maxTunnelSpeed" : 15,
+		
 		"scripts" : ["/tech/coatlica/head/abilities/tunnel/tunnel.lua"]
 	}
 }
