@@ -6,9 +6,12 @@
   "rarity" : "Legendary",
   "category" : "legarmour",
   "description" : "Infusing one's skirt with solarium is a simple way of showing one's status.",
-  "shortdescription" : "Envoy's Greaves",
+  "shortdescription" : "Envoy's Dress",
   "tooltipKind" : "armor",
-  "segments" : 6,
+	
+	"coatlica_ability" : ["infiltrator"],
+	"coatlica_segments" : 6,
+
   "maleFrames" : "pants.png",
   "femaleFrames" : "pants.png",
   "level" : 6,

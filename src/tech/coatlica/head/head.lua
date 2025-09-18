@@ -64,8 +64,6 @@ function update(args)
 	
 	local shiftHeld = not args.moves["run"]
 	if transformed then
-		move(args.moves)
-		holdAbility(shiftHeld)
 		run(args)
 	else
 		if shiftHeld then move(args.moves) end
@@ -113,6 +111,8 @@ function activate()
 	abilityInit()
 end
 function deactivate()
+	abilityUninit()
+	
 	mcontroller.setRotation(0)
 	world.spawnProjectile("clustermineexplosion", mcontroller.position())
 	tech.setParentHidden(false)
@@ -125,8 +125,6 @@ function deactivate()
 	if self.isHolding then
 		world.sendEntityMessage(entity.id(), "setHold", false)
 	end
-	
-	abilityUninit()
 end
 function spawnHead()
 	local params = {directives = getBodyDirectives()..getHairDirectives(), playerId = entity.id()}
@@ -144,13 +142,14 @@ function run(args)
 	if not self.headId or not world.entityExists(self.headId) then
 		return
 	end
-
-	tech.setVisible(true)
 	
-	mcontroller.controlParameters(self.movementParameters)
-	
+	if not self.movementOverride then
+		mcontroller.controlParameters(self.movementParameters)
+		move(args.moves)
+		headUpdate()
+		holdAbility(not args.moves["run"])
+	end
 	abilityUpdate(args)
-	headUpdate()
 end
 function abilityInit()
 	local abilityConfig, parameters = build(directory, root.assetJson("/tech/coatlica/head/head.tech"), {}, level, seed)
@@ -422,6 +421,9 @@ function setDirectives(directives)
 		world.callScriptedEntity(self.headId, "setDirectives", directives)
 	end
 	world.sendEntityMessage(entity.id(), "setDirectives", directives)
+end
+function setMovementOverride(isOverrided)
+	self.movementOverride = isOverrided
 end
 
 --abilities (temp till can be moved to own files)

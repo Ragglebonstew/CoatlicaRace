@@ -1,0 +1,18 @@
+{
+	"ability" : {
+		"name" : "infiltrator",
+		"type" : "infiltrator",
+		"class" : "Infiltrator",
+		"shortDescription" : "Infiltrator",
+		"description" : "Hide your snake-like appearance.",
+		"icon" : "/interface/statuses/invisible.png",
+		"chipCost" : 5,
+		
+		"scripts" : ["/tech/coatlica/head/abilities/infiltrator/infiltrator.lua"],
+		
+		"holdParameters" : {},
+		"releaseParameters" : {},
+		
+		"energyCost" : 20
+	}
+}

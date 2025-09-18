@@ -8,7 +8,9 @@
   "description" : "Aegisalt makes for a great glass material. Necessary to protect your eyes from long-term sun exposure (and to overcome inevitable sun-related eye damage).",
   "shortdescription" : "Envoy's Visor",
   "tooltipKind" : "armor",
-  "segments" : 6,
+	
+	"coatlica_ability" : ["infiltrator"],
+	"coatlica_segments" : 6,
 
   "maleFrames" : "head.png",
   "femaleFrames" : "head.png",
