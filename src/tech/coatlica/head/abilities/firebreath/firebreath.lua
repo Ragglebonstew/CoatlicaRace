@@ -24,7 +24,7 @@ function FireBreath:hold(dt)
 			false,
 			{
 				speed = vec2.dot(mcontroller.velocity(), dir)+30,
-				power = 1
+				power = 1*status.stat("powerMultiplier")
 			}
 		)
 		status.overConsumeResource("energy", self.energyCost)
