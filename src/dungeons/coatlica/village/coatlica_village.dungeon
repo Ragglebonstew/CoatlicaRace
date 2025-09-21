@@ -5,7 +5,7 @@
 		"rules": [],
 		"anchor": ["coatlica_vertshaft"],
 		"gravity": 80,
-		"maxRadius": 200,
+		"maxRadius": 10000,
 		"maxParts": 10,
 		"protected": false
 	},

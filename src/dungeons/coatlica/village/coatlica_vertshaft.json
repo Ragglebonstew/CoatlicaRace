@@ -4,7 +4,7 @@
  "layers":[
         {
          "compression":"zlib",
-         "data":"eJztzbENACAMA7CQ\/4\/uC2UEefDsJinAR86S1+v1er1er9fr9Xq9Xq\/X6\/V6vV6v1+t9\/4UbA9tCDz0=",
+         "data":"eJzt1sEJgDAQRcE1ldiNDaYNe4znQFCRYFjm8M7Dnv6WiCiSlKj9YdncenV2VS73o3sMynovl8vlctd07RGXy+VyV3DtEZfL5XK5XG4O96+\/bhs0270riyu9qQHO5\/ln",
          "encoding":"base64",
          "height":75,
          "id":1,
@@ -18,7 +18,7 @@
         }, 
         {
          "compression":"zlib",
-         "data":"eJztzrEJAEAIBEEbsAf7r\/Kjz00Ekdn4YC5Cku6UzV1NnuByuVwul8vlcrlcLpfL5XK5XC6Xy+Vyuatc6fcASLAHjg==",
+         "data":"eJzt2MENgCAMheEu4A5O5MhO5QCGmzEhlEKl4P+Snl7Cp4eGqAghZPWcyvna8\/DTObtyer6zvM6u6Xq51t4ruPO62yD3ee6VGW\/X2uPiRnTZI9\/gxnI1d5fFZY9wcdvdv+xRKbjzunwf1fe4uBFd9ggXt91lj3yDG8v1+s9wZEb7XFa3NKu51r7VtnRkXG45Nlmd",
          "encoding":"base64",
          "height":75,
          "id":2,
@@ -34,7 +34,151 @@
          "draworder":"topdown",
          "id":3,
          "name":"objects",
-         "objects":[],
+         "objects":[
+                {
+                 "gid":332,
+                 "height":40,
+                 "id":1,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":40,
+                 "x":72,
+                 "y":144
+                }, 
+                {
+                 "gid":332,
+                 "height":40,
+                 "id":2,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":40,
+                 "x":128,
+                 "y":256
+                }, 
+                {
+                 "gid":332,
+                 "height":40,
+                 "id":3,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":40,
+                 "x":72,
+                 "y":368
+                }, 
+                {
+                 "gid":332,
+                 "height":40,
+                 "id":4,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":40,
+                 "x":128,
+                 "y":536
+                }, 
+                {
+                 "gid":696,
+                 "height":16,
+                 "id":7,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":8,
+                 "x":128,
+                 "y":112
+                }, 
+                {
+                 "gid":696,
+                 "height":16,
+                 "id":8,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":8,
+                 "x":104,
+                 "y":112
+                }, 
+                {
+                 "gid":696,
+                 "height":16,
+                 "id":9,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":8,
+                 "x":128,
+                 "y":224
+                }, 
+                {
+                 "gid":696,
+                 "height":16,
+                 "id":10,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":8,
+                 "x":104,
+                 "y":224
+                }, 
+                {
+                 "gid":696,
+                 "height":16,
+                 "id":11,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":8,
+                 "x":104,
+                 "y":336
+                }, 
+                {
+                 "gid":696,
+                 "height":16,
+                 "id":12,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":8,
+                 "x":128,
+                 "y":336
+                }, 
+                {
+                 "gid":696,
+                 "height":16,
+                 "id":13,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":8,
+                 "x":104,
+                 "y":504
+                }, 
+                {
+                 "gid":696,
+                 "height":16,
+                 "id":14,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":8,
+                 "x":128,
+                 "y":504
+                }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -42,7 +186,7 @@
          "y":0
         }],
  "nextlayerid":4,
- "nextobjectid":1,
+ "nextobjectid":15,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
@@ -55,6 +199,18 @@
         {
          "firstgid":25,
          "source":"..\/..\/..\/..\/..\/..\/_games\/Steam\/steamapps\/common\/Starbound\/assets\/packed\/tilesets\/packed\/materials.json"
+        }, 
+        {
+         "firstgid":222,
+         "source":"..\/..\/..\/..\/..\/..\/_games\/Steam\/steamapps\/common\/Starbound\/assets\/packed\/tilesets\/packed\/supports.json"
+        }, 
+        {
+         "firstgid":259,
+         "source":"..\/..\/..\/..\/..\/..\/_games\/Steam\/steamapps\/common\/Starbound\/assets\/packed\/tilesets\/packed\/objects-by-category\/door.json"
+        }, 
+        {
+         "firstgid":391,
+         "source":"..\/..\/..\/..\/..\/..\/_games\/Steam\/steamapps\/common\/Starbound\/assets\/packed\/tilesets\/packed\/objects-by-category\/light.json"
         }],
  "tilewidth":8,
  "type":"map",
