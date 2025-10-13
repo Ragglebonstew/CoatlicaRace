@@ -4,7 +4,7 @@
  "layers":[
         {
          "compression":"zlib",
-         "data":"eJzt1bENgDAMRFGXbMO0TBk6FqChQAGCD9txJK74XTB5QsKriKyMMcYYG7oFrDWrNNK+e6rKcr65W9barJnv6bVa63tprOU4i8y1eM\/P\/8nraaV3PO\/sHOpF5np4I0K8aPT23UOo8cmMnhHgm2buoDvLl3OIN\/OfTC+93t7Mnevh1Vijd9CW0Oje+j4RRuv86G\/gbexpttyLMXZtB6KTWV8=",
+         "data":"eJzt1UEOgCAMRNEuvY2n9ZSw8wJuNDFVkbGFkjgmf4eVFxLJIpIZY4wxNnQLWGlWKlT77UkV5Xxzl6zaXDPf02u16n3VWNO+Fplr8Z7f\/5PX00rveN7ZOdSLzPXwtgjxotHb9x5CjU9mdI0AZxp5B91ZvqxDvJH\/ZHrp9fZG3rke3uOJvIPWgEb36v20MFrntz4Db2NPs2VfjLFrG39ZWHM=",
          "encoding":"base64",
          "height":30,
          "id":1,
@@ -18,7 +18,7 @@
         }, 
         {
          "compression":"zlib",
-         "data":"eJztlksOgzAMBVlyoh65F8pRuui28gIpQiHYfv4o1CNZYhHsNxAFtq0oiuIZvB3Ka74VR78dKCTTbL6F6\/m5IZ5X+WY5NfPRd301S8os3918zmxpX25WFM1z81rbM9pHK4BkPe+lFUCzruRKlG\/s\/dFo8o7OqpdxUc\/GLMl85Hy2\/L8Y1YzWXVv37h1H\/xcWSHq1+yVmZH+DIl0P\/smVyPDNciWifTNdiUhfb9cvY43nN\/eTUFxfj9Lk83BE+3u\/A2tHTX8vt6IoZPwAOgG45Q==",
+         "data":"eJztlksKgDAMBV16Io\/shXoULyBZCEVqbfLyoZqBgIuavNFSXZYkSZJvsBuU1Xwtrn4rUEim3nwN1\/tzQzyf8vVySuaj7\/ppFpdevrf5I7O5fUezokiem9XamtY+mgEk630vzQCadSZXIn197\/dGkrd1Vm3KRT3LYHHmI+ez5v9Fq3qU6lq7d+3Y+r\/QgNOrvC9RI\/ob5Ol68SdXIsI3ypXw9o10JTx9o10Jy2\/uEVCjvhYlyWfhiPa3fgfajpL+Vm5JkvA4Ac2At+4=",
          "encoding":"base64",
          "height":30,
          "id":3,
@@ -190,6 +190,18 @@
                  "width":40,
                  "x":128,
                  "y":184
+                }, 
+                {
+                 "gid":247,
+                 "height":8,
+                 "id":15,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":8,
+                 "x":440,
+                 "y":184
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -198,7 +210,7 @@
          "y":0
         }],
  "nextlayerid":5,
- "nextobjectid":14,
+ "nextobjectid":16,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

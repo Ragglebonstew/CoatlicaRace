@@ -6,7 +6,7 @@
 		"anchor": ["coatlica_vertshaft"],
 		"gravity": 80,
 		"maxRadius": 10000,
-		"maxParts": 10,
+		"maxParts": 100,
 		"protected": false
 	},
 	"parts": [
@@ -23,6 +23,13 @@
 			["maxSpawnCount", [3]]
 		],
 		"def": ["tmx", "coatlica_house.json"]
+	},
+	{
+		"name": "coatlica_hall1",
+		"rules": [
+			["maxSpawnCount", [10]]
+		],
+		"def": ["tmx", "coatlica_hall1.json"]
 	}
 	]
 }

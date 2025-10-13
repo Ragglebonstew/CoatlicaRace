@@ -18,7 +18,7 @@
         }, 
         {
          "compression":"zlib",
-         "data":"eJzt2MENgCAMheEu4A5O5MhO5QCGmzEhlEKl4P+Snl7Cp4eGqAghZPWcyvna8\/DTObtyer6zvM6u6Xq51t4ruPO62yD3ee6VGW\/X2uPiRnTZI9\/gxnI1d5fFZY9wcdvdv+xRKbjzunwf1fe4uBFd9ggXt91lj3yDG8v1+s9wZEb7XFa3NKu51r7VtnRkXG45Nlmd",
+         "data":"eJzt00EKgDAMRNEcpSfyyJ7KA4hboRiTTpXmD2QVyGsXY0YIWT27c2Z7Cv+605wz8s92u\/1mN8qN7lXBxc3cPTqjdqN7XNw\/uvRIG9waLj3Cxc27VXr0FFzczN0qPcLFVbr0CBc379IjbXBruFtnVO9qzlnNje6zdmRHvssJ6YpZaQ==",
          "encoding":"base64",
          "height":75,
          "id":2,
@@ -178,6 +178,54 @@
                  "width":8,
                  "x":128,
                  "y":504
+                }, 
+                {
+                 "gid":13,
+                 "height":8,
+                 "id":15,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":8,
+                 "x":72,
+                 "y":144
+                }, 
+                {
+                 "gid":13,
+                 "height":8,
+                 "id":16,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":8,
+                 "x":72,
+                 "y":368
+                }, 
+                {
+                 "gid":13,
+                 "height":8,
+                 "id":17,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":8,
+                 "x":160,
+                 "y":256
+                }, 
+                {
+                 "gid":13,
+                 "height":8,
+                 "id":18,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":8,
+                 "x":160,
+                 "y":536
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -186,7 +234,7 @@
          "y":0
         }],
  "nextlayerid":4,
- "nextobjectid":15,
+ "nextobjectid":19,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
