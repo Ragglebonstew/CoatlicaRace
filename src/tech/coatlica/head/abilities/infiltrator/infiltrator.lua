@@ -17,11 +17,13 @@ function Infiltrator:init()
 	end
 	self.snakeDirectives = snakeDirectives
 	
+	tech.setToolUsageSuppressed(false)
 	tech.setParentHidden(false)
 	setMovementOverride(true)
 end
 function Infiltrator:uninit()
 	tech.setParentDirectives()
+	tech.setToolUsageSuppressed(true)
 	tech.setParentHidden(true)
 	setDirectives()
 	setMovementOverride(false)
