@@ -43,22 +43,7 @@ function update(args)
 	if args.moves["special1"] ~= self.specialLast then
 		self.specialLast = args.moves["special1"]
 		if args.moves["special1"] then
-			if not transformed 
-				and not tech.parentLounging()
-				and not status.statPositive("activeMovementAbilities") then
-				
-				local pos = transformPosition()
-				if pos then
-					mcontroller.setPosition(pos)
-					activate()
-				end
-			elseif transformed then
-				local pos = restorePosition()
-				if pos then
-					mcontroller.setPosition(pos)
-					deactivate()
-				end
-			end
+			attemptActivation()
 		end
 	end
 	
@@ -69,6 +54,24 @@ function update(args)
 		if shiftHeld then move(args.moves) end
 		coilAbility(args.moves["down"])
 		holdAbility(shiftHeld)
+	end
+end
+function attemptActivation()
+	if not transformed 
+		and not tech.parentLounging()
+		and not status.statPositive("activeMovementAbilities") then
+				
+		local pos = transformPosition()
+		if pos then
+			mcontroller.setPosition(pos)
+		end
+		activate()
+	elseif transformed then
+		local pos = restorePosition()
+		if pos then
+			mcontroller.setPosition(pos)
+		end
+		deactivate()
 	end
 end
 function transformPosition(pos)
@@ -186,13 +189,13 @@ function abilityUpdate(args)
 	local dir = vec2.norm({x, y})
 
 	if self.primaryAbility then
-		self.primaryAbility:update(script.updateDt(), dir, not args.moves["run"])
+		self.primaryAbility:update(args.dt, dir, not args.moves["run"])
 	end
 	if self.secondaryAbility then
-		self.secondaryAbility:update(script.updateDt(), dir, not args.moves["run"])
+		self.secondaryAbility:update(args.dt, dir, not args.moves["run"])
 	end
 	if self.passiveAbility then
-		self.passiveAbility:update(script.updateDt(), dir, not args.moves["run"])
+		self.passiveAbility:update(args.dt, dir, not args.moves["run"])
 	end
 	
 	
@@ -211,7 +214,7 @@ function updateAbilityFire(args, fireType, ability)
 		if not fire_last[fireType] then
 			ability:fire()
 		else
-			ability:hold(script.updateDt())
+			ability:hold(args.dt)
 			if ability.holdParameters then
 				for entry, param in pairs(ability.holdParameters) do
 					self[entry] = param
