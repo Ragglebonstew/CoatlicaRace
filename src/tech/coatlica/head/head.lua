@@ -61,14 +61,14 @@ function attemptActivation()
 		and not tech.parentLounging()
 		and not status.statPositive("activeMovementAbilities") then
 				
+		activate()
 		local pos = transformPosition()
-		if pos then
+		if pos and not self.movementOverride then
 			mcontroller.setPosition(pos)
 		end
-		activate()
 	elseif transformed then
 		local pos = restorePosition()
-		if pos then
+		if pos and not self.movementOverride then
 			mcontroller.setPosition(pos)
 		end
 		deactivate()
