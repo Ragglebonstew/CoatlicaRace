@@ -444,6 +444,8 @@ function move(control)
 	
 	if mcontroller.zeroG() then
 		mcontroller.controlApproachVelocity(vel, 95)
+	elseif world.liquidAt(mcontroller.position()) then
+		mcontroller.controlApproachVelocity(vel, 95*2)
 	elseif distance ~= maxHeight then
 		--mcontroller.controlApproachVelocity({velX*speed, velY*speed + (1-distance/maxHeight)*3.8}, gravity*3)
 		mcontroller.controlApproachXVelocity(velX*speed, 95)

@@ -78,7 +78,7 @@ function followOwner(ownerPos, coilPer)
 		animator.translateTransformationGroup("body", midpt)
 	end
 	
-	self.inGround = world.lineCollision(mcontroller.position(), ownerPos, {"Block", "Dynamic", "Slippery", "Null", "Platform"})
+	self.inGround = world.lineCollision(mcontroller.position(), ownerPos, {"Block", "Dynamic", "Slippery", "Null", "Platform"}) or world.liquidAt(mcontroller.position())
 	
 	world.debugPoint(mcontroller.position(), (inGround) and "white" or "blue")
 	if self.isHolding then
