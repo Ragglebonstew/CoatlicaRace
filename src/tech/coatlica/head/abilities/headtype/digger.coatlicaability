@@ -2,7 +2,7 @@
 	"ability" : {
 		"name" : "digger",
 		"type" : "digger",
-		"class" : "Digger",
+		"class" : "HeadType",
 		"shortDescription" : "Tipped",
 		"description" : "A sharp nose for the impatient snake!",
 		"icon" : "/interface/statuses/nofalldamage.png",
@@ -11,6 +11,6 @@
 		"isPassive" : true,
 		"unlockByDefault" : true,
 		
-		"scripts" : ["/tech/coatlica/head/abilities/digger/digger.lua"]
+		"scripts" : ["/tech/coatlica/head/abilities/headtype/headtype.lua"]
 	}
 }

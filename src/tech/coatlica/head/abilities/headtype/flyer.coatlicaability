@@ -2,7 +2,7 @@
 	"ability" : {
 		"name" : "flyer",
 		"type" : "flyer",
-		"class" : "Flyer",
+		"class" : "HeadType",
 		"shortDescription" : "Eyeless",
 		"description" : "One who sees through walls was never using their eyes.",
 		"icon" : "/interface/statuses/nofalldamage.png",
@@ -11,6 +11,6 @@
 		"isPassive" : true,
 		"unlockByDefault" : true,
 		
-		"scripts" : ["/tech/coatlica/head/abilities/flyer/flyer.lua"]
+		"scripts" : ["/tech/coatlica/head/abilities/headtype/headtype.lua"]
 	}
 }
