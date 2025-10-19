@@ -99,17 +99,17 @@ function setSelectedSlot(slot)
   widget.setText("lblSlot", self.slotLabelText[slot])
   populateTechList(slot)
 
-  self.tweenSelector = coroutine.wrap(function(dt)
-    local position = widget.getPosition("imgSlotSelect")
-    local timer = 0
-    while timer < self.selectorTime do
-      timer = math.min(timer + dt, self.selectorTime)
-      local ratio = timer / self.selectorTime
-      widget.setPosition("imgSlotSelect", {position[1], interp.sin(ratio, position[2], self.selectorHeights[slot])})
-      coroutine.yield()
-    end
-    self.tweenSelector = nil
-  end)
+	self.tweenSelector = coroutine.wrap(function(dt)
+		local position = widget.getPosition("imgSlotSelect")
+		local timer = 0
+		while timer < self.selectorTime do
+			timer = math.min(timer + dt, self.selectorTime)
+			local ratio = timer / self.selectorTime
+			widget.setPosition("imgSlotSelect", {position[1], interp.sin(ratio, position[2], self.selectorHeights[slot])})
+			coroutine.yield()
+		end
+		self.tweenSelector = nil
+	end)
 
   self.selectionImage = string.format(self.suitSelectedPath, status.statusProperty("coatlica_PassiveAbility","default"))
   self.animationTimer = 0
@@ -128,7 +128,7 @@ function animateSelection(dt)
   local ratio = (self.animationTimer / self.selectionPulse) * 2
   local opacity = interp.sin(ratio, 0, 1)
   local highlightDirectives = string.format("?multiply=FFFFFF%2x", math.floor(opacity * 255))
-  --widget.setImage("imgSelected", self.selectionImage..getBodyDirectives())
+  --widget.setImage("imgSelected", self.selectionImage..highlightDirectives)
 end
 
 function enableTech(techName)
@@ -148,7 +148,11 @@ function updateEquippedIcons()
   for _,slot in pairs({"Primary", "Secondary", "Passive"}) do
     local tech = status.statusProperty("coatlica_"..slot.."Ability", {})
     if tech and self.techs[tech] then
-      widget.setImage(string.format("techIcon%s", slot), self.techs[tech].icon)
+		widget.setImage(string.format("techIcon%s", slot), self.techs[tech].icon)
+		head_img = "/interface/coatlicastatue/headimgs/"..tech.."_body.png"
+		if slot == "Passive" and root.imageSize(head_img) then
+			widget.setImage("imgSuit", head_img)
+		end
     else
       widget.setImage(string.format("techIcon%s", slot), "")
     end
@@ -171,6 +175,13 @@ function setSelectedTech(techName)
   else
     local affordable = player.hasCountOfItem("techcard") >= techCost(techName)
     widget.setButtonEnabled("btnEnable", affordable)
+	
+	
+	if self.techs[techName].class == "HeadType" then
+		head_img = "/interface/coatlicastatue/headimgs/"..techName.."_body.png"
+		widget.setImage("imgSuit", head_img)
+	end
+	
   end
 end
 
