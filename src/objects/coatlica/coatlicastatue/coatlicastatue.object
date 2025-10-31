@@ -1,6 +1,6 @@
 {
   "objectName" : "coatlicastatue",
-  "colonyTags" : ["sandstone", "pretty", "misc"],
+  "colonyTags" : ["sandstone", "pretty", "misc", "coatlica"],
   "rarity" : "Uncommon",
   "description" : "A statue of a limbless deity. A strange power eminates from its base. Can be used to craft coatlica related items.",
   "shortdescription" : "Limbless Statue",

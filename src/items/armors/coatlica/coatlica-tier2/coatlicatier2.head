@@ -9,6 +9,8 @@
 	"shortdescription" : "Wild Helmet",
 	"tooltipKind" : "armor",
 	
+	"coatlica_ability" : ["icebreath"],
+	
 	"maleFrames" : "head.png",
 	"femaleFrames" : "head.png",
 	"mask" : "mask.png",

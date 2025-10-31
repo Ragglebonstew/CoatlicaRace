@@ -32,6 +32,7 @@ function init()
 	message.setHandler("requestHold", simpleHandler(requestHold))
 	message.setHandler("replyHold", simpleHandler(replyHold))
 	message.setHandler("updateFlying", simpleHandler(updateFlying))
+	message.setHandler("setDirectives", simpleHandler(setDirectives))
 end
 function update(dt)
 	if self.passTimer > 0 then self.passTimer = self.passTimer - dt
@@ -51,7 +52,7 @@ function update(dt)
 	end
 	
 	if self.isPivot and self.isPivot.hold then
-		if not self.inGround and not mcontroller.isColliding() then
+		if not self.inGround and not mcontroller.isColliding() and self.childId and world.entityExists(self.childId) then
 			world.sendEntityMessage(self.childId, "requestHold", true, self.isPivot.num-1)
 			self.isPivot = nil
 		end
@@ -77,7 +78,7 @@ function followOwner(ownerPos, coilPer)
 		animator.translateTransformationGroup("body", midpt)
 	end
 	
-	self.inGround = world.lineCollision(mcontroller.position(), ownerPos, {"Block", "Dynamic", "Slippery", "Null", "Platform"})
+	self.inGround = world.lineCollision(mcontroller.position(), ownerPos, {"Block", "Dynamic", "Slippery", "Null", "Platform"}) or world.liquidAt(mcontroller.position())
 	
 	world.debugPoint(mcontroller.position(), (inGround) and "white" or "blue")
 	if self.isHolding then
@@ -102,6 +103,7 @@ function updateCommon(ownerPos, coilPer, walkFrame)
 	end
 	
 	followOwner(ownerPos, coilPer)
+	status.setPrimaryDirectives(self.directives..(self.customDirectives or ""))
 	walkFrame = updateAnimation(walkFrame)
 	
 	if self.childId and world.entityExists(self.childId) then
@@ -247,6 +249,9 @@ function requestHold(isHolding, num)
 		if self.childId and world.entityExists(self.childId) then
 			world.sendEntityMessage(self.childId, "requestHold", isHolding, -1)
 		end
+		if self.isFirst then
+			world.sendEntityMessage(self.ownerId, "replyHold", isHolding)
+		end
 	end
 end
 function replyHold(isHolding)
@@ -263,5 +268,11 @@ function updateFlying(drop)
 	end
 	if self.btype ~= "tail" and self.childId then
 		world.sendEntityMessage(self.childId, "updateFlying", drop)
+	end
+end
+function setDirectives(directives)
+	self.customDirectives = directives
+	if self.childId and world.entityExists(self.childId) then
+		world.sendEntityMessage(self.childId, "setDirectives", directives)
 	end
 end

@@ -5,10 +5,13 @@
   "maxStack" : 1,
   "rarity" : "Legendary",
   "category" : "legarmour",
-  "description" : "These trousers reinforce the movement of the wearer, a kick from an armoured leg can shatter bone.",
-  "shortdescription" : "Synthesizer's Trousers",
+  "description" : "The boldest belt.",
+  "shortdescription" : "Monarch's Belt",
   "tooltipKind" : "armor",
-  "segments" : 6,
+	
+	"coatlica_ability" : ["tunnel"],
+	"coatlica_segments" : 6,
+  
   "maleFrames" : "pants.png",
   "femaleFrames" : "pants.png",
   "level" : 6,

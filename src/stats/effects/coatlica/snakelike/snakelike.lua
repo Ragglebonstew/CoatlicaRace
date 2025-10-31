@@ -9,6 +9,7 @@ function init()
 	message.setHandler("setCoil", simpleHandler(setCoil))
 	message.setHandler("setTransformed", simpleHandler(setTransformed))
 	message.setHandler("setFly", simpleHandler(setFly))
+	message.setHandler("setDirectives", simpleHandler(setDirectives))
 	self.length = 1
 	self.coilPer = 1
 	self.transformed = false
@@ -34,28 +35,6 @@ function update(dt)
 		killBody()
 		return
 	end
-		
-		--[[
-		local pantsDirectory
-		for _,v in ipairs(world.entityPortrait(entity.id(), "fullnude")) do
-			sb.logInfo("stuff: "..v.image)
-			--local pantsCheck = string.find(v.image, "pants.png")
-			--if pantsCheck then
-				--pantsDirectory = string.sub(v.image, 1, pantsCheck-1)
-				--break
-			--end
-		end
-		---[[
-		if pantsDirectory then
-			local size = root.imageSize(pantsDirectory.."coatlicamask.png")
-			if size[1] ~= 64 then
-				effect.setParentDirectives("?addmask="..pantsDirectory.."coatlicamask.png")
-			else
-				effect.setParentDirectives()
-			end
-		end
-		]]--
-	
 	
 	if not self.bodyId or not world.entityExists(self.bodyId) then
 		spawnBody()
@@ -78,7 +57,8 @@ function update(dt)
 	if not self.transformed then
 		pos = vec2.add(pos, {0,-2.1875})
 	end
-	local inGround = world.pointCollision(pos, {"Block", "Dynamic", "Slippery", "Null", "Platform"})
+	local inGround = world.pointCollision(pos, {"Block", "Dynamic", "Slippery", "Null", "Platform"}) or world.liquidAt(playerPos)
+	
 	world.sendEntityMessage(self.bodyId, "updateCommon", pos, self.coilPer)
 	
 	if self.isHolding or inGround then
@@ -113,6 +93,8 @@ function setHold(isHolding)
 	if self.bodyId and world.entityExists(self.bodyId) then
 		local segCheck = math.floor(self.length * 2/3)
 		world.sendEntityMessage(self.bodyId, "requestHold", isHolding, segCheck)
+	else
+		replyHold(isHolding)
 	end
 end
 function replyHold(isHolding)
@@ -129,5 +111,10 @@ function setFly(isFlying)
 	self.isFlying = isFlying
 	if self.bodyId and not isFlying then
 		world.sendEntityMessage(self.bodyId, "updateFlying", true)
+	end
+end
+function setDirectives(directives)
+	if self.bodyId and world.entityExists(self.bodyId) then
+		world.sendEntityMessage(self.bodyId, "setDirectives", directives)
 	end
 end

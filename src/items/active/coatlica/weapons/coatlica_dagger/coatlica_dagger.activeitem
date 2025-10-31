@@ -1,11 +1,11 @@
 {
   "itemName" : "coatlica_dagger",
   "price" : 320,
-  "level" : 3,
+  "level" : 4,
   "maxStack" : 1,
   "rarity" : "Uncommon",
   "description" : "This dagger is much sharper than it ought to be.",
-  "shortdescription" : "Titanium Dagger",
+  "shortdescription" : "Coatlica Dagger",
   "tooltipKind" : "sword",
   "category" : "dagger",
   "twoHanded" : false,

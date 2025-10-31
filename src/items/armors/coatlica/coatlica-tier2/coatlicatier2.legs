@@ -8,6 +8,8 @@
 	"description" : "An unruly pair of greaves, made by and for coatlica.",
 	"shortdescription" : "Wild Greaves",
 	"tooltipKind" : "armor",
+	
+	"coatlica_ability" : ["icebreath"],
   
 	"maleFrames" : "pants.png",
 	"femaleFrames" : "pants.png",

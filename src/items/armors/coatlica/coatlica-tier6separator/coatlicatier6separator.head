@@ -5,10 +5,12 @@
   "maxStack" : 1,
   "rarity" : "Legendary",
   "category" : "headarmour",
-  "description" : "The prey of the universe shiver at the sight of this eerie helm .",
-  "shortdescription" : "Synthesizer's Helm",
+  "description" : "A beacon for the lost and discarded.",
+  "shortdescription" : "Monarch's Helm",
   "tooltipKind" : "armor",
-  "segments" : 6,
+	
+	"coatlica_ability" : ["tunnel"],
+	"coatlica_segments" : 6,
 
   "maleFrames" : "head.png",
   "femaleFrames" : "head.png",

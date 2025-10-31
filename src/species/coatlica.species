@@ -1,17 +1,23 @@
 {
-  "kind" : "coatlica",
+	"kind" : "coatlica",
 	"charCreationTooltip" : {
-	"title" : "Coatlica",
-	"subTitle" : "O2",
-	"description" : "Yielding from the depths of desert and scorched planets, the coatlica rarely interact with the rest of the universe. Their size makes it difficult to maneuver the colonies of other species, but easy to navigate the ruins of species past. Many of the coatlica find interest in forgotten history and mysticism."
-  },
-  
-  "statusEffects" : [ "snakelike" ],
+		"title" : "Coatlica",
+		"subTitle" : "O2",
+		"description" : "Yielding from the depths of desert and scorched planets, the Coatlica rarely interact with the rest of the universe. Their size makes it difficult to maneuver the colonies of other species, but easy to navigate the ruins of species past. Many of the coatlica find interest in forgotten history and mysticism.
+^yellow;Attributes^reset;
+^cyan;Energy Regen^reset;: ^red;-25%^reset;
+^yellow;Resistances^reset;
+^cyan;Electric Resistance^reset;: ^green;+35%^reset;
+^yellow;Racial Traits^reset;: ^green;Subterranean^reset;
+^cyan;Max Breath^reset;: ^green;200^reset;, ^cyan;Knockback Resistance^reset;: ^green;+25%^reset;^reset;, ^cyan;Jump Modifier^reset;: ^green;+20%^reset;^reset;"
+	},
+
+	"statusEffects" : [ "snakelike" ],
   
   //"humanoidConfig" : "/species/coatlica.config",
   "nameGen" : [ "/species/coatlicamalenamegen.config:names", "/species/coatlicafemalenamegen.config:names" ],
   "ouchNoises" : [ "/sfx/humanoid/coatlicahurt_male1.ogg", "/sfx/humanoid/coatlicahurt_female1.ogg" ],
-  "charGenTextLabels" : [ "Skin Color", "Hair Style", "Shirt", "Pants", "Eye Color", "Hair Color", "Shirt Color", "Pants Color", "coatlica", "Personality" ],
+  "charGenTextLabels" : [ "Skin Color", "Hair Style", "Shirt", "Pants", "Eye Color", "Hair Color", "Shirt Color", "Pants Color", "COATLICA", "Personality" ],
   "skull" : "/humanoid/coatlica/dead.png",
   "effectDirectives" : "?replace=FEFFFFFF=FFFFFFFF?replace=9bd4ffFF=ffea63FF?replace=31a6ffFF=f5bc00FF",
   "defaultBlueprints" : {
@@ -105,8 +111,8 @@
 					"male50", "male51", "male52", "male53", "male54", "male55", "male56", "male57", "male58", "male59",
 					"male60", "male61", "male62", "male63", "male64"
 	  ],
-      "shirt" : [ "coatlicaoutfit1chest", "coatlicaoutfit2chest", "coatlicaoutfit3chest", "coatlicaoutfit4chest", "bedouinchest" ],
-      "pants" : [ "coatlicaoutfit1legs",  "coatlicaoutfit2legs",  "coatlicaoutfit3legs",  "coatlicaoutfit4legs", "" ],
+      "shirt" : [ "coatlicaoutfit1chest", "coatlicaoutfit2chest", "coatlicaoutfit3chest", "coatlicaoutfit4chest", "coatlicaoutfit5chest", "bedouinchest" ],
+      "pants" : [ "coatlicaoutfit1legs",  "coatlicaoutfit2legs",  "coatlicaoutfit3legs",  "coatlicaoutfit4legs",  "coatlicaoutfit5legs",  "" ],
       "facialHairGroup" : "",
       "facialHair" : [ ],
       "facialMaskGroup" : "",
@@ -122,14 +128,14 @@
 					"fem30", "fem31", "fem32", "fem33", "fem34", "fem35", "fem36", "fem37", "fem38", "fem39",
 					"fem40", "fem41", "fem42", "fem43", "fem44", "fem45", "fem46", "fem47", "fem48", "fem49",
 					"fem50", "fem51", "fem52", "fem53", "fem54", "fem55", "fem56", "fem57", "fem58", "fem59",
-					"fem60", "fem61", "fem62", "fem63", "fem64", "fem65", "fem66",
+					"fem60", "fem61", "fem62", "fem63", "fem64", 
 					"anti_fhuman01", "anti_fhuman12", "anti_fhuman13", "anti_fhuman14", "anti_fhuman15", "anti_fhuman16", "anti_fhuman17", "anti_fhuman18", "anti_fhuman19", "anti_fhuman10",
 					"anti_fhuman11", "anti_fhuman02", "anti_fhuman03", "anti_fhuman04", "anti_fhuman05", "anti_fhuman06", "anti_fhuman07", "anti_fhuman08", "anti_fhuman09", "anti_fhuman20",
 					"anti_fhuman21",
 					"PatchHair01", "PatchHair02",  "PatchHair03",  "PatchHair04",  "PatchHair05",
 					"PatchHuman01", "PatchHuman02", "PatchHuman03", "PatchHuman04", "PatchHuman05" ],
-      "shirt" : [ "coatlicaoutfit1chest", "coatlicaoutfit2chest", "coatlicaoutfit3chest", "coatlicaoutfit4chest", "bedouinchest" ],
-      "pants" : [ "coatlicaoutfit1legs",  "coatlicaoutfit2legs",  "coatlicaoutfit3legs",  "coatlicaoutfit4legs", "" ],
+      "shirt" : [ "coatlicaoutfit1chest", "coatlicaoutfit2chest", "coatlicaoutfit3chest", "coatlicaoutfit4chest", "coatlicaoutfit5chest", "bedouinchest" ],
+      "pants" : [ "coatlicaoutfit1legs",  "coatlicaoutfit2legs",  "coatlicaoutfit3legs",  "coatlicaoutfit4legs",  "coatlicaoutfit5legs",  "" ],
       "facialHairGroup" : "",
       "facialHair" : [ ],
       "facialMaskGroup" : "",

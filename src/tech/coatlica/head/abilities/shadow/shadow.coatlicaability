@@ -1,0 +1,18 @@
+{
+	"ability" : {
+		"name" : "shadow",
+		"type" : "shadow",
+		"class" : "Shadow",
+		"shortDescription" : "Shadow",
+		"description" : "Fade into shadow and pass the world by.",
+		"icon" : "/interface/statuses/invisible.png",
+		"chipCost" : 5,
+		
+		"scripts" : ["/tech/coatlica/head/abilities/shadow/shadow.lua"],
+		
+		"holdParameters" : {},
+		"releaseParameters" : {},
+		
+		"energyCost" : 20
+	}
+}

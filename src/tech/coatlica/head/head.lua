@@ -43,34 +43,35 @@ function update(args)
 	if args.moves["special1"] ~= self.specialLast then
 		self.specialLast = args.moves["special1"]
 		if args.moves["special1"] then
-			if not transformed 
-				and not tech.parentLounging()
-				and not status.statPositive("activeMovementAbilities") then
-				
-				local pos = transformPosition()
-				if pos then
-					mcontroller.setPosition(pos)
-					activate()
-				end
-			elseif transformed then
-				local pos = restorePosition()
-				if pos then
-					mcontroller.setPosition(pos)
-					deactivate()
-				end
-			end
+			attemptActivation()
 		end
 	end
 	
 	local shiftHeld = not args.moves["run"]
 	if transformed then
-		move(args.moves)
-		holdAbility(shiftHeld)
 		run(args)
 	else
 		if shiftHeld then move(args.moves) end
 		coilAbility(args.moves["down"])
 		holdAbility(shiftHeld)
+	end
+end
+function attemptActivation()
+	if not transformed 
+		and not tech.parentLounging()
+		and not status.statPositive("activeMovementAbilities") then
+				
+		activate()
+		local pos = transformPosition()
+		if pos and not self.movementOverride then
+			mcontroller.setPosition(pos)
+		end
+	elseif transformed then
+		local pos = restorePosition()
+		if pos and not self.movementOverride then
+			mcontroller.setPosition(pos)
+		end
+		deactivate()
 	end
 end
 function transformPosition(pos)
@@ -113,6 +114,8 @@ function activate()
 	abilityInit()
 end
 function deactivate()
+	abilityUninit()
+	
 	mcontroller.setRotation(0)
 	world.spawnProjectile("clustermineexplosion", mcontroller.position())
 	tech.setParentHidden(false)
@@ -125,8 +128,6 @@ function deactivate()
 	if self.isHolding then
 		world.sendEntityMessage(entity.id(), "setHold", false)
 	end
-	
-	abilityUninit()
 end
 function spawnHead()
 	local params = {directives = getBodyDirectives()..getHairDirectives(), playerId = entity.id()}
@@ -144,13 +145,14 @@ function run(args)
 	if not self.headId or not world.entityExists(self.headId) then
 		return
 	end
-
-	tech.setVisible(true)
 	
-	mcontroller.controlParameters(self.movementParameters)
-	
+	if not self.movementOverride then
+		mcontroller.controlParameters(self.movementParameters)
+		move(args.moves)
+		headUpdate()
+		holdAbility(not args.moves["run"])
+	end
 	abilityUpdate(args)
-	headUpdate()
 end
 function abilityInit()
 	local abilityConfig, parameters = build(directory, root.assetJson("/tech/coatlica/head/head.tech"), {}, level, seed)
@@ -187,13 +189,13 @@ function abilityUpdate(args)
 	local dir = vec2.norm({x, y})
 
 	if self.primaryAbility then
-		self.primaryAbility:update(script.updateDt(), dir, not args.moves["run"])
+		self.primaryAbility:update(args.dt, dir, not args.moves["run"])
 	end
 	if self.secondaryAbility then
-		self.secondaryAbility:update(script.updateDt(), dir, not args.moves["run"])
+		self.secondaryAbility:update(args.dt, dir, not args.moves["run"])
 	end
 	if self.passiveAbility then
-		self.passiveAbility:update(script.updateDt(), dir, not args.moves["run"])
+		self.passiveAbility:update(args.dt, dir, not args.moves["run"])
 	end
 	
 	
@@ -208,11 +210,11 @@ local fire_last = {}
 function updateAbilityFire(args, fireType, ability)
 	if not ability or not self.headId then return end
 	
-	if args.moves[fireType] then
+	if args.moves[fireType] and not status.resourceLocked("energy") then
 		if not fire_last[fireType] then
 			ability:fire()
 		else
-			ability:hold(script.updateDt())
+			ability:hold(args.dt)
 			if ability.holdParameters then
 				for entry, param in pairs(ability.holdParameters) do
 					self[entry] = param
@@ -261,7 +263,7 @@ function headUpdate()
 	if self.mouthPer <= 0 then jawRot = 0
 	else jawRot = -math.pi/5 * self.mouthPer end
 	if self.headId and world.entityExists(self.headId) then
-		world.sendEntityMessage(self.headId, "updateAnim", pos, headRot, jawRot)
+		world.sendEntityMessage(self.headId, "updateAnim", pos, headRot, jawRot, getBodyDirectives()..getHairDirectives())
 	end
 	
 	self.jawOpen = false
@@ -417,6 +419,15 @@ function setHeadType(headType)
 		world.callScriptedEntity(self.headId, "setHeadType", headType)
 	end
 end
+function setDirectives(directives)
+	if self.headId and world.entityExists(self.headId) then
+		world.callScriptedEntity(self.headId, "setDirectives", directives)
+	end
+	world.sendEntityMessage(entity.id(), "setDirectives", directives)
+end
+function setMovementOverride(isOverrided)
+	self.movementOverride = isOverrided
+end
 
 --abilities (temp till can be moved to own files)
 
@@ -431,7 +442,11 @@ function move(control)
 	local velY = control["up"] and 1 or control["down"] and -1 or 0
 	local vel = vec2.mul(vec2.norm({velX,velY}),speed)
 	
-	if mcontroller.zeroG() then
+	if mcontroller.zeroG() or world.liquidAt(mcontroller.position()) then
+		mcontroller.controlParameters({
+			liquidFriction = 0.1,
+			liquidBuoyancy = 1
+		})
 		mcontroller.controlApproachVelocity(vel, 95)
 	elseif distance ~= maxHeight then
 		--mcontroller.controlApproachVelocity({velX*speed, velY*speed + (1-distance/maxHeight)*3.8}, gravity*3)

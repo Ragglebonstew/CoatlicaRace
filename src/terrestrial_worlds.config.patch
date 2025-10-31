@@ -1,0 +1,19 @@
+[
+	[
+    {"op" : "test", "path" : "/planetTypes/desert/layers/subsurface/dungeons", "inverse" : true },
+	{"op" : "add", "path" : "/planetTypes/desert/layers/subsurface/dungeons", "value" : [] }
+	],
+	[
+
+	{
+	"op" : "add", 
+	"path" : "/planetTypes/forest/layers/surface/dungeons/-", 	
+	"value" : [0.5, "coatlica_outpost"] 
+	},
+	{
+	"op" : "add", 
+	"path" : "/planetTypes/desert/layers/subsurface/dungeons/-", 	
+	"value" : [0.5, "coatlica_digsite"] 
+	}
+	]
+]

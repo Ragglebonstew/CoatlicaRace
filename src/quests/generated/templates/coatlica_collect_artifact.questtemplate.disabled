@@ -1,0 +1,89 @@
+{
+  "id" : "coatlica_collect_artifact",
+  "parameters" : {
+    "questGiver" : {
+      "type" : "entity"
+    },
+    "target" : {
+      "type" : "entity",
+      "example" : {
+        "name" : "Friendly Friend"
+      }
+    },
+    "item" : {
+      "type" : "item",
+      "example" : {
+        "item" : "luckydip"
+      }
+    }
+  },
+  "moneyRange" : [10, 50],
+  "rewards" : [ ["coatlica_statue", 1] ],
+  "rewardParameters" : [ "rewards" ],
+  "canBeAbandoned" : true,
+  "ephemeral" : true,
+
+  "updateDelta" : 10,
+  "script" : "/quests/scripts/generated/coatlica_collect_artifact.lua",
+  "scriptConfig" : {
+    "portraits" : {
+      "default" : "questGiver",
+      "objective" : "target"
+    },
+    "generatedText" : {
+      "text" : {
+        "first" : {
+          "coatlica" : [
+            "I've arranged with ^orange;<target> ^green;to procure ^green;get a ^orange;<item>. ^white;. If you fetch it for me, I'll give you something far rarer."
+          ],
+          "default" : [
+            "The first thing I'll need is one ^orange;<item>.^white; ^orange;<target>^white; has an extra one, and owes me a favor. ^green;Could you run over to <target.pronoun.object> and pick it up?",
+            "To begin we'll need one ^orange;<item>.^white; I know ^orange;<target>^white; got a new one recently, ^green;you should ask if we can use it."
+          ]
+        },
+        "default" : {
+          "default" : [
+            "Next, I need you to ^green;retreive my ^orange;<item>^white;. I loaned it to ^orange;<target>^white; last week, ^green;could you ask for it back?^white;  We're going to need it for the next phase of my plan.",
+            "Now I'll need you to get one ^orange;<item>. <target>^white; has the biggest collection around; if you ^green;ask nicely^white; I'm sure <target.pronoun.subject> wouldn't mind parting with just one."
+          ]
+        }
+      },
+      "completionText" : {
+        "last" : {
+          "coatlica" : [
+            "You brought the <item>! Thankss."
+          ],
+          "default" : [
+            "You got the <item> from <target>, excellent work! This next step would have been tough without it.",
+            "Perfect, I'll have to give <target> my thanks. This is exactly what we need."
+          ]
+        },
+        "default" : {
+          "default" : [
+            "Thanks for getting what we needed from <target>. Now to move things forward.",
+            "That is one good looking <item>. Thanks for picking this up."
+          ]
+        }
+      }
+    },
+    "requireTurnIn" : true,
+    "indicators" : ["target"],
+    "requestGiftNotification" : "requestGift",
+    "giftReceivedEventName" : "giftProvided",
+
+    "objectives" : [
+      {
+        "id" : "collect",
+        "text" : "Acquire <item> from <target>"
+      },
+      {
+        "id" : "return",
+        "text" : "Return to <questGiver>"
+      }
+    ],
+    "initialCompassTarget" : {
+      "targetType" : "parameter",
+      "target" : "target"
+    }
+  }
+}

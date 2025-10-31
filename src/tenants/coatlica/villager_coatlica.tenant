@@ -1,0 +1,25 @@
+{
+  "name": "villager_coatlica",
+  "priority": 2,
+
+  "colonyTagCriteria": {
+    "light": 1,
+    "door": 1,
+    "coatlica": 1
+  },
+
+  "tenants": [
+    {
+      "spawn": "npc",
+      "species": "coatlica",
+      "type": "generictenant",
+      "overrides": {
+       }
+     }
+   ],
+
+  "rent": {
+    "periodRange": [900.0, 1800.0],
+    "pool": "villagerGift"
+  }
+}

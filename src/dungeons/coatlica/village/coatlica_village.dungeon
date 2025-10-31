@@ -1,0 +1,35 @@
+{
+	"metadata": {
+		"name": "coatlica_village",
+		"species": "coatlica",
+		"rules": [],
+		"anchor": ["coatlica_vertshaft"],
+		"gravity": 80,
+		"maxRadius": 10000,
+		"maxParts": 100,
+		"protected": false
+	},
+	"parts": [
+	{
+		"name": "coatlica_vertshaft",
+		"rules": [
+			["maxSpawnCount", [1]]
+		],
+		"def": ["tmx", "coatlica_vertshaft.json"]
+	},
+	{
+		"name": "coatlica_house",
+		"rules": [
+			["maxSpawnCount", [3]]
+		],
+		"def": ["tmx", "coatlica_house.json"]
+	},
+	{
+		"name": "coatlica_hall1",
+		"rules": [
+			["maxSpawnCount", [10]]
+		],
+		"def": ["tmx", "coatlica_hall1.json"]
+	}
+	]
+}

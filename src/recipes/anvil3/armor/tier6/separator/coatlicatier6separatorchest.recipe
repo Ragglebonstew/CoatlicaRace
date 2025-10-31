@@ -1,7 +1,7 @@
 {
   "input" : [
     { "item" : "solariumstar", "count" : 20 },
-    { "item" : "apextier5schest", "count" : 1 }
+    { "item" : "coatlicatier5schest", "count" : 1 }
   ],
   "duration" : 5,
   "output" : { "item" : "coatlicatier6schest", "count" : 1 },

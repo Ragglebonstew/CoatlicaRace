@@ -1,0 +1,19 @@
+{
+	"metadata": {
+		"name": "coatlica_outpost",
+		"species": "coatlica",
+		"rules": [],
+		"anchor": ["coatlica_outpost"],
+		"gravity": 80,
+		"maxRadius": 200,
+		"maxParts": 1,
+		"protected": false
+	},
+	"parts": [{
+		"name": "coatlica_outpost",
+		"rules": [
+			["maxSpawnCount", [1]]
+		],
+		"def": ["tmx", "coatlica_outpost.json"]
+	}]
+}

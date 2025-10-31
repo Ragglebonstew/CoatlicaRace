@@ -1,0 +1,33 @@
+{
+  "objectName" : "coatlicaromanshield",
+  "colonyTags" : ["coatlica"],
+  "rarity" : "Common",
+  "category" : "decorative",
+  "price" : 60,
+
+  "shortdescription" : "Ancient Shield",
+  "description" : "A historic shield from a bygone era.",
+  "race" : "coatlica",
+
+  "apexDescription" : "The Coatlica always seem to dig up the strangest things.",
+  "avianDescription" : "Uninspiring to all but the Hylotl.",
+  "floranDescription" : "Looksss like pattern of ssstabs.",
+  "glitchDescription" : "Curious. The design seems ancient and advanced.",
+  "humanDescription" : "I think I've seen this in a history book.",
+  "hylotlDescription" : "The strong colors are harsh.",
+  "novakidDescription" : "Seems a bit flimsy.",
+
+  "inventoryIcon" : "coatlicaromanshield.png",
+  "orientations" : [
+    {
+      "image" : "coatlicaromanshield.png:<color>",
+      "imagePosition" : [-8, -16],
+      "frames" : 1,
+      "animationCycle" : 0.5,
+
+      "spaceScan" : 0.1,
+      "anchors" : [ "background" ]
+
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+[
+	{	"op" : "add",
+		"path" : "/items/coatlica",
+		"value" : [
+			[0, [
+				{
+					"head" : [ { "name" : "coatlicatier3head" } ],
+					"chest" : [ { "name" : "coatlicatier3chest" } ],
+					"legs" : [ { "name" : "coatlicatier3pants" } ],
+					"primary" : [ "npcbow" ]
+				}
+			] ]
+		]
+	}
+]

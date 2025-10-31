@@ -8,7 +8,10 @@
   "description" : "We come in one, large, non-threatening piece.",
   "shortdescription" : "Envoy's Breastplate",
   "tooltipKind" : "armor",
-  "segments" : 8,
+	
+	"coatlica_ability" : ["infiltrator"],
+	"coatlica_segments" : 8,
+
   "maleFrames" : {
     "body" : "chestf.png",
     "backSleeve" : "bsleeve.png",
