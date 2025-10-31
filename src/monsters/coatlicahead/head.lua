@@ -71,4 +71,5 @@ function setHeadType(headType)
 end
 function setDirectives(directives)
 	self.customDirectives = directives
+	status.setPrimaryDirectives(self.directives..(self.customDirectives or ""))
 end
