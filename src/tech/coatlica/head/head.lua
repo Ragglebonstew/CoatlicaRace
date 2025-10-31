@@ -442,10 +442,12 @@ function move(control)
 	local velY = control["up"] and 1 or control["down"] and -1 or 0
 	local vel = vec2.mul(vec2.norm({velX,velY}),speed)
 	
-	if mcontroller.zeroG() then
+	if mcontroller.zeroG() or world.liquidAt(mcontroller.position()) then
+		mcontroller.controlParameters({
+			liquidFriction = 0.1,
+			liquidBuoyancy = 1
+		})
 		mcontroller.controlApproachVelocity(vel, 95)
-	elseif world.liquidAt(mcontroller.position()) then
-		mcontroller.controlApproachVelocity(vel, 95*2)
 	elseif distance ~= maxHeight then
 		--mcontroller.controlApproachVelocity({velX*speed, velY*speed + (1-distance/maxHeight)*3.8}, gravity*3)
 		mcontroller.controlApproachXVelocity(velX*speed, 95)

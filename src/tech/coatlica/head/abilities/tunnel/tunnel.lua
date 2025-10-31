@@ -9,9 +9,8 @@ function Tunnel:update(dt, dir, shiftHeld)
 
 	--local headPoly = { {0.75, 1.0}, {1.0, 0.75}, {1.0, -0.75}, {0.75, -1.0}, {-0.75, -1.0}, {-1.0, -0.75}, {-1.0, 0.75}, {-0.75, 1.0} }
 	local playerPos = mcontroller.position()
-	inGround = world.pointCollision(playerPos, {"Block", "Platform", "Dynamic", "Slippery", "Null"})
+	local inGround = world.pointCollision(playerPos, {"Block", "Platform", "Dynamic", "Slippery", "Null"})
 	if inGround then
-		mcontroller.controlParameters({gravityEnabled = true})
 		local vel = mcontroller.velocity()
 		if vec2.mag(vel) > self.maxTunnelSpeed then
 			limVel = vec2.mul(vec2.norm(vel), self.maxTunnelSpeed)
@@ -20,9 +19,6 @@ function Tunnel:update(dt, dir, shiftHeld)
 	end
 	
 	mcontroller.controlParameters({
-		collisionEnabled = false,
-		airFriction = 0.1,
-		liquidFriction = 0.1,
-		liquidBuoyancy = 0.1
+		collisionEnabled = false
 	})
 end
