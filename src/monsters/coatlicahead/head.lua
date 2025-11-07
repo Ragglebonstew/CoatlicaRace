@@ -25,6 +25,7 @@ function init()
 	message.setHandler("setHeadType", simpleHandler(setHeadType))
 	message.setHandler("setDirectives", simpleHandler(setDirectives))
 	message.setHandler("setDamageOnTouch", simpleHandler(monster.setDamageOnTouch))
+	message.setHandler("setAnimationState", simpleHandler(animator.setAnimationState))
 end
 function update(dt)
 	self.updateTimer = self.updateTimer - dt

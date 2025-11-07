@@ -108,7 +108,7 @@
 						},
 						"inactive" : {
 							"properties" : {
-								"image" : "<partImage>"
+								"image" : "<partImage>:inactive"
 							}
 						}
 					}
