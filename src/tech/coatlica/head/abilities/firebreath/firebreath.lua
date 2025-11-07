@@ -1,8 +1,12 @@
 FireBreath = CoatlicaAbility:new()
 
-function FireBreath:init() end
+function FireBreath:init()
+	self.cooldown = 0.05
+end
 function FireBreath:uninit() end
-function FireBreath:update(dt, dir, shiftHeld) end
+function FireBreath:update(dt, dir, shiftHeld)
+	self.cooldown = math.max(self.cooldown - dt,0)
+end
 function FireBreath:fire()
 	if not status.resourceLocked("energy") then
 		local dir = vec2.norm(world.distance(tech.aimPosition(), mcontroller.position()))
@@ -10,7 +14,7 @@ function FireBreath:fire()
 	end
 end
 function FireBreath:hold(dt)
-	if not status.resourceLocked("energy") then
+	if not status.resourceLocked("energy") and self.cooldown <= 0 then
 		local angle = (math.random()-0.5)*math.pi*0.05
 		local dir = vec2.norm(world.distance(tech.aimPosition(), mcontroller.position()))
 		local offset = vec2.mul(dir,2)
@@ -27,6 +31,7 @@ function FireBreath:hold(dt)
 				power = 1*status.stat("powerMultiplier")
 			}
 		)
+		self.cooldown = 0.05
 		status.overConsumeResource("energy", self.energyCost)
 	end
 end
