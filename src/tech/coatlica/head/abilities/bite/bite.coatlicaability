@@ -17,6 +17,10 @@
 			"mouthPer" : 1.2
 		},
 		
-		"energyCost" : 20
+		"energyCost" : 20,
+		
+		"sounds" : {
+			"activate" : [ "/sfx/melee/leap1.ogg" ]
+		}
 	}
 }

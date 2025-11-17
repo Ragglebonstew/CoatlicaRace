@@ -2,6 +2,7 @@ Bite = CoatlicaAbility:new()
 
 function Bite:init()
 	self.cooldown = 0
+	animator.setSoundPool("ability", self.sounds.activate)
 end
 function Bite:uninit()
 	status.clearPersistentEffects("coatlica_bite_ability")
@@ -33,6 +34,7 @@ function Bite:release(headId)
 		status.overConsumeResource("energy", self.energyCost)
 		world.sendEntityMessage(headId, "setDamageOnTouch", true)
 		status.setPersistentEffects("coatlica_bite_ability", {{stat = "invulnerable", amount = 1}})
+		animator.playSound("ability")
 		self.cooldown = 0.3
 	end
 end
