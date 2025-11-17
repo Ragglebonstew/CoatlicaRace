@@ -188,22 +188,22 @@ function abilityUpdate(args)
 	local y = args.moves["up"] and 1 or args.moves["down"] and -1 or 0
 	local dir = vec2.norm({x, y})
 
-	if self.primaryAbility then
-		self.primaryAbility:update(args.dt, dir, not args.moves["run"])
-	end
-	if self.secondaryAbility then
-		self.secondaryAbility:update(args.dt, dir, not args.moves["run"])
+	if not self.movementOverride then
+		if self.primaryAbility then
+			self.primaryAbility:update(args.dt, dir, not args.moves["run"])
+		end
+		if self.secondaryAbility then
+			self.secondaryAbility:update(args.dt, dir, not args.moves["run"])
+		end
 	end
 	if self.passiveAbility then
 		self.passiveAbility:update(args.dt, dir, not args.moves["run"])
 	end
 	
+	if self.movementOverride then return end
 	
 	updateAbilityFire(args, "primaryFire", self.primaryAbility)
 	updateAbilityFire(args, "altFire", self.secondaryAbility)
-	if self.passiveAbility then 
-		self.passiveAbility:update(args.moves)
-	end
 end
 
 local fire_last = {}
