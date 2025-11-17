@@ -8,6 +8,9 @@
 		"icon" : "/interface/statuses/invisible.png",
 		"chipCost" : 5,
 		
+		"isPassive" : true,
+		"unlockByDefault" : false,
+		
 		"scripts" : ["/tech/coatlica/head/abilities/infiltrator/infiltrator.lua"],
 		
 		"holdParameters" : {},
