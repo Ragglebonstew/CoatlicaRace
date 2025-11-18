@@ -4,7 +4,7 @@
 		"type" : "infiltrator",
 		"class" : "Infiltrator",
 		"shortDescription" : "Infiltrator",
-		"description" : "Hide your snake-like appearance.",
+		"description" : "Hide your snake-like appearance. Can't use abilities.",
 		"icon" : "/interface/statuses/invisible.png",
 		"chipCost" : 5,
 		
