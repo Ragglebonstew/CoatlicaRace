@@ -7,6 +7,7 @@ require "/scripts/coatlica/util.lua"
 local abilityTablePath = "/tech/coatlica/head/abilities/coatlicaabilities.config"
 local abilityTypes = nil
 local transformed = false
+local fire_last = {}
 local regTimer = 0
 
 function init()
@@ -163,6 +164,9 @@ function abilityInit()
 	self.secondaryAbility = getAbility("Secondary", abilityConfig.SecondaryAbility)
 	self.passiveAbility = getAbility("Passive", abilityConfig.PassiveAbility)
 	
+	fire_last["primaryFire"] = false
+	fire_last["altFire"]	 = false
+	
 	if self.primaryAbility then
 		self.primaryAbility:init("primaryFire")
 	end
@@ -206,7 +210,6 @@ function abilityUpdate(args)
 	updateAbilityFire(args, "altFire", self.secondaryAbility)
 end
 
-local fire_last = {}
 function updateAbilityFire(args, fireType, ability)
 	if not ability or not self.headId then return end
 	
