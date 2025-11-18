@@ -17,15 +17,21 @@
 					"invisible" : {}
 				}
 			},
-			
-			"headArmor" : {
+			"halo" : {
 				"priority" : 0,
-				"default" : "",
+				"default" : "inactive",
 				"states" : {
-					"" : {}
+					"activate" : {
+						"frames" : 2
+					},
+					"active" : {
+						"frames" : 8,
+						"cycle" : 0.8,
+						"mode" : "loop"
+					},
+					"inactive" : {}
 				}
 			},
-			
 			"damage" : {
 				"priority" : 3,
 				"default" : "none",
@@ -48,12 +54,12 @@
 					"head" : {
 						"idle" : {
 							"properties" : {
-								"image" : "<partImage>:idle"
+								"image" : "<headImage>.png:idle"
 							}
 						},
 						"mouthopen" : {
 							"properties" : {
-								"image" : "<partImage>:mouthopen"
+								"image" : "<headImage>.png:mouthopen"
 							}
 						}
 					}
@@ -70,7 +76,7 @@
 					"jaw" : {
 						"visible" : {
 							"properties" : {
-								"image" : "<partImage>"
+								"image" : "<headImage>_jaw.png"
 							}
 						},
 						"invisible" : {
@@ -81,18 +87,28 @@
 					}
 				}
 			},
-			"headArmor" : {
+			"halo" : {
 				"properties" : {
 					"zLevel" : 3,
 					"centered" : true,
-					"offset" : [-2, 2],
+					"offset" : [0, 0],
 					"transformationGroups" : [ "head" ]
 				},
 				"partStates" : {
-					"headArmor" : {
-						"" : {
+					"halo" : {
+						"activate" : {
 							"properties" : {
-								"image" : "<headArmor>"
+								"image" : "<partImage>:activate.<frame>"
+							}
+						},
+						"active" : {
+							"properties" : {
+								"image" : "<partImage>:active.<frame>"
+							}
+						},
+						"inactive" : {
+							"properties" : {
+								"image" : "<partImage>:inactive"
 							}
 						}
 					}
@@ -101,12 +117,12 @@
 		}
 	},
 
+	"globalTagDefaults" : {
+		"headImage": "/monsters/coatlicahead/head_images/default.png"
+	},
 	"transformationGroups" : {
 		"head" : { "interpolated" : true },
 		"jaw" : { "interpolated" : true }
-	},
-	"globalTagDefaults" : {
-		"headArmor" : "/items/armors/coatlica/outfits/coatlicaprotectorateshirt/headpiece2.png"
 	},
   
 	"effects" : {

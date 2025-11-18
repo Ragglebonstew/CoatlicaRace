@@ -1,6 +1,8 @@
 Infiltrator = CoatlicaAbility:new()
 
 function Infiltrator:init()
+	setHeadType(self.type)
+	
 	self.progress = 0
 	local snakeDirectives = "?replace"
 	local scaleDirectives = string.sub(getBodyDirectives(),65,114)
@@ -22,6 +24,8 @@ function Infiltrator:init()
 	setMovementOverride(true)
 end
 function Infiltrator:uninit()
+	setHeadType()
+
 	tech.setParentDirectives()
 	tech.setToolUsageSuppressed(true)
 	tech.setParentHidden(true)
@@ -32,6 +36,3 @@ function Infiltrator:update(dt, dir, shiftHeld)
 	tech.setParentDirectives(self.snakeDirectives)
 	setDirectives("?multiply=FFFFFF00")
 end
-function Infiltrator:fire()end
-function Infiltrator:hold(dt) end
-function Infiltrator:release(headId)end

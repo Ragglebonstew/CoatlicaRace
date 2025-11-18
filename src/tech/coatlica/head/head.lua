@@ -7,6 +7,7 @@ require "/scripts/coatlica/util.lua"
 local abilityTablePath = "/tech/coatlica/head/abilities/coatlicaabilities.config"
 local abilityTypes = nil
 local transformed = false
+local fire_last = {}
 local regTimer = 0
 
 function init()
@@ -97,6 +98,7 @@ function activate()
 	local launchVel = vec2.mul(launchDir, 3)
 	mcontroller.setVelocity(launchVel)
 	world.spawnProjectile("clustermineexplosion", mcontroller.position())
+	animator.playSound("activate")
 	tech.setParentHidden(true)
 	tech.setToolUsageSuppressed(true)
 	status.setPersistentEffects("coatlica_consumerstats", {
@@ -118,6 +120,7 @@ function deactivate()
 	
 	mcontroller.setRotation(0)
 	world.spawnProjectile("clustermineexplosion", mcontroller.position())
+	animator.playSound("deactivate")
 	tech.setParentHidden(false)
 	tech.setToolUsageSuppressed(false)
 	status.clearPersistentEffects("coatlica_consumerstats")
@@ -161,11 +164,14 @@ function abilityInit()
 	self.secondaryAbility = getAbility("Secondary", abilityConfig.SecondaryAbility)
 	self.passiveAbility = getAbility("Passive", abilityConfig.PassiveAbility)
 	
+	fire_last["primaryFire"] = false
+	fire_last["altFire"]	 = false
+	
 	if self.primaryAbility then
-		self.primaryAbility:init()
+		self.primaryAbility:init("primaryFire")
 	end
 	if self.secondaryAbility then
-		self.secondaryAbility:init()
+		self.secondaryAbility:init("altFire")
 	end
 	if self.passiveAbility then
 		self.passiveAbility:init()
@@ -173,10 +179,10 @@ function abilityInit()
 end
 function abilityUninit()
 	if self.primaryAbility then
-		self.primaryAbility:uninit()
+		self.primaryAbility:uninit("primaryFire")
 	end
 	if self.secondaryAbility then
-		self.secondaryAbility:uninit()
+		self.secondaryAbility:uninit("altFire")
 	end
 	if self.passiveAbility then
 		self.passiveAbility:uninit()
@@ -198,23 +204,22 @@ function abilityUpdate(args)
 		self.passiveAbility:update(args.dt, dir, not args.moves["run"])
 	end
 	
+	if self.movementOverride then return end
 	
 	updateAbilityFire(args, "primaryFire", self.primaryAbility)
 	updateAbilityFire(args, "altFire", self.secondaryAbility)
-	if self.passiveAbility then 
-		self.passiveAbility:update(args.moves)
-	end
 end
 
-local fire_last = {}
 function updateAbilityFire(args, fireType, ability)
 	if not ability or not self.headId then return end
 	
-	if args.moves[fireType] and not status.resourceLocked("energy") then
+	local isButtonHeld = args.moves[fireType] and not status.resourceLocked("energy")
+	
+	if isButtonHeld then
 		if not fire_last[fireType] then
-			ability:fire()
+			ability:fire(fireType)
 		else
-			ability:hold(args.dt)
+			ability:hold(args.dt, fireType)
 			if ability.holdParameters then
 				for entry, param in pairs(ability.holdParameters) do
 					self[entry] = param
@@ -223,7 +228,7 @@ function updateAbilityFire(args, fireType, ability)
 		end
 	else
 		if fire_last[fireType] then
-			ability:release(self.headId)
+			ability:release(fireType, self.headId)
 			if ability.releaseParameters then
 				for entry, param in pairs(ability.releaseParameters) do
 					self[entry] = param
@@ -231,7 +236,7 @@ function updateAbilityFire(args, fireType, ability)
 			end
 		end
 	end
-	fire_last[fireType] = args.moves[fireType]
+	fire_last[fireType] = isButtonHeld
 end
 function headUpdate()
 	--head rotation

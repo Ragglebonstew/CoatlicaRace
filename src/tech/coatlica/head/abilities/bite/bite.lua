@@ -1,7 +1,8 @@
 Bite = CoatlicaAbility:new()
 
-function Bite:init()
+function Bite:init(fireType)
 	self.cooldown = 0
+	animator.setSoundPool(fireType, self.sounds.activate)
 end
 function Bite:uninit()
 	status.clearPersistentEffects("coatlica_bite_ability")
@@ -17,7 +18,7 @@ function Bite:update(dt, dir, shiftHeld)
 end
 function Bite:fire() end
 function Bite:hold(dt) end
-function Bite:release(headId)
+function Bite:release(fireType, headId)
 	--lunge forward
 	local maxHeight = 6
 	if self.cooldown == 0
@@ -33,6 +34,7 @@ function Bite:release(headId)
 		status.overConsumeResource("energy", self.energyCost)
 		world.sendEntityMessage(headId, "setDamageOnTouch", true)
 		status.setPersistentEffects("coatlica_bite_ability", {{stat = "invulnerable", amount = 1}})
+		animator.playSound(fireType)
 		self.cooldown = 0.3
 	end
 end
