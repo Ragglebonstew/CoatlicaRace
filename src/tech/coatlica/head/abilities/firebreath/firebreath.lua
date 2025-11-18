@@ -2,6 +2,7 @@ FireBreath = CoatlicaAbility:new()
 
 function FireBreath:init(fireType)
 	self.cooldown = 0.05
+	self.audiocooldown = 0
 	animator.setSoundPool(fireType, self.sounds.fire)
 	animator.setSoundPool(fireType.."Hold", self.sounds.hold)
 	animator.setSoundPool(fireType.."Release", self.sounds.release)
@@ -36,10 +37,17 @@ function FireBreath:hold(dt, fireType)
 			}
 		)
 		self.cooldown = 0.05
-		animator.playSound(fireType.."Hold")
+		self.audiocooldown = math.max(self.audiocooldown - 1,0)
+		if self.audiocooldown <= 0 then
+			animator.playSound(fireType.."Hold")
+			self.audiocooldown = 140
+		end
 		status.overConsumeResource("energy", self.energyCost)
 	end
 end
 function FireBreath:release(fireType)
+	animator.stopAllSounds(fireType)
+	animator.stopAllSounds(fireType.."Hold")
 	animator.playSound(fireType.."Release")
+	self.audiocooldown = 0
 end
