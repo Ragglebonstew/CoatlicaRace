@@ -175,10 +175,10 @@ function abilityInit()
 end
 function abilityUninit()
 	if self.primaryAbility then
-		self.primaryAbility:uninit()
+		self.primaryAbility:uninit("primaryFire")
 	end
 	if self.secondaryAbility then
-		self.secondaryAbility:uninit()
+		self.secondaryAbility:uninit("altFire")
 	end
 	if self.passiveAbility then
 		self.passiveAbility:uninit()
@@ -210,7 +210,9 @@ local fire_last = {}
 function updateAbilityFire(args, fireType, ability)
 	if not ability or not self.headId then return end
 	
-	if args.moves[fireType] and not status.resourceLocked("energy") then
+	local isButtonHeld = args.moves[fireType] and not status.resourceLocked("energy")
+	
+	if isButtonHeld then
 		if not fire_last[fireType] then
 			ability:fire(fireType)
 		else
@@ -231,7 +233,7 @@ function updateAbilityFire(args, fireType, ability)
 			end
 		end
 	end
-	fire_last[fireType] = args.moves[fireType]
+	fire_last[fireType] = isButtonHeld
 end
 function headUpdate()
 	--head rotation
