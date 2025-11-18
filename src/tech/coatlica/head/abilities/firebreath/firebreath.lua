@@ -1,19 +1,23 @@
 FireBreath = CoatlicaAbility:new()
 
-function FireBreath:init()
+function FireBreath:init(fireType)
 	self.cooldown = 0.05
+	animator.setSoundPool(fireType, self.sounds.fire)
+	animator.setSoundPool(fireType.."Hold", self.sounds.hold)
+	animator.setSoundPool(fireType.."Release", self.sounds.release)
 end
 function FireBreath:uninit() end
 function FireBreath:update(dt, dir, shiftHeld)
 	self.cooldown = math.max(self.cooldown - dt,0)
 end
-function FireBreath:fire()
+function FireBreath:fire(fireType)
 	if not status.resourceLocked("energy") then
 		local dir = vec2.norm(world.distance(tech.aimPosition(), mcontroller.position()))
 		mcontroller.controlApproachVelocity(vec2.mul(dir, -50), 400)
+		animator.playSound(fireType)
 	end
 end
-function FireBreath:hold(dt)
+function FireBreath:hold(dt, fireType)
 	if not status.resourceLocked("energy") and self.cooldown <= 0 then
 		local angle = (math.random()-0.5)*math.pi*0.05
 		local dir = vec2.norm(world.distance(tech.aimPosition(), mcontroller.position()))
@@ -32,7 +36,10 @@ function FireBreath:hold(dt)
 			}
 		)
 		self.cooldown = 0.05
+		animator.playSound(fireType.."Hold")
 		status.overConsumeResource("energy", self.energyCost)
 	end
 end
-function FireBreath:release() end
+function FireBreath:release(fireType)
+	animator.playSound(fireType.."Release")
+end

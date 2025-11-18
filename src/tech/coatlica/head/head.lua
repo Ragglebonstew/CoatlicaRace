@@ -164,10 +164,10 @@ function abilityInit()
 	self.passiveAbility = getAbility("Passive", abilityConfig.PassiveAbility)
 	
 	if self.primaryAbility then
-		self.primaryAbility:init()
+		self.primaryAbility:init("primaryFire")
 	end
 	if self.secondaryAbility then
-		self.secondaryAbility:init()
+		self.secondaryAbility:init("altFire")
 	end
 	if self.passiveAbility then
 		self.passiveAbility:init()
@@ -190,13 +190,11 @@ function abilityUpdate(args)
 	local y = args.moves["up"] and 1 or args.moves["down"] and -1 or 0
 	local dir = vec2.norm({x, y})
 
-	if not self.movementOverride then
-		if self.primaryAbility then
-			self.primaryAbility:update(args.dt, dir, not args.moves["run"])
-		end
-		if self.secondaryAbility then
-			self.secondaryAbility:update(args.dt, dir, not args.moves["run"])
-		end
+	if self.primaryAbility then
+		self.primaryAbility:update(args.dt, dir, not args.moves["run"])
+	end
+	if self.secondaryAbility then
+		self.secondaryAbility:update(args.dt, dir, not args.moves["run"])
 	end
 	if self.passiveAbility then
 		self.passiveAbility:update(args.dt, dir, not args.moves["run"])
@@ -214,9 +212,9 @@ function updateAbilityFire(args, fireType, ability)
 	
 	if args.moves[fireType] and not status.resourceLocked("energy") then
 		if not fire_last[fireType] then
-			ability:fire()
+			ability:fire(fireType)
 		else
-			ability:hold(args.dt)
+			ability:hold(args.dt, fireType)
 			if ability.holdParameters then
 				for entry, param in pairs(ability.holdParameters) do
 					self[entry] = param
@@ -225,7 +223,7 @@ function updateAbilityFire(args, fireType, ability)
 		end
 	else
 		if fire_last[fireType] then
-			ability:release(self.headId)
+			ability:release(fireType, self.headId)
 			if ability.releaseParameters then
 				for entry, param in pairs(ability.releaseParameters) do
 					self[entry] = param

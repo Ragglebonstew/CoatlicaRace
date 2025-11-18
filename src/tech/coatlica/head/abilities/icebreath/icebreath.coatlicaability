@@ -15,6 +15,12 @@
 		},
 		
 		"projectileType" : "icethrower",
-		"energyCost" : 1
+		"energyCost" : 1,
+		
+		"sounds" : {
+			"fire" : [ "/sfx/gun/flamethrower_start.ogg" ],
+			"hold" : [ "/sfx/gun/flamethrower_loop.ogg" ],
+			"release" : [ "/sfx/gun/flamethrower_stop.ogg" ]
+		}
 	}
 }

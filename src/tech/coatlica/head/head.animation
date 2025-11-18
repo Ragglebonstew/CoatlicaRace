@@ -4,7 +4,11 @@
 		"deactivate" : [ "/sfx/tech/tech_sphere_transform.ogg" ],
 		"forceDeactivate" : [ "/sfx/tech/tech_sonicsphere_charge1.ogg" ],
 		"ability" : [ ],
-		"ability1" : [ ],
-		"ability2" : [ ]
+		"primaryFire" : [ ],
+		"altFire" : [ ],
+		"primaryFireHold" : [ ],
+		"altFireHold" : [ ],
+		"primaryFireRelease" : [ ],
+		"altFireRelease" : [ ]
 	}
 }
