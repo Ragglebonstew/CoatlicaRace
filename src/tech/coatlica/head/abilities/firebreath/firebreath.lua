@@ -7,7 +7,11 @@ function FireBreath:init(fireType)
 	animator.setSoundPool(fireType.."Hold", self.sounds.hold)
 	animator.setSoundPool(fireType.."Release", self.sounds.release)
 end
-function FireBreath:uninit() end
+function FireBreath:uninit(fireType)
+	animator.stopAllSounds(fireType)
+	animator.stopAllSounds(fireType.."Hold")
+	self.audiocooldown = 0
+end
 function FireBreath:update(dt, dir, shiftHeld)
 	self.cooldown = math.max(self.cooldown - dt,0)
 end
