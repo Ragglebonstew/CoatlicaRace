@@ -4,7 +4,7 @@
   "type" : "body",
 
   "frames" : {
-    "body" : "body.png",
+    "body" : "body_images/default.png",
     "bulge" : "bulge.png",
 	"tail" : "tail.png",
 	"end" : "end.png"

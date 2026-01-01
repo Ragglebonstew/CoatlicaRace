@@ -4,7 +4,7 @@
   "type" : "head",
 
   "frames" : {
-    "head" : "head.png",
+    "head" : "head_images/default.png",
     "jaw" : "jaw.png",
 	"halo" : "halo.png"
   }

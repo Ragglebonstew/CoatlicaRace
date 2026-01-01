@@ -41,24 +41,24 @@
 				"zLevel" : 2,
 				"centered" : true,
 				"transformationGroups" : [ "body" ],
-				"image" : "<partImage>",
+				"image" : "<bodyImage>",
 				"offset" : [-0.25, 0]
 			},
 			"partStates" : {
 				"body" : {
 					"idle" : {
 						"properties" : {
-							"image" : "<partImage>:idle"
+							"image" : "<bodyImage>:idle"
 						}
 					},
 					"walk" : {
 						"properties" : {
-							"image" : "<partImage>:walk.<walkFrame>"
+							"image" : "<bodyImage>:walk.<walkFrame>"
 						}
 					},
 					"tail" : {
 						"properties" : {
-							"image" : "<partImage>:tail"
+							"image" : "<bodyImage>:tail"
 						}
 					}
 				}
@@ -124,6 +124,7 @@
     }
   },
 	"globalTagDefaults": {
+		"bodyImage": "/monsters/coatlicasegment/body_images/default.png",
 		"walkFrame" : "1"
 	},
 
