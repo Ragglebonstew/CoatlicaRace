@@ -5,7 +5,7 @@
   "maxStack" : 1,
   "rarity" : "Uncommon",
   "description" : "A spear imbued with power most others have forgotten.",
-  "shortdescription" : "Coatlica Spear",
+  "shortdescription" : "Coatlica Staff",
   "tooltipKind" : "sword",
   "category" : "spear",
   "twoHanded" : true,
