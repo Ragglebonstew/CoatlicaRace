@@ -25,6 +25,8 @@
 	
   // Empty Hands
       { "item" : "flagcoatlica" },
+
+      { "item" : "coatlicastatue" },
 	    
 // Anvil
       { "item" : "coatlicatier1head" },
