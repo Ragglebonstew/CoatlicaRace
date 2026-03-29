@@ -10,6 +10,7 @@ function init()
 	message.setHandler("setTransformed", simpleHandler(setTransformed))
 	message.setHandler("setFly", simpleHandler(setFly))
 	message.setHandler("setDirectives", simpleHandler(setDirectives))
+	message.setHandler("setGlobalTag", simpleHandler(setGlobalTag))
 	self.length = 1
 	self.coilPer = 1
 	self.transformed = false
@@ -116,5 +117,10 @@ end
 function setDirectives(directives)
 	if self.bodyId and world.entityExists(self.bodyId) then
 		world.sendEntityMessage(self.bodyId, "setDirectives", directives)
+	end
+end
+function setGlobalTag(directives)
+	if self.bodyId and world.entityExists(self.bodyId) then
+		world.sendEntityMessage(self.bodyId, "setGlobalTag", directives)
 	end
 end

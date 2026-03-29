@@ -33,6 +33,7 @@ function init()
 	message.setHandler("replyHold", simpleHandler(replyHold))
 	message.setHandler("updateFlying", simpleHandler(updateFlying))
 	message.setHandler("setDirectives", simpleHandler(setDirectives))
+	message.setHandler("setGlobalTag", simpleHandler(setGlobalTag))
 end
 function update(dt)
 	if self.passTimer > 0 then self.passTimer = self.passTimer - dt
@@ -274,5 +275,11 @@ function setDirectives(directives)
 	self.customDirectives = directives
 	if self.childId and world.entityExists(self.childId) then
 		world.sendEntityMessage(self.childId, "setDirectives", directives)
+	end
+end
+function setGlobalTag(directives)
+	animator.setGlobalTag("bodyImage", directives)
+	if self.childId and world.entityExists(self.childId) then
+		world.sendEntityMessage(self.childId, "setGlobalTag", directives)
 	end
 end
