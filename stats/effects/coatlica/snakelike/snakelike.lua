@@ -10,14 +10,14 @@ function init()
 	message.setHandler("setTransformed", simpleHandler(setTransformed))
 	message.setHandler("setFly", simpleHandler(setFly))
 	message.setHandler("setDirectives", simpleHandler(setDirectives))
-	message.setHandler("setGlobalTag", simpleHandler(setGlobalTag))
+	message.setHandler("controlSegmentParameters", simpleHandler(controlSegmentParameters))
 	self.length = 1
 	self.coilPer = 1
 	self.transformed = false
 	self.disabled = false
 	self.movementParameters = effect.getParameter("movementParameters")
 	--effect.setParentDirectives("?addmask=/humanoid/coatlica/tailmask.png")
-	
+
 	effect.addStatModifierGroup({
 		{stat = "jumpModifier", amount = -1.0}
 	})
@@ -30,13 +30,13 @@ function update(dt)
 	if not status.statPositive("activeMovementAbilities") then
 		mcontroller.controlParameters(self.movementParameters)
 	end
-	
+
 	local isRidingVehicle = mcontroller.anchorState() and world.entityType(mcontroller.anchorState()) == "vehicle"
 	if self.disabled or isRidingVehicle or (not self.transformed and status.statPositive("activeMovementAbilities")) then
 		killBody()
 		return
 	end
-	
+
 	if not self.bodyId or not world.entityExists(self.bodyId) then
 		spawnBody()
 		return
@@ -53,22 +53,22 @@ function update(dt)
 		mcontroller.controlParameters({gravityEnabled = false})
 	end
 
-	
+
 	local pos = mcontroller.position()
 	if not self.transformed then
 		pos = vec2.add(pos, {0,-2.1875})
 	end
 	local inGround = world.pointCollision(pos, {"Block", "Dynamic", "Slippery", "Null", "Platform"}) or world.liquidAt(playerPos)
-	
+
 	world.sendEntityMessage(self.bodyId, "updateCommon", pos, self.coilPer)
-	
+
 	if self.isHolding or inGround then
 		mcontroller.controlParameters({gravityEnabled = false})
 	end
 end
 
 function spawnBody()
-	local params = { 
+	local params = {
 		playerId = entity.id(),
 		ownerId = entity.id(),
 		ownerHealth = status.resourcePercentage("health"),
@@ -119,8 +119,8 @@ function setDirectives(directives)
 		world.sendEntityMessage(self.bodyId, "setDirectives", directives)
 	end
 end
-function setGlobalTag(directives)
+function controlSegmentParameters(params)
 	if self.bodyId and world.entityExists(self.bodyId) then
-		world.sendEntityMessage(self.bodyId, "setGlobalTag", directives)
+		world.sendEntityMessage(self.bodyId, "controlSegmentParameters", params)
 	end
 end

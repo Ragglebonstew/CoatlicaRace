@@ -9,7 +9,7 @@ function init()
     self.segmentsLeft = config.getParameter("segmentsLeft", 0)
 	self.directives = config.getParameter("directives")
 	self.isFirst = config.getParameter("isFirst")
-	
+
 	self.segmentSize = config.getParameter("segmentSize", 2)
 	self.btype = self.segmentsLeft == 0 and "tail" or "body"
 	self.passTimer = 0
@@ -23,7 +23,7 @@ function init()
 	monster.setDamageTeam(world.entityDamageTeam(self.playerId))
 	if self.btype == "tail" then animator.setAnimationState("body", "tail") end
 	if self.isFirst then animator.setAnimationState("end", "on") end
-	
+
 	message.setHandler("updateCommon", simpleHandler(updateCommon))
 	message.setHandler("updateLength", simpleHandler(updateLength))
 	message.setHandler("die", simpleHandler(die))
@@ -33,25 +33,26 @@ function init()
 	message.setHandler("replyHold", simpleHandler(replyHold))
 	message.setHandler("updateFlying", simpleHandler(updateFlying))
 	message.setHandler("setDirectives", simpleHandler(setDirectives))
-	message.setHandler("setGlobalTag", simpleHandler(setGlobalTag))
+	--message.setHandler("setGlobalTag", simpleHandler(setGlobalTag))
+	message.setHandler("controlSegmentParameters", simpleHandler(controlSegmentParameters))
 end
 function update(dt)
 	if self.passTimer > 0 then self.passTimer = self.passTimer - dt
 	elseif carryingId then passEntity() end
-	
+
 	if carryingId and world.entityExists(carryingId) then
 		world.sendEntityMessage(carryingId, "applyStatusEffect", "coatlicaDigest", 1, entity.id())
 	end
-	
-	--In ground handling 
+
+	--In ground handling
 	if self.inGround or (self.isHolding and not (self.isPivot and (self.isPivot.num <= 1))) or self.isFlying then
 		mcontroller.controlParameters({
-			collisionEnabled = not self.inGround, 
+			collisionEnabled = not self.inGround,
 			gravityEnabled = false
 		})
 		mcontroller.setVelocity({0,0})
 	end
-	
+
 	if self.isPivot and self.isPivot.hold then
 		if not self.inGround and not mcontroller.isColliding() and self.childId and world.entityExists(self.childId) then
 			world.sendEntityMessage(self.childId, "requestHold", true, self.isPivot.num-1)
@@ -62,15 +63,15 @@ end
 
 function followOwner(ownerPos, coilPer)
 	animator.resetTransformationGroup("body")
-	
+
 	local segmentLength = self.segmentSize * coilPer
 	local dirV = vec2.norm(world.distance(ownerPos, mcontroller.position()))
 	local target = vec2.sub(ownerPos, vec2.mul(dirV, segmentLength))
-	
+
 	local animV = {math.abs(dirV[1]), dirV[2]}
 	animator.setFlipped(dirV[1] < 0)
 	animator.rotateTransformationGroup("body", vec2.angle(animV))
-	
+
 	if world.magnitude(ownerPos, mcontroller.position()) > segmentLength then
 		mcontroller.setPosition(target)
 		animator.translateTransformationGroup("body", vec2.mul(animV, segmentLength/2))
@@ -78,9 +79,9 @@ function followOwner(ownerPos, coilPer)
 		local midpt = vec2.mul(animV, world.magnitude(ownerPos, mcontroller.position())/2)
 		animator.translateTransformationGroup("body", midpt)
 	end
-	
+
 	self.inGround = world.lineCollision(mcontroller.position(), ownerPos, {"Block", "Dynamic", "Slippery", "Null", "Platform"}) or world.liquidAt(mcontroller.position())
-	
+
 	world.debugPoint(mcontroller.position(), (inGround) and "white" or "blue")
 	if self.isHolding then
 		world.debugPoint(vec2.add(mcontroller.position(),{0,1}), "red")
@@ -102,11 +103,11 @@ function updateCommon(ownerPos, coilPer, walkFrame)
 		die()
 		return
 	end
-	
+
 	followOwner(ownerPos, coilPer)
 	status.setPrimaryDirectives(self.directives..(self.customDirectives or ""))
 	walkFrame = updateAnimation(walkFrame)
-	
+
 	if self.childId and world.entityExists(self.childId) then
 		world.callScriptedEntity(self.childId, "updateCommon", mcontroller.position(), coilPer, walkFrame)
 	elseif self.segmentsLeft > 0 then -- segmentsLeft of 0 refers to the tail, the last body segment
@@ -114,14 +115,14 @@ function updateCommon(ownerPos, coilPer, walkFrame)
 	end
 end
 function updateAnimation(walkFrame)
-	
-	
+
+
 	if self.btype == "body" then
-		
+
 		local maxHeight = 1
 		local onGround = distanceToGround(maxHeight) ~= maxHeight
 		local isMoving = world.magnitude(self.lastPos, mcontroller.position()) > 0.5
-		
+
 		--body gets stretched in the air, so end chain here
 		if onGround then
 			animator.setAnimationState("body", "walk")
@@ -133,15 +134,15 @@ function updateAnimation(walkFrame)
 		if isMoving then
 			self.lastPos = mcontroller.position()
 		end
-		
+
 		--save our own frame if we need to start the chain
 		if walkFrame then
 			self.walkFrame = nil
 		elseif isMoving and onGround then
 			self.walkFrame = math.fmod((self.walkFrame or 0) + 1, 16)
 		end
-		
-		
+
+
 		--after self.walkFrame has been cleared, allow to be passed to walkFrame
 		if self.walkFrame then
 			walkFrame = math.floor(self.walkFrame)
@@ -281,5 +282,13 @@ function setGlobalTag(directives)
 	animator.setGlobalTag("bodyImage", directives)
 	if self.childId and world.entityExists(self.childId) then
 		world.sendEntityMessage(self.childId, "setGlobalTag", directives)
+	end
+end
+function controlSegmentParameters(params)
+	if params.body_image then animator.setGlobalTag("bodyImage", params.body_image) end
+
+	--continue to next segment
+	if self.childId and world.entityExists(self.childId) then
+		world.sendEntityMessage(self.childId, "controlSegmentParameters", params)
 	end
 end

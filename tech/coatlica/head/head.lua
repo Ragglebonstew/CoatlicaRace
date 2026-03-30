@@ -166,6 +166,8 @@ function abilityInit()
 	
 	fire_last["primaryFire"] = false
 	fire_last["altFire"]	 = false
+
+	local params = {}
 	
 	if self.primaryAbility then
 		self.primaryAbility:init("primaryFire")
@@ -174,19 +176,29 @@ function abilityInit()
 		self.secondaryAbility:init("altFire")
 	end
 	if self.passiveAbility then
-		self.passiveAbility:init()
+		self.passiveAbility:init(params)
 	end
+
+	if params.movementOverride then self.movementOverride = params.movementOverride end
 end
 function abilityUninit()
+
+	local next = next
+	local params = {
+		coil = self.coilPer
+	}
+
 	if self.primaryAbility then
-		self.primaryAbility:uninit("primaryFire")
+		self.primaryAbility:uninit("primaryFire", params)
 	end
 	if self.secondaryAbility then
-		self.secondaryAbility:uninit("altFire")
+		self.secondaryAbility:uninit("altFire", params)
 	end
 	if self.passiveAbility then
-		self.passiveAbility:uninit()
+		self.passiveAbility:uninit(params)
 	end
+
+	controlSegmentParameters(params)
 end
 function abilityUpdate(args)
 
@@ -194,15 +206,22 @@ function abilityUpdate(args)
 	local y = args.moves["up"] and 1 or args.moves["down"] and -1 or 0
 	local dir = vec2.norm({x, y})
 
+	local next = next
+	local params = {
+		coil = self.coilPer
+	}
+
 	if self.primaryAbility then
-		self.primaryAbility:update(args.dt, dir, not args.moves["run"])
+		self.primaryAbility:update(args.dt, dir, not args.moves["run"], params)
 	end
 	if self.secondaryAbility then
-		self.secondaryAbility:update(args.dt, dir, not args.moves["run"])
+		self.secondaryAbility:update(args.dt, dir, not args.moves["run"], params)
 	end
 	if self.passiveAbility then
-		self.passiveAbility:update(args.dt, dir, not args.moves["run"])
+		self.passiveAbility:update(args.dt, dir, not args.moves["run"], params)
 	end
+
+	controlSegmentParameters(params)
 	
 	if self.movementOverride then return end
 	
@@ -432,6 +451,14 @@ function setDirectives(directives)
 end
 function setMovementOverride(isOverrided)
 	self.movementOverride = isOverrided
+end
+function controlSegmentParameters(params)
+	self.coilPer = params.coil
+
+	if self.headId and world.entityExists(self.headId) then
+		world.callScriptedEntity(self.headId, "controlSegmentParameters", params)
+	end
+	world.sendEntityMessage(entity.id(), "controlSegmentParameters", params)
 end
 
 --abilities (temp till can be moved to own files)
