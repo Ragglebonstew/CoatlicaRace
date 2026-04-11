@@ -32,9 +32,6 @@ function init()
 	message.setHandler("requestHold", simpleHandler(requestHold))
 	message.setHandler("replyHold", simpleHandler(replyHold))
 	message.setHandler("updateFlying", simpleHandler(updateFlying))
-	message.setHandler("setDirectives", simpleHandler(setDirectives))
-	--message.setHandler("setGlobalTag", simpleHandler(setGlobalTag))
-	message.setHandler("controlSegmentParameters", simpleHandler(controlSegmentParameters))
 end
 function update(dt)
 	if self.passTimer > 0 then self.passTimer = self.passTimer - dt
@@ -98,18 +95,20 @@ function spawnSegment()
 	}
     self.childId = world.spawnMonster("coatlicasegment", mcontroller.position(), params)
 end
-function updateCommon(ownerPos, coilPer, walkFrame)
+function updateCommon(ownerPos, params, walkFrame)
 	if not (self.ownerId and world.entityExists(self.ownerId)) then
 		die()
 		return
 	end
 
-	followOwner(ownerPos, coilPer)
-	status.setPrimaryDirectives(self.directives..(self.customDirectives or ""))
+	followOwner(ownerPos, params.coilPer)
+	if params.body_image then animator.setGlobalTag("bodyImage", params.body_image) end
+	if params.directives then status.setPrimaryDirectives(self.directives..(params.directives)) end
+
 	walkFrame = updateAnimation(walkFrame)
 
 	if self.childId and world.entityExists(self.childId) then
-		world.callScriptedEntity(self.childId, "updateCommon", mcontroller.position(), coilPer, walkFrame)
+		world.callScriptedEntity(self.childId, "updateCommon", mcontroller.position(), params, walkFrame)
 	elseif self.segmentsLeft > 0 then -- segmentsLeft of 0 refers to the tail, the last body segment
         spawnSegment()
 	end
@@ -270,25 +269,5 @@ function updateFlying(drop)
 	end
 	if self.btype ~= "tail" and self.childId then
 		world.sendEntityMessage(self.childId, "updateFlying", drop)
-	end
-end
-function setDirectives(directives)
-	self.customDirectives = directives
-	if self.childId and world.entityExists(self.childId) then
-		world.sendEntityMessage(self.childId, "setDirectives", directives)
-	end
-end
-function setGlobalTag(directives)
-	animator.setGlobalTag("bodyImage", directives)
-	if self.childId and world.entityExists(self.childId) then
-		world.sendEntityMessage(self.childId, "setGlobalTag", directives)
-	end
-end
-function controlSegmentParameters(params)
-	if params.body_image then animator.setGlobalTag("bodyImage", params.body_image) end
-
-	--continue to next segment
-	if self.childId and world.entityExists(self.childId) then
-		world.sendEntityMessage(self.childId, "controlSegmentParameters", params)
 	end
 end

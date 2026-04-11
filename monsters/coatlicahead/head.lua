@@ -26,6 +26,7 @@ function init()
 	message.setHandler("setDirectives", simpleHandler(setDirectives))
 	message.setHandler("setDamageOnTouch", simpleHandler(monster.setDamageOnTouch))
 	message.setHandler("setAnimationState", simpleHandler(animator.setAnimationState))
+	message.setHandler("controlSegmentParameters", simpleHandler(controlSegmentParameters))
 end
 function update(dt)
 	self.updateTimer = self.updateTimer - dt
@@ -72,5 +73,9 @@ function setHeadType(headType)
 end
 function setDirectives(directives)
 	self.customDirectives = directives
+	status.setPrimaryDirectives(self.directives..(self.customDirectives or ""))
+end
+function controlSegmentParameters(params)
+	self.customDirectives = params.directives
 	status.setPrimaryDirectives(self.directives..(self.customDirectives or ""))
 end

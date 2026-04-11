@@ -12,11 +12,12 @@ function init()
 	message.setHandler("setDirectives", simpleHandler(setDirectives))
 	message.setHandler("controlSegmentParameters", simpleHandler(controlSegmentParameters))
 	self.length = 1
-	self.coilPer = 1
+	self.segmentParams = {
+		coilPer = 1
+	}
 	self.transformed = false
 	self.disabled = false
 	self.movementParameters = effect.getParameter("movementParameters")
-	--effect.setParentDirectives("?addmask=/humanoid/coatlica/tailmask.png")
 
 	effect.addStatModifierGroup({
 		{stat = "jumpModifier", amount = -1.0}
@@ -60,7 +61,7 @@ function update(dt)
 	end
 	local inGround = world.pointCollision(pos, {"Block", "Dynamic", "Slippery", "Null", "Platform"}) or world.liquidAt(playerPos)
 
-	world.sendEntityMessage(self.bodyId, "updateCommon", pos, self.coilPer)
+	world.sendEntityMessage(self.bodyId, "updateCommon", pos, self.segmentParams)
 
 	if self.isHolding or inGround then
 		mcontroller.controlParameters({gravityEnabled = false})
@@ -103,7 +104,7 @@ function replyHold(isHolding)
 	status.setStatusProperty("isHolding", isHolding)
 end
 function setCoil(per)
-	self.coilPer = per
+	--self.coilPer = per
 end
 function setTransformed(state)
 	self.transformed = state
@@ -120,7 +121,5 @@ function setDirectives(directives)
 	end
 end
 function controlSegmentParameters(params)
-	if self.bodyId and world.entityExists(self.bodyId) then
-		world.sendEntityMessage(self.bodyId, "controlSegmentParameters", params)
-	end
+	self.segmentParams = params
 end

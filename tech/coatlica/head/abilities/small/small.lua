@@ -10,7 +10,7 @@ function Small:uninit(params)
 	--world.sendEntityMessage(entity.id(), "setCoil", 1.0)
 
 	params.body_image = "/monsters/coatlicasegment/body_images/default.png"
-	params.coil = 1.0
+	params.coilPer = 1.0
 end
 function Small:update(dt, dir, shiftHeld, params)
 	--world.sendEntityMessage(entity.id(), "setGlobalTag", "/monsters/coatlicasegment/body_images/micro.png")
@@ -18,7 +18,7 @@ function Small:update(dt, dir, shiftHeld, params)
 
 	params.body_image = "/monsters/coatlicasegment/body_images/micro.png"
 	params.movementParameters = self.segmentPoly
-	params.coil = 0.7
+	params.coilPer = 0.7
 
 
 	mcontroller.controlParameters(self.movementParameters)

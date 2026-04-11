@@ -185,7 +185,7 @@ function abilityUninit()
 
 	local next = next
 	local params = {
-		coil = self.coilPer
+		coilPer = self.coilPer
 	}
 
 	if self.primaryAbility then
@@ -208,7 +208,7 @@ function abilityUpdate(args)
 
 	local next = next
 	local params = {
-		coil = self.coilPer
+		coilPer = self.coilPer
 	}
 
 	if self.primaryAbility then
@@ -443,18 +443,10 @@ function setHeadType(headType)
 		world.callScriptedEntity(self.headId, "setHeadType", headType)
 	end
 end
-function setDirectives(directives)
-	if self.headId and world.entityExists(self.headId) then
-		world.callScriptedEntity(self.headId, "setDirectives", directives)
-	end
-	world.sendEntityMessage(entity.id(), "setDirectives", directives)
-end
 function setMovementOverride(isOverrided)
 	self.movementOverride = isOverrided
 end
 function controlSegmentParameters(params)
-	self.coilPer = params.coil
-
 	if self.headId and world.entityExists(self.headId) then
 		world.callScriptedEntity(self.headId, "controlSegmentParameters", params)
 	end
