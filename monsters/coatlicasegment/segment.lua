@@ -104,6 +104,7 @@ function updateCommon(ownerPos, params, walkFrame)
 	followOwner(ownerPos, params.coilPer)
 	if params.body_image then animator.setGlobalTag("bodyImage", params.body_image) end
 	if params.directives then status.setPrimaryDirectives(self.directives..(params.directives)) end
+	if params.endState and self.isFirst then animator.setAnimationState("end", params.endState) end
 
 	walkFrame = updateAnimation(walkFrame)
 

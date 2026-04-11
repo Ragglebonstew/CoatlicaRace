@@ -59,6 +59,7 @@ function update(dt)
 	if not self.transformed then
 		pos = vec2.add(pos, {0,-2.1875})
 	end
+	self.segmentParams.endState = self.transformed and "off" or "on"
 	local inGround = world.pointCollision(pos, {"Block", "Dynamic", "Slippery", "Null", "Platform"}) or world.liquidAt(playerPos)
 
 	world.sendEntityMessage(self.bodyId, "updateCommon", pos, self.segmentParams)
