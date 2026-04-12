@@ -1,0 +1,22 @@
+{
+	"ability" : {
+		"name" : "small",
+		"type" : "small",
+		"class" : "Small",
+		"shortDescription" : "Small",
+		"description" : "Smol moding.",
+		"icon" : "/interface/statuses/invisible.png",
+		"chipCost" : 5,
+
+		"isPassive" : true,
+		
+		"scripts" : ["/tech/coatlica/head/abilities/small/small.lua"],
+
+		"movementParameters" : {
+			"collisionPoly" : [ [0.2, 0.4], [0.25, 0.0], [0.25, -0.4], [-0.25, -0.4], [-0.25, 0.0], [-0.2, 0.4] ]
+		},
+		"segmentPoly" : {
+			"collisionPoly" : [ [0.3, 0.5], [0.85, 0.3], [0.85, -0.3], [0.3, -0.5625], [-0.3, -0.5625], [-0.85, -0.3], [-0.85, 0.3], [-0.3, 0.5] ]
+		}
+	}
+}

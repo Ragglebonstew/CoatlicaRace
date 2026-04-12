@@ -1,0 +1,11 @@
+{
+  "name" : "coatlicahead_base",
+  "category" : "coatlicahead",
+  "type" : "head",
+
+  "frames" : {
+    "head" : "head_images/default.png",
+    "jaw" : "jaw.png",
+	"halo" : "halo.png"
+  }
+}
