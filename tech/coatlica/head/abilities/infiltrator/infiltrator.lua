@@ -23,16 +23,16 @@ function Infiltrator:init()
 	tech.setParentHidden(false)
 	setMovementOverride(true)
 end
-function Infiltrator:uninit()
+function Infiltrator:uninit(params)
 	setHeadType()
 
 	tech.setParentDirectives()
 	tech.setToolUsageSuppressed(true)
 	tech.setParentHidden(true)
-	setDirectives()
+	params.directives = ""
 	setMovementOverride(false)
 end
-function Infiltrator:update(dt, dir, shiftHeld)
+function Infiltrator:update(dt, dir, shiftHeld, params)
 	tech.setParentDirectives(self.snakeDirectives)
-	setDirectives("?multiply=FFFFFF00")
+	params.directives = "?multiply=FFFFFF00"
 end
